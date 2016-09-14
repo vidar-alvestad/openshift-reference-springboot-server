@@ -24,7 +24,19 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-	<dependencies>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://aurora/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://aurora/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
