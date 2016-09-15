@@ -1,0 +1,13 @@
+{
+  "docker": {
+    "maintainer": "Bent André Solheim <BentAndre.Solheim@skatteetaten.no>",
+    "labels": {
+      "io.k8s.description": "Demo application with spring boot on Openshift.",
+      "io.openshift.tags": "openshift,springboot"
+    }
+  },
+  "java" :{
+    "mainClass" : "ske.aurora.openshift.referanse.OpenshiftReferanseSpringbootServerApplication",
+    "readinessUrl" : "/info"
+  }
+}

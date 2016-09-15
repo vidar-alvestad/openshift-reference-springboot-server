@@ -1,6 +1,6 @@
 node {
     def os
-    fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git') {
+    fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
         os = fileLoader.load('openshift/openshift')
     }
 
