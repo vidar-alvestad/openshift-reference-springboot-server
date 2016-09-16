@@ -38,11 +38,11 @@ parallel 'jacoco': {
     node {
       unstash 'source'
       println("Jacoco stuff")
-      //sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
-      //publishHTML(
-      //    target: [reportDir: 'build/reports/jacoco/jacocoRootTestReport/html', reportFiles: 'index.html', reportName: 'Code Coverage'])
-      //step(
-      //    [$class: 'JacocoPublisher', execPattern: 'build/jacoco/*.exec', classPattern: 'build/classes/main', sourcePattern: 'src/main/java'])
+      sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
+      publishHTML(
+          target: [reportDir: 'build/reports/jacoco/jacocoRootTestReport/html', reportFiles: 'index.html', reportName: 'Code Coverage'])
+      step(
+          [$class: 'JacocoPublisher', execPattern: 'build/jacoco/*.exec', classPattern: 'build/classes/main', sourcePattern: 'src/main/java'])
     }
   }
 }, 'PITest': {
@@ -50,7 +50,7 @@ parallel 'jacoco': {
     node {
       unstash 'source'
       println("PITest magic")
-      //sh "./mvnw test pitest:mutationCoverage -B"
+      sh "./mvnw test pitest:mutationCoverage -B"
     }
   }
 }, 'Sonar': {
@@ -59,7 +59,7 @@ parallel 'jacoco': {
       def sonarServerUrl = 'http://aurora/magsonar'
       unstash 'source'
       println("Sonar magic")
-      //sh "./mvnw sonar:sonar -D sonar.host.url=${sonarServerUrl} -Dsonar.language=java -Dsonar.branch=${env.BRANCH_NAME} -B"
+      sh "./mvnw sonar:sonar -D sonar.host.url=${sonarServerUrl} -Dsonar.language=java -Dsonar.branch=${env.BRANCH_NAME} -B"
     }
   }
 }
@@ -78,5 +78,4 @@ node {
 
   }
 }
-
 
