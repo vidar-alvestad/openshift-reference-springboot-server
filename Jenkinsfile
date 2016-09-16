@@ -1,10 +1,7 @@
 #!groovy
 
 node {
-  def os
-  fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
-    os = fileLoader.load('openshift/openshift')
-  }
+
 
   stage('Checkout') {
     def isMaster = env.BRANCH_NAME == "master"
@@ -37,19 +34,18 @@ parallel 'jacoco': {
   stage('Jacoco') {
     node {
       unstash 'source'
-      println("Jacoco stuff")
       sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
-      publishHTML(
-          target: [reportDir: 'build/reports/jacoco/jacocoRootTestReport/html', reportFiles: 'index.html', reportName: 'Code Coverage'])
-      step(
-          [$class: 'JacocoPublisher', execPattern: 'build/jacoco/*.exec', classPattern: 'build/classes/main', sourcePattern: 'src/main/java'])
+      //publishHTML(
+      //   target: [reportDir: 'build/reports/jacoco/jacocoRootTestReport/html', reportFiles: 'index.html', reportName: 'Code Coverage'])
+      //step(
+      //    [$class: 'JacocoPublisher', execPattern: 'build/jacoco/*.exec', classPattern: 'build/classes/main', sourcePattern: 'src/main/java'])
     }
   }
 }, 'PITest': {
   stage('PITest') {
     node {
+      println("PITest")
       unstash 'source'
-      println("PITest magic")
       sh "./mvnw test pitest:mutationCoverage -B"
     }
   }
@@ -58,7 +54,6 @@ parallel 'jacoco': {
     node {
       def sonarServerUrl = 'http://aurora/magsonar'
       unstash 'source'
-      println("Sonar magic")
       sh "./mvnw sonar:sonar -D sonar.host.url=${sonarServerUrl} -Dsonar.language=java -Dsonar.branch=${env.BRANCH_NAME} -B"
     }
   }
@@ -66,16 +61,20 @@ parallel 'jacoco': {
 
 
 node {
+  def os
+  fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
+    os = fileLoader.load('openshift/openshift')
+  }
+
   stage('Deploy to nexus') {
     unstash 'source'
-    sh "./mvnw deploy -B"
+    sh "./mvnw clean deploy"
     junit '**/target/surefire-reports/TEST-*.xml'
   }
 
   stage('Deploy to Openshift') {
     os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server',
         '0.0.1-SNAPSHOT')
-
   }
 }
 
