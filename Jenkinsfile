@@ -88,8 +88,10 @@ try {
     def os
     fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
       os = fileLoader.load('openshift/openshift')
-      // Set build name
+      // Get artifact version
+      unstash 'source'
       pom = readMavenPom file: 'pom.xml'
+
       os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server',
           $pom.version)
     }
