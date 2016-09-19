@@ -10,8 +10,8 @@ node {
     echo "My branch is: ${env.BRANCH_NAME} "
     if (isMaster) {
       sh "./mvnw ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
-
-      echo "YOYOYO newVersion: ${newVersion}"
+      echo "YOYOYO!!"
+      echo "newVersion: ${newVersion}"
       sh "git tag -a ${newVersion} -m 'Release ${newVersion} on master'"
       sh "git push --follow-tags"
     } else {
