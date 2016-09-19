@@ -1,5 +1,5 @@
 #!groovy
-try {
+
   node {
     stage('Checkout') {
       def isMaster = env.BRANCH_NAME == "master"
@@ -66,14 +66,6 @@ try {
     }
   }
 
-} catch (error) {
-  currentBuild.result = "FAILED"
-  def commitId = git.getCommitId()
-  sh "git --no-pager show -s --format='%ae' ${commitId} > .git/commiter"
-  def commiter = readFile(".git/commiter")
-  emailext(body: "Bygg feiler", subject: "Bygg feiler", to: "${commiter}")
-  throw error
-}
 
 currentBuild.result = 'SUCCESS'
 try {
@@ -96,4 +88,5 @@ try {
 } catch (error) {
   currentBuild.result = 'SUCCESS'
   echo "RESULT: ${currentBuild.result}"
+  echo "HEI JEG ER I CATCH"
 }
