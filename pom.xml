@@ -137,7 +137,7 @@
           <execution>
             <phase>validate</phase>
             <goals>
-              <goal>checkstyle-aggregate</goal>
+              <goal>check</goal>
             </goals>
           </execution>
         </executions>
