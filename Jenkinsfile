@@ -80,16 +80,16 @@ try {
   throw error
 }
 
-
+currentBuild.result = 'SUCCESS'
 try {
   stage('Deploy to Openshift') {
     timeout(time: 7, unit: 'DAYS') {
-      input message: 'Approve deployment?', ok: 'Deploy UTV'
+      input message: 'Approve deployment?'
     }
   }
 } catch (error) {
   currentBuild.result = 'SUCCESS'
-  throw error
+  echo "RESULT: ${currentBuild.result}"
 }
 node {
     def os
