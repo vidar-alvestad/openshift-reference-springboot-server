@@ -86,7 +86,8 @@ try {
     os.buildVersion('mfp-openshift-referanse-springboot-server', pom.artifactId,   pom.version)
   }
 } catch (error) {
-  currentBuild.result = 'SUCCESS'
-  echo "RESULT: ${currentBuild.result}"
   echo "HEI JEG ER I CATCH"
+  echo "RESULT: ${currentBuild.result}"
+  currentBuild.result = 'SUCCESS'
+  echo "RESULT etter: ${currentBuild.result}"
 }
