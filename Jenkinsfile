@@ -76,7 +76,9 @@ try {
   throw error
 }
 
-bitbucketStatusNotify()
+bitbucketStatusNotify(
+    buildState: 'SUCCESSFUL'
+)
 
 try {
   stage('Deploy to Openshift') {
