@@ -58,7 +58,16 @@ parallel 'jacoco': {
   }
 }
 
-stage('Deploy OSE') {
+node {
+  stage('Deploy to nexus') {
+    unstash 'source'
+    sh "./mvnw clean deploy"
+    junit '**/target/surefire-reports/TEST-*.xml'
+  }
+}
+
+
+stage('Deploy to Openshift') {
   timeout(time:5, unit:'DAYS') {
     input message:'Approve deployment?'
   }
@@ -68,16 +77,8 @@ node {
   fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
     os = fileLoader.load('openshift/openshift')
   }
-
-  stage('Deploy to nexus') {
-    unstash 'source'
-    sh "./mvnw clean deploy"
-    junit '**/target/surefire-reports/TEST-*.xml'
-  }
-
-  stage('Deploy to Openshift') {
-    os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server',
-        '0.0.1-SNAPSHOT')
-  }
+  // Set build name
+  pom = readMavenPom file: 'pom.xml'
+  os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server', $pom.version)
 }
 
