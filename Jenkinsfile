@@ -67,8 +67,6 @@
   }
 
 
-currentBuild.result = 'SUCCESS'
-try {
   stage('Deploy to Openshift') {
     timeout(time: 7, unit: 'DAYS') {
       input message: 'Approve deployment?'
@@ -85,9 +83,3 @@ try {
 
     os.buildVersion('mfp-openshift-referanse-springboot-server', pom.artifactId,   pom.version)
   }
-} catch (error) {
-  echo "HEI JEG ER I CATCH"
-  echo "RESULT: ${currentBuild.result}"
-  currentBuild.result = 'SUCCESS'
-  echo "RESULT etter: ${currentBuild.result}"
-}
