@@ -1,8 +1,6 @@
 #!groovy
 
 node {
-
-
   stage('Checkout') {
     def isMaster = env.BRANCH_NAME == "master"
     def branchShortName = env.BRANCH_NAME.split("/").last()
@@ -60,12 +58,11 @@ parallel 'jacoco': {
   }
 }
 
-stage 'Deploy OSE' {
+stage('Deploy OSE') {
   timeout(time:5, unit:'DAYS') {
     input message:'Approve deployment?'
   }
 }
-
 node {
   def os
   fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
