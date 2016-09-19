@@ -1,4 +1,4 @@
-package ske.aurora.openshift.referanse;
+package ske.aurora.openshift.referanse.springboot;
 
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -18,7 +18,7 @@ import ske.aurora.openshift.referanse.test.ApplicationConstants;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class OpenshiftReferanseSpringbootServerApplicationTests {
+public class MainTest {
 
     private MockMvc mockMvc;
 

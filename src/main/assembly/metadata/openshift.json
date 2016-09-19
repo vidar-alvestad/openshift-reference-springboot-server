@@ -7,7 +7,7 @@
     }
   },
   "java" :{
-    "mainClass" : "ske.aurora.openshift.referanse.OpenshiftReferanseSpringbootServerApplication",
+    "mainClass" : "ske.aurora.openshift.referanse.springboot.Main",
     "readinessUrl" : "/info"
   }
 }
