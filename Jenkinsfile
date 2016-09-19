@@ -1,5 +1,5 @@
 #!groovy
-
+try {
 node {
   stage('Checkout') {
     def isMaster = env.BRANCH_NAME == "master"
@@ -66,21 +66,31 @@ node {
     junit '**/target/surefire-reports/TEST-*.xml'
   }
 }
-
-
-stage('Deploy to Openshift') {
-  timeout(time:7, unit:'DAYS') {
-    input message:'Approve deployment?'
-  }
-  checkpoint('Before OSE-UTV')
+} catch (error) {
+  currentBuild.result = "FAILED"
+  def commitId = git.getCommitId()
+  sh "git --no-pager show -s --format='%ae' ${commitId} > .git/commiter"
+  def commiter = readFile(".git/commiter")
+  emailext(body: "Bygg feiler", subject: "Bygg feiler", to: "${commiter}")
+  throw error
 }
-node {
-  def os
-  fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
-    os = fileLoader.load('openshift/openshift')
+
+try {
+  stage('Deploy to Openshift') {
+    timeout(time:7, unit:'DAYS') {
+      input message:'Approve deployment?'
+    }
   }
-  // Set build name
-  pom = readMavenPom file: 'pom.xml'
-  os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server', $pom.version)
+  node {
+    def os
+    fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
+      os = fileLoader.load('openshift/openshift')
+    }
+    // Set build name
+    pom = readMavenPom file: 'pom.xml'
+    os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server', $pom.version)
+  }
+} catch(error) {
+  currentBuild.result = 'SUCCESS'
 }
 
