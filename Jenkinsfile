@@ -63,7 +63,7 @@ try {
   node {
     stage('Deploy to nexus') {
       unstash 'source'
-      sh "./mvnw clean deploy"
+      sh "./mvnw deploy -DskipTests"
       junit '**/target/surefire-reports/TEST-*.xml'
     }
   }
