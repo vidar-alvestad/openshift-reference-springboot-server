@@ -37,7 +37,7 @@ parallel 'jacoco': {
       sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
 
       step([$class: 'JUnitResultArchiver', testResults: '**/surefire-reports/TEST-*.xml'])
-      publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '**/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
+      publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
       // step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
     }
   }
@@ -84,7 +84,5 @@ try {
     os.buildVersion('mfp-openshift-referanse-springboot-server', pom.artifactId,   pom.version)
   }
 } catch (error) {
-  echo "RESULT BEFORE: ${currentBuild.result}"
   currentBuild.result = 'SUCCESS'
-  echo "RESULT YO: ${currentBuild.result}"
 }
