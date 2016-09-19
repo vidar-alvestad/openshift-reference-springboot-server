@@ -83,24 +83,22 @@ try {
 try {
   stage('Deploy to Openshift') {
     timeout(time: 7, unit: 'DAYS') {
-      input message: 'Approve deployment?'
-    }
-  }
-  node {
-    def os
-    fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
-      os = fileLoader.load('openshift/openshift')
-      // Get artifact version
-      unstash 'source'
-      pom = readMavenPom file: 'pom.xml'
-
-      os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server',
-          $pom.version)
+      input message: 'Approve deployment?', ok: 'Deploy UTV'
     }
   }
 } catch (error) {
   currentBuild.result = 'SUCCESS'
+  throw error
 }
-bitbucketStatusNotify(
-    buildState: 'SUCCESSFUL'
-)
+node {
+    def os
+    fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
+      os = fileLoader.load('openshift/openshift')
+    }
+    // Get artifact version
+    unstash 'source'
+    pom = readMavenPom file: 'pom.xml'
+
+    os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server',
+        $pom.version)
+}
