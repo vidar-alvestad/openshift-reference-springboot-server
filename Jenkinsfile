@@ -11,9 +11,11 @@ node {
     if (isMaster) {
       sh "./mvnw ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
       echo "YOYOYO!!"
-      echo "newVersion: ${newVersion}"
-      sh "git tag -a ${newVersion} -m 'Release ${newVersion} on master'"
-      sh "git push --follow-tags"
+      // TODO: newVersion property is not set correctly
+      // groovy.lang.MissingPropertyException: No such property: newVersion for class: groovy.lang.Binding
+      // echo "newVersion: ${newVersion}"
+      // sh "git tag -a ${newVersion} -m 'Release ${newVersion} on master'"
+      // sh "git push --follow-tags"
     } else {
       sh "./mvnw versions:set -DnewVersion=${branchShortName}-SNAPSHOT -DgenerateBackupPoms=false -B"
     }
