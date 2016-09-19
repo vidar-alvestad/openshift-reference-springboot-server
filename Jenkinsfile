@@ -27,6 +27,7 @@ node {
 
   stage('Compile') {
     sh "./mvnw compile"
+    step([$class: 'CheckStylePublisher', canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '', unHealthy: ''])
   }
 }
 
@@ -38,7 +39,7 @@ parallel 'jacoco': {
 
       publishHTML(
          target: [reportDir: '**/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
-      step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
+      // step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
     }
   }
 }, 'PITest': {
