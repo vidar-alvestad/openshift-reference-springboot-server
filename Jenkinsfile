@@ -35,11 +35,10 @@ parallel 'jacoco': {
     node {
       unstash 'source'
       sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
+
+      publishHTML(
+         target: [reportDir: '**/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
       step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
-      //publishHTML(
-      //   target: [reportDir: 'build/reports/jacoco/jacocoRootTestReport/html', reportFiles: 'index.html', reportName: 'Code Coverage'])
-      //step(
-      //    [$class: 'JacocoPublisher', execPattern: 'build/jacoco/*.exec', classPattern: 'build/classes/main', sourcePattern: 'src/main/java'])
     }
   }
 }, 'PITest': {
