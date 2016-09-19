@@ -66,20 +66,25 @@ node {
   }
 }
 
-
-stage('Deploy to Openshift') {
-  timeout(time: 7, unit: 'DAYS') {
-    input message: 'Approve deployment?'
+try {
+  stage('Deploy to Openshift') {
+    timeout(time: 7, unit: 'DAYS') {
+      input message: 'Approve deployment?'
+    }
   }
-}
-node {
-  def os
-  fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
-    os = fileLoader.load('openshift/openshift')
-  }
-  // Get artifact version
-  unstash 'source'
-  pom = readMavenPom file: 'pom.xml'
+  node {
+    def os
+    fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
+      os = fileLoader.load('openshift/openshift')
+    }
+    // Get artifact version
+    unstash 'source'
+    pom = readMavenPom file: 'pom.xml'
 
-  os.buildVersion('mfp-openshift-referanse-springboot-server', pom.artifactId,   pom.version)
+    os.buildVersion('mfp-openshift-referanse-springboot-server', pom.artifactId,   pom.version)
+  }
+} catch (error) {
+  echo "RESULT BEFORE: ${currentBuild.result}"
+  currentBuild.result = 'SUCCESS'
+  echo "RESULT YO: ${currentBuild.result}"
 }
