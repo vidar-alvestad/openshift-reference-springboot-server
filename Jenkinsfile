@@ -11,6 +11,7 @@ node {
     if (isMaster) {
       sh "./mvnw ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
 
+      echo newVersion
       sh "git tag -a ${newVersion} -m 'Release ${newVersion} on master'"
       sh "git push --follow-tags"
     } else {
