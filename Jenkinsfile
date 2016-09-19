@@ -37,6 +37,7 @@ parallel 'jacoco': {
 
       publishHTML(
          target: [reportDir: '**/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
+      step([$class: 'JUnitResultArchiver', testResults: '**/surefire-reports/TEST-*.xml'])
       // step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
     }
   }
@@ -68,9 +69,10 @@ node {
 
 
 stage('Deploy to Openshift') {
-  timeout(time:5, unit:'DAYS') {
+  timeout(time:7, unit:'DAYS') {
     input message:'Approve deployment?'
   }
+  checkpoint('Before OSE-UTV')
 }
 node {
   def os
