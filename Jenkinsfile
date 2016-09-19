@@ -36,8 +36,7 @@ try {
         unstash 'source'
         sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
 
-        publishHTML(
-            target: [reportDir: '**/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
+        publishHTML(target: [reportDir: '**/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
         step([$class: 'JUnitResultArchiver', testResults: '**/surefire-reports/TEST-*.xml'])
         // step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
       }
@@ -64,10 +63,6 @@ try {
     stage('Deploy to nexus') {
       unstash 'source'
       sh "./mvnw deploy -DskipTests"
-      junit '**/target/surefire-reports/TEST-*.xml'
-      bitbucketStatusNotify(
-          buildState: 'SUCCESSFUL'
-      )
     }
   }
 
@@ -87,11 +82,7 @@ try {
       input message: 'Approve deployment?'
     }
   }
-} catch (error) {
-  currentBuild.result = 'SUCCESS'
-  echo "RESULT: ${currentBuild.result}"
-}
-node {
+  node {
     def os
     fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
       os = fileLoader.load('openshift/openshift')
@@ -100,6 +91,9 @@ node {
     unstash 'source'
     pom = readMavenPom file: 'pom.xml'
 
-    os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server',
-        pom.version)
+    os.buildVersion('mfp-openshift-referanse-springboot-server', pom.artifactId,   pom.version)
+  }
+} catch (error) {
+  currentBuild.result = 'SUCCESS'
+  echo "RESULT: ${currentBuild.result}"
 }
