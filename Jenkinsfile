@@ -101,5 +101,5 @@ node {
     pom = readMavenPom file: 'pom.xml'
 
     os.buildVersion('mfp-openshift-referanse-springboot-server', 'openshift-referanse-springboot-server',
-        $pom.version)
+        pom.version)
 }
