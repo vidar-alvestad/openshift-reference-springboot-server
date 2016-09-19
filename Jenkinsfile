@@ -35,6 +35,7 @@ parallel 'jacoco': {
     node {
       unstash 'source'
       sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
+      step([$class: 'JacocoPublisher', execPattern:'build/jacoco/*.exec', classPattern: 'build/classes/main', sourcePattern: 'src/main/java'])
       //publishHTML(
       //   target: [reportDir: 'build/reports/jacoco/jacocoRootTestReport/html', reportFiles: 'index.html', reportName: 'Code Coverage'])
       //step(
@@ -59,6 +60,9 @@ parallel 'jacoco': {
   }
 }
 
+timeout(time:5, unit:'DAYS') {
+  input message:'Approve deployment?'
+}
 
 node {
   def os
