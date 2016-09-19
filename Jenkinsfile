@@ -67,6 +67,9 @@ try {
       junit '**/target/surefire-reports/TEST-*.xml'
     }
   }
+  bitbucketStatusNotify(
+      buildState: 'SUCCESSFUL'
+  )
 } catch (error) {
   currentBuild.result = "FAILED"
   def commitId = git.getCommitId()
@@ -76,9 +79,6 @@ try {
   throw error
 }
 
-bitbucketStatusNotify(
-    buildState: 'SUCCESSFUL'
-)
 
 try {
   stage('Deploy to Openshift') {
@@ -101,4 +101,6 @@ try {
 } catch (error) {
   currentBuild.result = 'SUCCESS'
 }
-
+bitbucketStatusNotify(
+    buildState: 'SUCCESSFUL'
+)
