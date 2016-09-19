@@ -60,8 +60,10 @@ parallel 'jacoco': {
   }
 }
 
-timeout(time:5, unit:'DAYS') {
-  input message:'Approve deployment?'
+stage 'Deploy OSE' {
+  timeout(time:5, unit:'DAYS') {
+    input message:'Approve deployment?'
+  }
 }
 
 node {
