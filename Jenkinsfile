@@ -65,11 +65,12 @@ try {
       unstash 'source'
       sh "./mvnw deploy -DskipTests"
       junit '**/target/surefire-reports/TEST-*.xml'
+      bitbucketStatusNotify(
+          buildState: 'SUCCESSFUL'
+      )
     }
   }
-  bitbucketStatusNotify(
-      buildState: 'SUCCESSFUL'
-  )
+
 } catch (error) {
   currentBuild.result = "FAILED"
   def commitId = git.getCommitId()
