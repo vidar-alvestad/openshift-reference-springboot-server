@@ -30,34 +30,6 @@
     }
   }
 
-  parallel 'jacoco': {
-    stage('Jacoco') {
-      node {
-        unstash 'source'
-        sh "./mvnw jacoco:prepare-agent test jacoco:report -B"
-
-        publishHTML(target: [reportDir: '**/site/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage'])
-        step([$class: 'JUnitResultArchiver', testResults: '**/surefire-reports/TEST-*.xml'])
-        // step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
-      }
-    }
-  }, 'PITest': {
-    stage('PITest') {
-      node {
-        println("PITest")
-        unstash 'source'
-        sh "./mvnw test pitest:mutationCoverage -B"
-      }
-    }
-  }, 'Sonar': {
-    stage('Sonar') {
-      node {
-        def sonarServerUrl = 'http://aurora/magsonar'
-        unstash 'source'
-        sh "./mvnw sonar:sonar -D sonar.host.url=${sonarServerUrl} -Dsonar.language=java -Dsonar.branch=${env.BRANCH_NAME} -B"
-      }
-    }
-  }
 
   node {
     stage('Deploy to nexus') {
