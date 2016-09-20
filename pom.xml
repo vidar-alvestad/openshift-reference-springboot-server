@@ -77,6 +77,26 @@
     </pluginManagement>
     <plugins>
       <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <!-- Inkluder repackage goal slik at vi kan konfigurere det (se under) -->
+              <goal>repackage</goal>
+              <!-- Generer META-INF/build-info.properties slik at byggeinformasjonen kan inkluderes i /info -->
+              <goal>build-info</goal>
+            </goals>
+            <configuration>
+              <!-- Konfigurer repackage goalet til å ikke kjøre. Vi skrur dette av for å unngå at de ompakkede jaren
+              bli inkludert i Leveransepakken. Den ompakkede jaren er i praksis en fat jar (jar med alle avhengigheter),
+              slik at Leveransepakken ville bli dobbelt så stor. -->
+              <skip>true</skip>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <configuration>
