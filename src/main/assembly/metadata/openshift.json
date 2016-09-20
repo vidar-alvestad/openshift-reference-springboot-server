@@ -6,8 +6,8 @@
       "io.openshift.tags": "openshift,springboot"
     }
   },
-  "java" :{
-    "mainClass" : "ske.aurora.openshift.referanse.springboot.Main",
-    "readinessUrl" : "/info"
+  "java": {
+    "mainClass": "ske.aurora.openshift.referanse.springboot.Main",
+    "readinessUrl": "/info"
   }
 }

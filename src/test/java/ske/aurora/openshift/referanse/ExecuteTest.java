@@ -1,6 +1,5 @@
 package ske.aurora.openshift.referanse;
 
-
 public class ExecuteTest {
 
         /*extends Specification {
@@ -157,7 +156,6 @@ public class ExecuteTest {
       healthError.get() == 0
   }
   */
-
 
 }
 
