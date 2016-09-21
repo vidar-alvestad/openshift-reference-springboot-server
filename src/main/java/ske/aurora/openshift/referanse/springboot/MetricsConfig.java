@@ -40,7 +40,7 @@ import io.prometheus.client.hotspot.DefaultExports;
 import io.prometheus.client.spring.boot.SpringBootMetricsCollector;
 
 @Configuration
-public class PrometheusConfig {
+public class MetricsConfig {
 
     @Autowired
     private MetricRegistry metricRegistry;
