@@ -1,4 +1,4 @@
-package ske.aurora.openshift.referanse.test;
+package ske.aurora.openshift.referanse.springboot.controllers;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LivelinessController {
 
-    @RequestMapping(ApplicationConstants.PING_URL)
+    @RequestMapping("/ping")
     public HttpEntity<String> alive() {
-        return new ResponseEntity<>("Aplication is alive", HttpStatus.OK);
+        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 }

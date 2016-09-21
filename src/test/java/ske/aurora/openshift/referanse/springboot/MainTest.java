@@ -32,9 +32,8 @@ public class MainTest {
 
     @Test
     public void liveliness() throws Exception {
-        // TODO: Assert 200, not 404
         mockMvc.perform(get(ApplicationConstants.PING_URL))
-            .andExpect(status().is4xxClientError());
+            .andExpect(status().is2xxSuccessful());
     }
 
     @Test
