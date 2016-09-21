@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ske.aurora.logging.korrelasjon.RequestKorrelasjon;
+
 @SpringBootApplication
 @RestController
 public class Main {
@@ -18,9 +20,8 @@ public class Main {
         return "test";
     }
 
-
-    @RequestMapping("/api/test")
-    public String apiTest() {
-        return "apiTest";
+    @RequestMapping("/api/korrelasjonsid")
+    public String getKorrelasjonsId() {
+        return RequestKorrelasjon.getId();
     }
 }
