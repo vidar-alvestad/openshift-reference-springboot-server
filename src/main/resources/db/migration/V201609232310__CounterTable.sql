@@ -1,0 +1,1 @@
+CREATE TABLE COUNTER ( value integer DEFAULT 0);
