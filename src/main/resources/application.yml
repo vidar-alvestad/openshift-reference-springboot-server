@@ -17,6 +17,7 @@ logging:
 spring:
   profiles: local
   datasource:
-    url: jdbc:oracle:thin:@til0map-sprint2demo-db01.skead.no:1521/maptest
-    username: DACCPKILYEODSLGFJCQHJARWTJCQOS
-    password: gdxdvpxgDlLwkOEaTrZNbavSFnCfhk
+    # id: 3f9d8558-0fd2-488e-8f79-fbbdf62b04ff
+    url: jdbc:oracle:thin:@uil0map-drivein-db02:1521/dbhotel
+    username: EIRJUPISSHOZYQAEVQPGWHVLVRJPDI
+    password: vMJGXIptKxIbZZguunXBMoQvcZzYIG
