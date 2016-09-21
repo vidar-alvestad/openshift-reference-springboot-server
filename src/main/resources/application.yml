@@ -1,3 +1,9 @@
 spring:
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+
+logging:
+    file: logs/application.log
+    pattern:
+      console: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
+      file: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
