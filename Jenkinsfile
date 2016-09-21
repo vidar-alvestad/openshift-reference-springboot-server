@@ -84,7 +84,7 @@ try {
     unstash 'source'
     pom = readMavenPom file: 'pom.xml'
 
-    os.buildVersion('mfp-openshift-referanse-springboot-server', pom.artifactId,   pom.version)
+    os.buildVersion('mfp-openshift-referanse-springboot-server', 'springboot-server',   pom.version)
   }
 } catch (error) {
   currentBuild.result = 'SUCCESS'
