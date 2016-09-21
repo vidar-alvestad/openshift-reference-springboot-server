@@ -2,6 +2,8 @@ info:
     application:
         name: "Aurora Spring Boot Server Referanseapplikasjon"
 spring:
+    profiles:
+        active: local
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
 
@@ -10,3 +12,11 @@ logging:
     pattern:
       console: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
       file: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
+
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:oracle:thin:@til0map-sprint2demo-db01.skead.no:1521/maptest
+    username: DACCPKILYEODSLGFJCQHJARWTJCQOS
+    password: gdxdvpxgDlLwkOEaTrZNbavSFnCfhk
