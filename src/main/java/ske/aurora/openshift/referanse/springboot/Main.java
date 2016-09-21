@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        String databasePath = System.getenv("REFERANSEAPP_PROPERTIES");
+        String databasePath = System.getenv("REFERANSEAPP_DB_PROPERTIES");
 
         if (databasePath != null) {
             Properties props = new Properties();
