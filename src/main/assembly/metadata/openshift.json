@@ -8,6 +8,7 @@
   },
   "java": {
     "mainClass": "ske.aurora.openshift.referanse.springboot.Main",
+    "jvmOpts": "-Dspring.profiles.active=openshift",
     "readinessUrl": "/info"
   }
 }

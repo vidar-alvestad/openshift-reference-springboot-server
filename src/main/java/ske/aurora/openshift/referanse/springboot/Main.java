@@ -1,5 +1,8 @@
 package ske.aurora.openshift.referanse.springboot;
 
+import java.io.FileReader;
+import java.util.Properties;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +14,21 @@ import ske.aurora.logging.korrelasjon.RequestKorrelasjon;
 @RestController
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
+        String databasePath = System.getenv("REFERANSEAPP_PROPERTIES");
+
+        if (databasePath != null) {
+            Properties props = new Properties();
+            try (FileReader reader = new FileReader(databasePath)) {
+                props.load(reader);
+            }
+
+            System.setProperty("spring.datasource.url", props.getProperty("jdbc.url"));
+            System.setProperty("spring.datasource.username", props.getProperty("jdbc.user"));
+            System.setProperty("spring.datasource.password", props.getProperty("jdbc.password"));
+        }
+
         SpringApplication.run(Main.class, args);
     }
 
