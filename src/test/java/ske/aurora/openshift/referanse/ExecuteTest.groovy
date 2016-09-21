@@ -1,8 +1,16 @@
-package ske.aurora.openshift.referanse;
+package ske.aurora.openshift.referanse
 
-public class ExecuteTest {
+import java.util.concurrent.atomic.AtomicInteger
+import java.util.function.Supplier
 
-        /*extends Specification {
+import com.codahale.metrics.Metric
+import com.codahale.metrics.MetricRegistry
+
+import ske.aurora.openshift.referanse.test.Execute
+import spock.lang.Shared
+import spock.lang.Specification
+
+class ExecuteTest extends Specification {
   @Shared
   MetricRegistry metricRegistry;
   AtomicInteger healthError;
@@ -155,7 +163,6 @@ public class ExecuteTest {
       metricRegistry.counter("test." + Execute.SUCCESS_COUNTER_SUFFIX).count == 1
       healthError.get() == 0
   }
-  */
 
 }
 

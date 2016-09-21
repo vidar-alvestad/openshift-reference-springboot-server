@@ -51,6 +51,20 @@
     <pluginManagement>
       <plugins>
         <plugin>
+          <!-- Brukes til å kompilere groovy kode i enhetstestene -->
+          <groupId>org.codehaus.gmavenplus</groupId>
+          <artifactId>gmavenplus-plugin</artifactId>
+          <version>1.4</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
           <groupId>ske.maven.plugins</groupId>
           <artifactId>continuous-delivery-maven-plugin</artifactId>
           <version>1.3</version>
@@ -209,6 +223,30 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
+      <version>1.0-groovy-2.4</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Valgfrie avhengigheter ved bruk av spock -->
+    <dependency> <!-- bruk en bestemt versjon av groovy (istedenfor den som settes av spock-core -->
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <version>2.4.1</version>
+    </dependency>
+    <dependency> <!-- for å kunne mocke klasser (ikke bare interface) -->
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <version>3.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency> <!-- for å kunne mocke klasser uten default konstruktør -->
+      <groupId>org.objenesis</groupId>
+      <artifactId>objenesis</artifactId>
+      <version>2.1</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.prometheus</groupId>
