@@ -1,4 +1,4 @@
-package ske.aurora.openshift.referanse.test;
+package ske.aurora.metrics;
 
 import static com.codahale.metrics.MetricRegistry.name;
 

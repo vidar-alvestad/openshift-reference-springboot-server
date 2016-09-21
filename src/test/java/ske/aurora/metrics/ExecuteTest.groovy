@@ -1,4 +1,4 @@
-package ske.aurora.openshift.referanse
+package ske.aurora.metrics
 
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.function.Supplier
@@ -6,7 +6,7 @@ import java.util.function.Supplier
 import com.codahale.metrics.Metric
 import com.codahale.metrics.MetricRegistry
 
-import ske.aurora.openshift.referanse.test.Execute
+import ske.aurora.metrics.Execute
 import spock.lang.Shared
 import spock.lang.Specification
 
