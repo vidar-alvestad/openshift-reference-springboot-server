@@ -1,4 +1,4 @@
-package ske.aurora.openshift.referanse.test;
+package ske.aurora.logging.korrelasjon;
 
 import java.io.IOException;
 import java.util.UUID;

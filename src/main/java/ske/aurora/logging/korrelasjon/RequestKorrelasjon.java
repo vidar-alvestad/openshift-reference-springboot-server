@@ -1,4 +1,4 @@
-package ske.aurora.openshift.referanse.test;
+package ske.aurora.logging.korrelasjon;
 
 public class RequestKorrelasjon {
     public static final String KORRELASJONS_ID = "Korrelasjonsid";
