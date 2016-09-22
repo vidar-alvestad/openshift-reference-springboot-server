@@ -12,6 +12,7 @@ import static j2html.TagCreator.span;
 import static j2html.TagCreator.title;
 import static j2html.TagCreator.ul;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.MediaType;
@@ -25,10 +26,19 @@ public class AuroraController {
 
     private final BuildProperties buildProperties;
 
+    @Autowired(required = false)
     public AuroraController(BuildProperties buildProperties,
         @Value("${info.application.name}") String applicationName) {
         this.buildProperties = buildProperties;
         this.applicationName = applicationName;
+    }
+
+    /**
+     * Denne konstruktøren er kun her for å ta høyde for at META-INF/build.properties ikke alltid finnes (genereres
+     * via fullt mavenbygg).
+     */
+    public AuroraController() {
+        this(null, null);
     }
 
     @GetMapping(value = "/aurora", produces = MediaType.TEXT_HTML_VALUE)
