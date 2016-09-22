@@ -24,10 +24,6 @@
     <java.version>1.8</java.version>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
-    <!-- Plugins -->
-    <metrics.version>3.1.2</metrics.version>
-    <prometheus.version>0.0.16</prometheus.version>
-    <logback.version>1.1.7</logback.version>
 
     <!-- Prosjektspesifikk Nexus staging profil. Må endres av prosjektene -->
     <staging-profile-id-med-clm>8815b545f21bd</staging-profile-id-med-clm>
@@ -285,6 +281,11 @@
       <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
     <dependency>
+      <groupId>ske.aurora.springboot.prometheus</groupId>
+      <artifactId>spring-boot-prometheus</artifactId>
+      <version>3.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
       <groupId>com.oracle</groupId>
       <artifactId>ojdbc7</artifactId>
       <version>12.1.0.2</version>
@@ -339,61 +340,6 @@
       <artifactId>objenesis</artifactId>
       <version>2.1</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_spring_boot</artifactId>
-      <version>${prometheus.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_dropwizard</artifactId>
-      <version>${prometheus.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_servlet</artifactId>
-      <version>${prometheus.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.prometheus</groupId>
-      <artifactId>simpleclient_hotspot</artifactId>
-      <version>${prometheus.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-core</artifactId>
-      <version>${metrics.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-servlets</artifactId>
-      <version>${metrics.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-servlet</artifactId>
-      <version>${metrics.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-jvm</artifactId>
-      <version>${metrics.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-annotation</artifactId>
-      <version>${metrics.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-healthchecks</artifactId>
-      <version>${metrics.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-logback</artifactId>
-      <version>${metrics.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
