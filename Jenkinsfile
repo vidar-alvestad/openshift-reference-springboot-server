@@ -10,7 +10,7 @@ node {
     echo "My branch is: ${env.BRANCH_NAME} "
     if (isMaster) {
       // TODO: Decide if we should use ske-cd or not.
-      sh "./mvnw ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
+      sh "./mvnw clean ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
       // TODO: newVersion property is not set in ENV
       // TODO: groovy.lang.MissingPropertyException: No such property: newVersion for class: groovy.lang.Binding
       // echo "newVersion: ${newVersion}"
