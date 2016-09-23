@@ -71,6 +71,10 @@ node {
   }
 }
 
+milestone 1
+input message: 'Approve deployment?'
+milestone 2
+
 try {
   stage('Deploy to Openshift') {
 //    timeout(time: 7, unit: 'DAYS') {
@@ -79,7 +83,7 @@ try {
   }
   node {
     def os
-    fileLoader.withGit('https://ci_map@git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
+    fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
       os = fileLoader.load('openshift/openshift')
     }
     // Get artifact version
