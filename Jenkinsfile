@@ -1,5 +1,7 @@
 #!groovy
 
+milestone 1
+
 node {
   stage('Checkout') {
     def isMaster = env.BRANCH_NAME == "master"
@@ -71,8 +73,7 @@ node {
   }
 }
 
-milestone 1
-input message: 'Approve deployment?'
+// input message: 'Approve deployment?'
 milestone 2
 
 try {
