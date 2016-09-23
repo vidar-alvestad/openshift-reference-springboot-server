@@ -10,12 +10,13 @@ node {
     echo "My branch is: ${env.BRANCH_NAME} "
     if (isMaster) {
       sh "./mvnw ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
-      echo "YOYOYO!!"
-      // TODO: newVersion property is not set correctly
-      // groovy.lang.MissingPropertyException: No such property: newVersion for class: groovy.lang.Binding
+      // TODO: newVersion property is not set in ENV
+      // TODO: groovy.lang.MissingPropertyException: No such property: newVersion for class: groovy.lang.Binding
       // echo "newVersion: ${newVersion}"
       // sh "git tag -a ${newVersion} -m 'Release ${newVersion} on master'"
       // sh "git push --follow-tags"
+      // TODO: Remove scm:tag and scm-settings from pom.xml when $newVersion is set in ENV
+      sh "./mvnw scm:tag -B"
     } else {
       sh "./mvnw versions:set -DnewVersion=${branchShortName}-SNAPSHOT -DgenerateBackupPoms=false -B"
     }
