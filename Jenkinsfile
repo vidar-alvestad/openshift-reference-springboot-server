@@ -9,6 +9,7 @@ node {
     // Set version in pom.xml
     echo "My branch is: ${env.BRANCH_NAME} "
     if (isMaster) {
+      // TODO: Decide if we should use ske-cd or not.
       sh "./mvnw ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
       // TODO: newVersion property is not set in ENV
       // TODO: groovy.lang.MissingPropertyException: No such property: newVersion for class: groovy.lang.Binding
@@ -16,7 +17,7 @@ node {
       // sh "git tag -a ${newVersion} -m 'Release ${newVersion} on master'"
       // sh "git push --follow-tags"
       // TODO: Remove scm:tag and scm-settings from pom.xml when $newVersion is set in ENV
-      sh "./mvnw scm:tag -B"
+      sh "./mvnw scm:tag -Dusername=ci_aos -Dpassword=ci_aos -B"
     } else {
       sh "./mvnw versions:set -DnewVersion=${branchShortName}-SNAPSHOT -DgenerateBackupPoms=false -B"
     }
