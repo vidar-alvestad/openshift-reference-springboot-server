@@ -46,15 +46,7 @@ parallel 'jacoco': {
       // step([$class: 'JacocoPublisher', execPattern:'**/target/**.exec', classPattern: '**/classes', sourcePattern: '**/src/main/java'])
     }
   }
-}, 'PITest': {
-  stage('PITest') {
-    node {
-      println("PITest")
-      unstash 'source'
-      sh "./mvnw test pitest:mutationCoverage -B"
-    }
-  }
-}/*, 'Sonar': {
+}, 'Sonar': {
   stage('Sonar') {
     node {
       def sonarServerUrl = 'http://aurora/magsonar'
@@ -62,7 +54,17 @@ parallel 'jacoco': {
       sh "./mvnw sonar:sonar -D sonar.host.url=${sonarServerUrl} -Dsonar.language=java -Dsonar.branch=${env.BRANCH_NAME} -B"
     }
   }
-}*/
+}
+
+node {
+  stage('PITest') {
+    node {
+      println("PITest")
+      unstash 'source'
+      sh "./mvnw test pitest:mutationCoverage -B"
+    }
+  }
+}
 
 node {
   stage('Deploy to nexus') {
