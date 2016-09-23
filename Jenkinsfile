@@ -58,11 +58,9 @@ parallel 'jacoco': {
 
 node {
   stage('PITest') {
-    node {
-      println("PITest")
-      unstash 'source'
-      sh "./mvnw test pitest:mutationCoverage -B"
-    }
+    println("PITest")
+    unstash 'source'
+    sh "./mvnw test pitest:mutationCoverage -B"
   }
 }
 
