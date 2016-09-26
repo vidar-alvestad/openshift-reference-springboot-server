@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ske.aurora.openshift.referanse.springboot.service.CounterService;
 
 @RestController
-public class DatabaseExampleController {
+public class CounterController {
 
     private final CounterService counterService;
 
-    public DatabaseExampleController(CounterService counterService) {
+    public CounterController(CounterService counterService) {
 
         this.counterService = counterService;
     }
