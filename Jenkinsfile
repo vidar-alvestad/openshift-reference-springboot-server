@@ -73,14 +73,13 @@ node {
   }
 }
 
-// input message: 'Approve deployment?'
-milestone 2
 
 try {
   stage('Deploy to Openshift') {
-//    timeout(time: 7, unit: 'DAYS') {
-//      input message: 'Approve deployment?'
-//    }
+    timeout(time: 7, unit: 'DAYS') {
+      input message: 'Approve deployment?'
+    }
+    milestone 2
   }
   node {
     def os
