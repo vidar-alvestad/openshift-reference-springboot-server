@@ -7,6 +7,13 @@ spring:
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
 
+aurora:
+    metrics:
+        prometheus:
+            endpoint: /prometheus
+            statusCodeMetric:
+                mappings: /api/*
+
 logging:
     file: logs/application.log
     pattern:
