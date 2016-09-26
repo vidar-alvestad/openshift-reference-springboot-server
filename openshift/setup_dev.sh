@@ -11,6 +11,7 @@ oc new-app --template=aurora-development-3.0 \
     -p GROUP_ID=ske.aurora.openshift.referanse \
     -p VERSION=0.0.1-SNAPSHOT \
     -p MAX_MEMORY=512M \
+    -p PROMETHEUS_ENABLED=true \
     -p DATABASE=referanseapp:3f9d8558-0fd2-488e-8f79-fbbdf62b04ff \
     -l app=springboot-server
 
