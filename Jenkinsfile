@@ -4,21 +4,15 @@ milestone 1
 
 node {
   stage('Checkout') {
+    checkout scm
+
     def isMaster = env.BRANCH_NAME == "master"
     def branchShortName = env.BRANCH_NAME.split("/").last()
-    checkout scm
 
     // Set version in pom.xml
     echo "My branch is: ${env.BRANCH_NAME} "
     if (isMaster) {
-      // TODO: Decide if we should use ske-cd or not.
-      sh "./mvnw clean ske-cd:suggest-version versions:set -Dcd.version.accesibleFromProperty=newVersion -DgenerateBackupPoms=false"
-      // TODO: newVersion property is not set in ENV
-      // TODO: groovy.lang.MissingPropertyException: No such property: newVersion for class: groovy.lang.Binding
-      // echo "newVersion: ${newVersion}"
-      // sh "git tag -a ${newVersion} -m 'Release ${newVersion} on master'"
-      // sh "git push --follow-tags"
-      // TODO: Remove scm:tag and scm-settings from pom.xml when $newVersion is set in ENV
+      sh "./mvnw clean aurora-cd:suggest-version versions:set -DgenerateBackupPoms=false"
       sh "./mvnw scm:tag -Dusername=ci_aos -Dpassword=ci_aos -B"
     } else {
       sh "./mvnw versions:set -DnewVersion=${branchShortName}-SNAPSHOT -DgenerateBackupPoms=false -B"
@@ -53,7 +47,7 @@ parallel 'jacoco': {
     node {
       def sonarServerUrl = 'http://aurora/magsonar'
       unstash 'source'
-      sh "./mvnw sonar:sonar -D sonar.host.url=${sonarServerUrl} -Dsonar.language=java -Dsonar.branch=${env.BRANCH_NAME} -B"
+      sh "./mvnw sonar:sonar -Dsonar.host.url=${sonarServerUrl} -Dsonar.language=java -Dsonar.branch=${env.BRANCH_NAME} -B"
     }
   }
 }
@@ -90,7 +84,7 @@ try {
     unstash 'source'
     pom = readMavenPom file: 'pom.xml'
 
-    os.buildVersion('mfp-openshift-referanse-springboot-server', 'springboot-server',   pom.version)
+    os.buildVersion('mfp-openshift-referanse-springboot-server', 'springboot-server', pom.version)
   }
 } catch (error) {
   currentBuild.result = 'SUCCESS'
