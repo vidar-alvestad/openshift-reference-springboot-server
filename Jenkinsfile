@@ -23,7 +23,6 @@ node {
 
   stage('Compile') {
     maven.compile()
-    utilities.getSurefireReports()
     utilities.getCheckstyleReports()
   }
 }
@@ -34,6 +33,7 @@ parallel 'jacoco': {
       unstash 'source'
       maven.jacoco()
       utilities.getJacocoReports()
+      utilities.getSurefireReports()
     }
   }
 }, 'Sonar': {
