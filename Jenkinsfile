@@ -17,7 +17,6 @@ node {
   stage('Checkout') {
     checkout scm
     gitCommit = git.getCommitId()
-    utilities.notifyBitbucket(gitCommit)
     maven.bumpVersion()
     stash excludes: 'target/', includes: '**', name: 'source'
   }
@@ -59,7 +58,6 @@ node {
   stage('Deploy to nexus') {
     unstash 'source'
     maven.deploy()
-    utilities.notifyBitbucket(gitCommit)
   }
 }
 
