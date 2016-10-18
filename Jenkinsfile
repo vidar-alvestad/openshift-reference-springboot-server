@@ -11,12 +11,13 @@ fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git',
   utilities = fileLoader.load('utilities/utilities')
 }
 
-maven.setVersion('Maven 3')
 milestone 1
 
 
 node {
   stage('Checkout') {
+   maven.setVersion('Maven 3')
+
     checkout scm
     maven.bumpVersion()
     stash excludes: 'target/', includes: '**', name: 'source'
