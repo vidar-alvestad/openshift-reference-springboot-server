@@ -20,6 +20,7 @@ node {
 
     checkout scm
     maven.bumpVersion()
+    maven.tag('ci_aos', 'ci_aos')
     stash excludes: 'target/', includes: '**', name: 'source'
   }
 
@@ -42,7 +43,7 @@ parallel 'jacoco': {
   stage('Sonar') {
     node {
       unstash 'source'
-      maven.sonar()
+      maven.sonar('http://aurora/magsonar')
     }
   }
 }
