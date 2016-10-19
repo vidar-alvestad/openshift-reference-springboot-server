@@ -16,17 +16,15 @@ milestone 1
 
 node {
   stage('Checkout') {
-   maven.setVersion('Maven 3')
-
+    maven.setVersion('Maven 3')
     checkout scm
     maven.bumpVersion()
     maven.tag('ci_aos', 'ci_aos')
-    stash excludes: 'target/', includes: '**', name: 'source'
   }
-
   stage('Compile') {
     maven.compile()
     utilities.createCheckStylePublisher()
+    stash includes: '**', name: 'source'
   }
 }
 
