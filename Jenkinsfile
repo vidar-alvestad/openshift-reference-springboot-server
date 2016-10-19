@@ -4,7 +4,7 @@ def git
 def maven
 def os
 def utilities
-fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'feature/AOS-478') {
+fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'master') {
   git = fileLoader.load('git/git')
   maven = fileLoader.load('maven/maven')
   os = fileLoader.load('openshift/openshift')
