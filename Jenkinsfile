@@ -66,7 +66,7 @@ node {
 try {
   stage('Deploy to Openshift') {
     timeout(time: 7, unit: 'DAYS') {
-      input message: 'Approve deployment?'
+      input id: 'Deploy to OpenShift', message: 'Approve deployment?'
     }
     milestone 2
   }
