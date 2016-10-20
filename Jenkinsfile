@@ -13,7 +13,6 @@ fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git',
 
 milestone 1
 
-
 node {
   stage('Checkout') {
     maven.setVersion('Maven 3')
@@ -24,26 +23,27 @@ node {
   stage('Compile') {
     maven.compile()
     utilities.createCheckStylePublisher()
-    stash includes: '**', name: 'source'
+    stash excludes: 'target/', includes: '**', name: 'source'
   }
 }
 
-node {
+parallel 'jacoco': {
   stage('Jacoco') {
+    node {
       unstash 'source'
       maven.jacoco()
       utilities.createJUnitResultArchiver()
       utilities.createJacocoPublisher()
     }
   }
-
- node {
+}, 'Sonar': {
   stage('Sonar') {
-
+    node {
       unstash 'source'
       maven.sonar('http://aurora/magsonar')
     }
   }
+}
 
 node {
   stage('PITest') {
