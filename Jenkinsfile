@@ -28,23 +28,22 @@ node {
   }
 }
 
-parallel 'jacoco': {
+node {
   stage('Jacoco') {
-    node {
       unstash 'source'
       maven.jacoco()
       utilities.createJUnitResultArchiver()
       utilities.createJacocoPublisher()
     }
   }
-}, 'Sonar': {
+
+ node {
   stage('Sonar') {
-    node {
+
       unstash 'source'
       maven.sonar('http://aurora/magsonar')
     }
   }
-}
 
 node {
   stage('PITest') {
