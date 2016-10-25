@@ -42,7 +42,6 @@
     </snapshotRepository>
   </distributionManagement>
 
-  <!-- Fjernes når ske.cd-plugin setter newVersion som ENV -->
   <scm>
     <url>https://aurora/git/projects/AOP/repos/openshift-referanse-springboot-server/browse</url>
     <connection>scm:git:https://aurora/git/scm/aop/openshift-referanse-springboot-server.git</connection>
@@ -134,10 +133,6 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <groupId>pl.project13.maven</groupId>
-        <artifactId>git-commit-id-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.asciidoctor</groupId>
@@ -255,7 +250,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>6.13</version>
+            <version>6.16.1</version>
           </dependency>
           <dependency>
             <groupId>ske.aurora.checkstyle</groupId>
