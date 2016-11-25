@@ -61,22 +61,8 @@ node {
   }
 }
 
-
-try {
-  stage('Deploy to Openshift') {
-    timeout(time: 7, unit: 'DAYS') {
-      input id: 'DeployOpenShift', message: 'Approve deployment?'
-      echo "Deploy to Openshift"
-    }
-    milestone 2
+node {
+  stage('Openshift Build') {
+    os.buildLeveransepakkePom()
   }
-  node {
-    // Get artifact version
-    unstash 'source'
-    pom = readMavenPom file: 'pom.xml'
-
-    os.buildVersion('mfp-openshift-referanse-springboot-server', 'springboot-server', pom.version)
-  }
-} catch (error) {
-  currentBuild.result = 'SUCCESS'
 }
