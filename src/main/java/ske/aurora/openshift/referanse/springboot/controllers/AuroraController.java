@@ -54,7 +54,8 @@ public class AuroraController {
                     h2("Imageversjon"),
                     span().withRel("imageVersion").withText(System.getenv("AURORA_VERSION")),
                     h2("Applikasjonsversjon"),
-                    span().withRel("applicationVersion").withText(buildProperties.getVersion()),
+                    span().withRel("applicationVersion")
+                        .withText(buildProperties != null ? buildProperties.getVersion() : null),
                     h2("Tilhørighet"),
                     span().withRel("affiliation").withText("Aurora"),
                     h2("Links"),
