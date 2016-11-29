@@ -1,6 +1,6 @@
 package ske.aurora.logging.korrelasjon;
 
-public class RequestKorrelasjon {
+public final class RequestKorrelasjon {
     public static final String KORRELASJONS_ID = "Korrelasjonsid";
     private static final ThreadLocal<String> THREAD_LOCAL = new ThreadLocal<>();
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
+@SuppressWarnings({ "checkstyle:hideutilityclassconstructor" })
 public class Main {
 
     public static void main(String[] args) throws Exception {

@@ -9,7 +9,7 @@ import com.codahale.metrics.Counter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 
-public class Execute {
+public final class Execute {
     public static final String EXECUTION_TIMER_SUFFIX = "executionTimer";
     public static final String SUCCESS_COUNTER_SUFFIX = "successCount";
     public static final String ERROR_COUNTER_SUFFIX = "errorCount";
