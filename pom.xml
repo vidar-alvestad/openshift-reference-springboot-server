@@ -308,6 +308,11 @@
       <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
     <dependency>
+      <groupId>ske.aurora</groupId>
+      <artifactId>aurora-header-mdc-filter</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+    <dependency>
       <groupId>ske.aurora.springboot.prometheus</groupId>
       <artifactId>spring-boot-prometheus</artifactId>
       <version>3.0.1</version>
