@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codahale.metrics.annotation.Timed;
+
 import ske.aurora.openshift.referanse.springboot.service.CounterService;
 
 @RestController
@@ -21,6 +23,7 @@ public class CounterController {
         this.counterService = counterService;
     }
 
+    @Timed(name = "counter")
     @GetMapping("/api/counter")
     public Map<String, Object> counter() {
 
