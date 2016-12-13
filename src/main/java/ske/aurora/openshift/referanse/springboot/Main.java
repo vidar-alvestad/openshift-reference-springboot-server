@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
 @SuppressWarnings({ "checkstyle:hideutilityclassconstructor" })
 public class Main {
 
