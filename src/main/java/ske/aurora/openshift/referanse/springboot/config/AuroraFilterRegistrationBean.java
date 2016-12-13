@@ -4,10 +4,14 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
+import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
+
 import ske.aurora.filter.logging.AuroraHeaderFilter;
 
 @Configuration
-public class AuroraFilterRegistrationBean {
+@EnableMetrics
+public class ApplicationConfig extends MetricsConfigurerAdapter {
 
     @Bean
     public FilterRegistrationBean auroraHeaderFilter() {
