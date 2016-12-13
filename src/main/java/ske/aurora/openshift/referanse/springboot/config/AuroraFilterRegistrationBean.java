@@ -4,16 +4,16 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import ske.aurora.logging.korrelasjon.KorrelasjonsFilter;
+import ske.aurora.filter.logging.AuroraHeaderFilter;
 
 @Configuration
-public class ApplicationConfig {
+public class AuroraFilterRegistrationBean {
 
     @Bean
-    public FilterRegistrationBean korrelasjonsFilterRegistrationBean() {
+    public FilterRegistrationBean auroraHeaderFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.addUrlPatterns("/api/*");
-        registration.setFilter(new KorrelasjonsFilter());
+        registration.setFilter(new AuroraHeaderFilter());
         return registration;
     }
 }
