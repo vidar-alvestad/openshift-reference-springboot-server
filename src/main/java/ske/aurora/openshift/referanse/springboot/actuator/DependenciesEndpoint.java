@@ -19,14 +19,14 @@ public class DependenciesEndpoint extends AbstractMvcEndpoint {
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Map<String, String> listDependencies() {
-
-
         /*
         Usikker på om dette i det hele tatt skal brukes eller hvordan det skal være.
          */
-        return new HashMap<String, String>() {{
-            put("boks", "http://foo.bar.baz/foobar");
-        }};
+        return new HashMap<String, String>() {
+            {
+                put("boks", "http://foo.bar.baz/foobar");
+            }
+        };
     }
 
 }
