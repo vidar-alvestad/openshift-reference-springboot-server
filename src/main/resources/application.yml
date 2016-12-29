@@ -1,11 +1,16 @@
 info:
     application:
         name: "Aurora Spring Boot Server Referanseapplikasjon"
+
 spring:
     profiles:
         active: local
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+
+endpoints:
+    metrics:
+        enabled: false
 
 aurora:
     metrics:
