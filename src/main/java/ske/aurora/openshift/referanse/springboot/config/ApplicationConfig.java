@@ -1,10 +1,15 @@
 package ske.aurora.openshift.referanse.springboot.config;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +21,13 @@ import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 
 import ske.aurora.filter.logging.AuroraHeaderFilter;
+import ske.aurora.openshift.referanse.springboot.controllers.CounterController;
 
 @Configuration
 @EnableMetrics
 public class ApplicationConfig extends MetricsConfigurerAdapter {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationConfig.class);
 
     @Autowired
     private ConfigurableEnvironment env;
@@ -33,17 +41,17 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
     }
 
     @Bean
-    public PropertiesPropertySource secretProperties() throws IOException {
+    public PropertiesPropertySource secretProperties() {
         return createAuroraPropertySource("auroraConfig[secret]", "AURORA_SECRET_PREFIX");
     }
 
     @Bean
-    public PropertiesPropertySource configProperties() throws IOException {
+    public PropertiesPropertySource configProperties()  {
         return createAuroraPropertySource("auroraConfig[env]", "AURORA_ENV_PREFIX");
     }
 
     @Bean
-    public PropertiesPropertySource auroraProperties() throws IOException {
+    public PropertiesPropertySource auroraProperties()  {
 
 
         Properties props = new Properties();
@@ -56,7 +64,7 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
         return imageProps;
     }
 
-    private PropertiesPropertySource createAuroraPropertySource(String name, String envPrefix) throws IOException {
+    private PropertiesPropertySource createAuroraPropertySource(String name, String envPrefix) {
         String secretPrefix = System.getenv(envPrefix);
 
         if (secretPrefix == null) {
@@ -65,7 +73,16 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
 
         String propertiesName = secretPrefix + ".properties";
         Properties props = new Properties();
-        props.load(new FileInputStream(propertiesName));
+
+        try {
+            try (BufferedReader reader =
+                     Files.newBufferedReader(Paths.get(propertiesName))) {
+                props.load(reader);
+            }
+        } catch (IOException e) {
+            LOG.debug("Could not read file location " + propertiesName);
+            return null;
+        }
 
         PropertiesPropertySource secretProps = new PropertiesPropertySource(name, props);
 
