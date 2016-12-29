@@ -1,7 +1,6 @@
 package ske.aurora.openshift.referanse.springboot.config;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,7 +20,6 @@ import com.ryantenney.metrics.spring.config.annotation.EnableMetrics;
 import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 
 import ske.aurora.filter.logging.AuroraHeaderFilter;
-import ske.aurora.openshift.referanse.springboot.controllers.CounterController;
 
 @Configuration
 @EnableMetrics
@@ -46,17 +44,16 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
     }
 
     @Bean
-    public PropertiesPropertySource configProperties()  {
+    public PropertiesPropertySource configProperties() {
         return createAuroraPropertySource("auroraConfig[env]", "AURORA_ENV_PREFIX");
     }
 
     @Bean
-    public PropertiesPropertySource auroraProperties()  {
-
+    public PropertiesPropertySource auroraProperties() {
 
         Properties props = new Properties();
         Stream.of("AURORA_VERSION", "APP_VERSION")
-            .forEach(p ->props.put(p, System.getenv(p)));
+            .forEach(p -> props.put(p, System.getenv(p)));
 
         PropertiesPropertySource imageProps = new PropertiesPropertySource("auroraConfig[image]", props);
 
