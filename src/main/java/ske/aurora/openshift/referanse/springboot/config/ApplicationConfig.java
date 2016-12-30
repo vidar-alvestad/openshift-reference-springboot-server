@@ -81,6 +81,8 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
             return null;
         }
 
+
+        props.list(System.out);
         PropertiesPropertySource secretProps = new PropertiesPropertySource(name, props);
 
         env.getPropertySources().addLast(secretProps);
