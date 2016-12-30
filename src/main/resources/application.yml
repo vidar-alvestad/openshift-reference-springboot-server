@@ -11,6 +11,23 @@ spring:
 endpoints:
     metrics:
         enabled: false
+    logfile:
+        enabled: false
+    autoconfig:
+        enabled: false
+    heapdump:
+        enabled: false
+    configprops:
+        enabled: false
+    mappings:
+        enabled: false
+    beans:
+        enabled: false
+    dump:
+        enabled: false
+    jolokia:
+        enabled: false
+
 
 aurora:
     metrics:
