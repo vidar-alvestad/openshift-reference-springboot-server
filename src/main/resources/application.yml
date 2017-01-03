@@ -8,6 +8,7 @@ spring:
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
 
+
 endpoints:
     metrics:
         enabled: false
@@ -39,13 +40,13 @@ aurora:
                 mappings: /api/*
 
 logging:
-    file: logs/application.log
-    pattern:
-      console: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
-      file: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
-
     level:
       ske.aurora: DEBUG
+      org:
+        springframework: WARN
+        apache.catalina: WARN
+        hibernate: WAR
+
 ---
 spring:
   profiles: local
@@ -54,3 +55,7 @@ spring:
     url: jdbc:oracle:thin:@uil0map-drivein-db02:1521/dbhotel
     username: EIRJUPISSHOZYQAEVQPGWHVLVRJPDI
     password: vMJGXIptKxIbZZguunXBMoQvcZzYIG
+
+logging:
+    pattern:
+      console: "%d [%-9.9thread] %-5level %logger %X - %msg %n%rEx{full}"
