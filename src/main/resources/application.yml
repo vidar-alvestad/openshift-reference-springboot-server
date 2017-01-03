@@ -29,9 +29,6 @@ endpoints:
     jolokia:
         enabled: false
 
-management:
-    port: 8081
-
 aurora:
     metrics:
         prometheus:
