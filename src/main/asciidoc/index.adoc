@@ -57,12 +57,3 @@ API'et prøver å følge standard HTTP og ReST konvensjoner i bruk av HTTP statu
 
 [resources]
 == Endepunkter
-
-=== Auroraendepunktet
-
-Standard Auroraendepunkt
-include::{snippets}/aurora/curl-request.adoc[]
-
-Respons::
-include::{snippets}/aurora/http-response.adoc[]
-//include::{snippets}/database-create/response-fields.adoc[]
