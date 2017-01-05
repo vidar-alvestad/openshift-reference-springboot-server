@@ -12,10 +12,10 @@ fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git',
 
 node {
   stage('Checkout') {
-    maven.setVersion(mavenVersion)
+    maven.setVersion('Maven 3')
     checkout scm
     maven.bumpVersion()
-    maven.tag(gitUser, gitPassword)
+    maven.tag('ci_aos', 'ci_aos')
   }
   stage('Compile') {
     maven.compile()
