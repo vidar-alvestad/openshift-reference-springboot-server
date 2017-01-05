@@ -27,7 +27,7 @@ public class Main {
      * @param propertiesFile
      * @throws IOException
      */
-    private static void setDatasourcePropertiesFromDbPropertiesFile(String propertiesFile) throws IOException {
+    static void setDatasourcePropertiesFromDbPropertiesFile(String propertiesFile) throws IOException {
 
         String databasePath = System.getenv(propertiesFile);
 
