@@ -27,9 +27,9 @@ node {
     utilities.createJacocoPublisher()
   }
   stage('SonarQube') {
-
+    withSonarQubeEnv('Aurora SonarQube') {
         maven.run("sonar:sonar -Dsonar.branch=${env.BRANCH_NAME}");
-
+    }
   }
   stage('PIT Mutation Tests') {
     def isMaster = env.BRANCH_NAME == "master"
