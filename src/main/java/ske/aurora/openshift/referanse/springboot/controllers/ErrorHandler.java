@@ -17,12 +17,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ErrorHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(ErrorHandler.class);
 
     @ExceptionHandler({ RuntimeException.class })
     protected ResponseEntity<Object> handleGenericError(RuntimeException e, WebRequest request) {
 
-        LOGGER.error("Unexpected error", e);
+        logger.error("Unexpected error", e);
         return handleException(e, request, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -38,14 +38,11 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        Map<String, Object> error = new HashMap<String, Object>() {
-            {
-                put("errorMessage", e.getMessage());
-                if (e.getCause() != null) {
-                    put("cause", e.getCause().getMessage());
-                }
-            }
-        };
+        Map<String, Object> error = new HashMap<>();
+        error.put("errorMessage", e.getMessage());
+        if (e.getCause() != null) {
+            error.put("cause", e.getCause().getMessage());
+        }
         return handleExceptionInternal(e, error, headers, httpStatus, request);
     }
 }
