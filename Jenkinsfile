@@ -4,7 +4,7 @@ def maven
 def openshift
 def utilities
 
-fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', scriptVersion) {
+fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'v1.1.3') {
   maven = fileLoader.load('maven/maven')
   openshift = fileLoader.load('openshift/openshift')
   utilities = fileLoader.load('utilities/utilities')
