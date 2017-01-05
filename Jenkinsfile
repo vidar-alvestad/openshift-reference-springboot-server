@@ -27,7 +27,7 @@ node {
     utilities.createJacocoPublisher()
   }
   stage('SonarQube') {
-    withSonarQubeEnv('Aurora SonarQube') {
+    withSonarQubeEnv {
         maven.run("sonar:sonar -Dsonar.branch=${env.BRANCH_NAME}");
     }
   }
