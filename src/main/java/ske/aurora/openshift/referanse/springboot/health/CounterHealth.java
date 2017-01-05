@@ -19,7 +19,7 @@ public class CounterHealth extends AbstractHealthIndicator {
     protected void doHealthCheck(Health.Builder builder) throws Exception {
         int currentValue = Integer.parseInt(counterService.getAndIncrementCounter().get("VALUE").toString());
 
-         builder.up().withDetail("Antall", currentValue);
+        builder.up().withDetail("Antall", currentValue);
 
     }
 }
