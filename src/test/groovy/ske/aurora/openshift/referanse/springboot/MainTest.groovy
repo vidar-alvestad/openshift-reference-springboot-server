@@ -28,9 +28,4 @@ class MainTest extends Specification {
     then:
       databaseProperties.every { System.getProperty(it) }
   }
-
-  def "Sonar made me do it"() {
-    expect:
-      new Main()
-  }
 }
