@@ -1,11 +1,46 @@
 info:
     application:
         name: "Aurora Spring Boot Server Referanseapplikasjon"
+        hostname: ${HOSTNAME}
+        url: ${ROUTE_NAME}
+        aurora_version: ${AURORA_VERSION}
+        app_version: ${APP_VERSION}
+    links:
+        metrics: "{metricsHostname}/dashboard/db/openshift-project-spring-actuator-view?var-ds=openshift-{cluster}-ose&var-namespace={namespace}&var-app={name}"
+        logs: "{splunkHostname}/en-US/app/search/search?q=search environment%3D{namespace} application%3D{name} sourcetype%3Dlog4j&display.page.search.mode=smart&dispatch.sample_ratio=1&earliest=-10m&latest"
+        issues : "https://aurora/jira/secure/RapidBoard.jspa?rapidView=2269&quickFilter=6146"
+        ci: "http://jenkins-mfp-jenkins.utv.paas.skead.no/job/aop/job/openshift-referanse-springboot-server/"
+        wiki: "https://aurora/wiki/x/Z3dFBw"
+        api-doc: "${ROUTE_NAME}/docs/index.html"
+    dependencies:
+        boks: "http://examle/boks/endpoint/"
+
 spring:
     profiles:
         active: local
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+
+
+endpoints:
+    metrics:
+        enabled: false
+    logfile:
+        enabled: false
+    autoconfig:
+        enabled: false
+    heapdump:
+        enabled: false
+    configprops:
+        enabled: false
+    mappings:
+        enabled: false
+    beans:
+        enabled: false
+    dump:
+        enabled: false
+    jolokia:
+        enabled: false
 
 aurora:
     metrics:
@@ -15,13 +50,13 @@ aurora:
                 mappings: /api/*
 
 logging:
-    file: logs/application.log
-    pattern:
-      console: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
-      file: "%d [%-9.9thread] %-5level %logger{36} %X - %msg %n%rEx{full}"
-
     level:
       ske.aurora: DEBUG
+      org:
+        springframework: WARN
+        apache.catalina: WARN
+        hibernate: WAR
+
 ---
 spring:
   profiles: local
@@ -30,3 +65,7 @@ spring:
     url: jdbc:oracle:thin:@uil0map-drivein-db02:1521/dbhotel
     username: EIRJUPISSHOZYQAEVQPGWHVLVRJPDI
     password: vMJGXIptKxIbZZguunXBMoQvcZzYIG
+
+logging:
+    pattern:
+      console: "%d [%-9.9thread] %-5level %logger %X - %msg %n%rEx{full}"

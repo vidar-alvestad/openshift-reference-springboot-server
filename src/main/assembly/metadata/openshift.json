@@ -1,6 +1,6 @@
 {
   "docker": {
-    "maintainer": "Bent André Solheim <BentAndre.Solheim@skatteetaten.no>",
+    "maintainer": "Aurora OpenShift Utvikling <utvpaas@skatteetaten.no>",
     "labels": {
       "io.k8s.description": "Demo application with spring boot on Openshift.",
       "io.openshift.tags": "openshift,springboot"
@@ -10,6 +10,6 @@
     "mainClass": "ske.aurora.openshift.referanse.springboot.Main",
     "jvmOpts": "-Dspring.profiles.active=openshift",
     "applicationArgs": "--logging.config=${LOGBACK_FILE}",
-    "readinessUrl": "/info"
+    "readinessUrl": "/health"
   }
 }
