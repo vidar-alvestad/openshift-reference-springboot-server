@@ -5,4 +5,4 @@ fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git',
    jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
 
-jenkinsfile.run('v2.0.0', 'aurora-bitbucket')
+jenkinsfile.run('v2.0.0', 'Maven 3', 'aurora-bitbucket')
