@@ -52,9 +52,12 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
     public PropertiesPropertySource auroraProperties() {
 
         Properties props = new Properties();
-        Stream.of("AURORA_VERSION", "APP_VERSION")
-            .forEach(p -> props.put(p, System.getenv(p)));
-
+        Stream.of("AURORA_VERSION", "APP_VERSION").forEach(p -> {
+            String value = System.getenv(p);
+            if (value != null) {
+                props.put(p, value);
+            }
+        });
         PropertiesPropertySource imageProps = new PropertiesPropertySource("auroraConfig[image]", props);
 
         env.getPropertySources().addLast(imageProps);
