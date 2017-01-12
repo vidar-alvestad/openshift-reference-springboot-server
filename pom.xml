@@ -115,6 +115,10 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+      </plugin>
+      <plugin>
         <artifactId>maven-scm-plugin</artifactId>
         <version>1.9.5</version>
         <configuration>
