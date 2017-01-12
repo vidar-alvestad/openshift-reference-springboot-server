@@ -92,6 +92,14 @@ HTTP Status, Logging, Standard Metrics, Prometheus
 
 ## Unit Testing with Spock
 
+Unit testing has been set up and configured to use the Spock Framework with support for mocking classes and classes
+with non-default constructors. The gmavenplus-plugin and surefire-plugin are configured so that the tests will run in
+a standard maven build.
+
+For details, see:
+* [gmavenplus-plugin](http://groovy.github.io/GMavenPlus/)
+* [Spock Framework](http://spockframework.org/)
+
 
 ## Documentation
 
