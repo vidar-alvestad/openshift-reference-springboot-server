@@ -74,10 +74,16 @@ Boot automatically picks it up and configures it using the application DataSourc
 
 For details, see:
 * [Flyway SpringBoot](https://flywaydb.org/documentation/plugins/springboot)
-* [Use a higher-level database migration tool](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
+* [Spring Doc: Use a higher-level database migration tool](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
 
 ## Application Health
+
+Application health is provided by standard Spring Boot features. An example is provided in the ```CounterHealth``` 
+class.
+
+For details, see:
+* [Spring Doc: Health information](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-health)
 
 
 ## Actuator Endpoints
