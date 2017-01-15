@@ -135,11 +135,20 @@ For details, see:
 * [Spock Framework](http://spockframework.org/)
 
 
-## Example Code
-
-
-
 ## Documentation
+
+For documentation, the Reference Application configured to use [spring-rest-docs](https://projects.spring.io/spring-restdocs/) 
+which is an approach to documentation that combines hand-written documentation with auto-generated snippets produced 
+with Spring MVC Test. Please read the spring-rest-docs documentation for an overview of how the technology works.
+
+The ```pom.xml``` is set up with the necessary plugins to build the documentation. This is basically including
+spring-rest-docs on the test classpath to generate snippets and configuring the asciidoctor-maven-plugin to process
+documentation in the ```src/main/asciidoc```-folder and the output folder of the spring-rest-docs tests. The 
+maven-resources-plugin is configured to include the generated documentation in ```/static/docs``` in the final jar
+which results in spring-boot exposing the files over HTTP on ```/docs``` (see [Static Content](http://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-web-applications.html#boot-features-spring-mvc-static-content)
+from the spring-boot documentation for details).
+
+A class, ```AbstractControllerTest```, is included as an example base class for tests that use spring-rest-docs.
 
 
 ## Build Configuration
