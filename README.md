@@ -26,6 +26,25 @@ For more information on the decision process around selecting Spring Boot, see [
 # The Aurora Requirements
 
 
+# How to Use the Application
+
+As the intention of the Reference Application is to serve as a guide to how to set up your own application, it is not 
+intended to be used directly as a starting point for new applications without any modifications.
+
+You may fork the repository of the application to be able to apply new commits onto your own modified application, or
+your may export the code into your own fresh repository and manually keep up to date with changes to the central
+repository by inspecting the change logs. Which approach is best will depend on the amount of changes you make to 
+central files, like the ```pom.xml``` and ```application.yml```.
+
+Regardless of the approach you use to keep up with changes, you will have to make the following changes to the
+fork/export:
+
+ * change the ```groupId``` and ```artifactId``` in the ```pom.xml``` to match that of your application
+ * rename the main package in ```src/main``` to match that of your application
+ * change the ```info.application.name``` property in ```application.yml``` to match that of your application
+ * change the ```info.links``` in ```application.yml``` to match that of your application
+ * remove the example database code (migrations under ```src/main/resource/db/migrations```), the Counter-classes in the controllers, health and service packages and the database config in ```application.yml```
+
 
 # What is Covered in the Application?
 
@@ -86,14 +105,23 @@ For details, see:
 * [Spring Doc: Health information](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-health)
 
 
+## HTTP Endpoint JSON serialization
+
+The format for Dates in JSON responses has been set to com.fasterxml.jackson.databind.util.ISO8601DateFormat in
+preference of the default format which is just milli seconds since Epoc.
+
+
 ## Actuator Endpoints
+
+Spring Boot Actuator is included in the application, but most endpoints are disabled by default. See the 
+```resources/application.yml``` file for more details.
 
 
 ## Metrics
 HTTP Status, Logging, Standard Metrics, Prometheus
 
 
-# Security
+## Security
 
 
 ## Unit Testing with Spock
@@ -105,6 +133,10 @@ a standard maven build.
 For details, see:
 * [gmavenplus-plugin](http://groovy.github.io/GMavenPlus/)
 * [Spock Framework](http://spockframework.org/)
+
+
+## Example Code
+
 
 
 ## Documentation
