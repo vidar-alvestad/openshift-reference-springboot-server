@@ -155,7 +155,25 @@ A class, ```AbstractControllerTest```, is included as an example base class for 
 
 ### Leveransepakke
 
+The maven-assembly-plugin is configured to create a Leveransepakke compatible artifact from the build (basically just
+a .zip-file with all application jars). What is included in the file is configured in 
+```src/main/assembly/leveransepakke_descriptor.xml```.
+
+Note that the spring-boot-maven-plugin is configured to exclude the ```repackage``` goal (which is enabled by
+default). The repackage goal will create an "uberjar" that includes the application and all its dependencies instead
+of a jar file with only the application classes and resources. If this behaviour is not disabled all application
+dependencies will be included in the Leveransepakke twice; once in the application jar from the repackage goal, and
+once from the maven-assembly-plugin.
+
 ### Versioning
+
+The pom.xml is configured with the aurora-cd-plugin for versioning. aurora-cd, in turn, uses the aurora-git-version
+component. See [aurora-git-version](https://aurora/git/projects/AUF/repos/aurora-git-version/browse) for details.
+
+Maven does not allow plugins to change the version of the current build, so the plugin has to be triggered once
+before the actual "main" build is started. This is handled by Jenkins via the Jenkinsfile. See the ```Jenkinsfile``` in
+the root folder and [aurora-pipeline-scripts](https://aurora/git/projects/AO/repos/aurora-pipeline-scripts/browse) for 
+details.
 
 ### Code Analysis
 Checkstyle, Sonar, Jacoco, PiTest
