@@ -25,6 +25,8 @@ For more information on the decision process around selecting Spring Boot, see [
 
 # The Aurora Requirements
 
+TODO: missing
+
 
 # How to Use the Application
 
@@ -139,6 +141,8 @@ TODO: configuration.
 
 ## Security
 
+TODO: missing
+
 
 ## Unit Testing with Spock
 
@@ -168,6 +172,9 @@ A class, ```AbstractControllerTest```, is included as an example base class for 
 
 
 ## Build Configuration
+
+TODO: missing
+
 
 ### Leveransepakke
 
@@ -203,9 +210,13 @@ Checkstyle, Sonar, Jacoco, PiTest
 
 ## Openshift Integrations
 
+TODO: missing
+
 ### Build Metadata for Docker Images
 
 ### Aurora Console Integration
 
 
 ## Development Tools
+
+TODO: missing
