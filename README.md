@@ -25,7 +25,8 @@ For more information on the decision process around selecting Spring Boot, see [
 
 # The Aurora Requirements
 
-TODO: missing
+The non-functional requirements for application running on the Aurora Openshift platform is documented here:
+[Krav til applikasjoner som skal kjøre på OpenShift](https://aurora/wiki/pages/viewpage.action?pageId=108362986).
 
 
 # How to Use the Application
@@ -210,8 +211,10 @@ A class, ```AbstractControllerTest```, is included as an example base class for 
 
 ## Build Configuration
 
-TODO: missing
-
+This section relates to how the ```pom.xml``` file is set up to produce artifacts and reports. Some of this have already
+been covered in detail in other sections and will hence not be covered here again. In fact, most of the features of
+the Reference Application have one or more entires in the pom. This section covers what is not explicitly covered 
+elsewhere.
 
 ### Leveransepakke
 
@@ -239,9 +242,10 @@ the root folder and [aurora-pipeline-scripts](https://aurora/git/projects/AO/rep
 details.
 
 ### Code Analysis
-Checkstyle, Sonar, Jacoco, PiTest
 
-### Build metadata
+Plugins for code analysis via Checkstyle, Sonar, Jacoco and PiTest are included in the pom. Checkstyle is configured 
+with the default rule set for Skatteetaten. All code analysis is runn via the standard Jenkins pipeline scripts. See 
+section on Jenkinsfile for more details.
 
 ### Jenkinsfile
 
@@ -250,6 +254,11 @@ For more details, see
 
 ### Nexus IQ
 
+Every application that is deployed into production in the Skatteetaten networks are required to run a security
+check via the Nexus IQ tool. A profile for performing this check is included in the pom, but you will need to acquire
+your own staging profile id. See [reference missing]() for more details.
+
+TODO: add reference to Nexus IQ docs.
 
 ## Openshift Integrations
 
