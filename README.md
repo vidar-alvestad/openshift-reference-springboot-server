@@ -173,6 +173,8 @@ the Reference Application pulls in the [metrics-spring](http://metrics.ryantenne
 
 TODO: configuration.
 
+For more details, see
+ * [Hvordan samle inn og se metrikker](https://aurora/wiki/display/OS/Hvordan+samle+inn+og+se+metrikker)
 
 ## Security
 
@@ -223,6 +225,9 @@ of a jar file with only the application classes and resources. If this behaviour
 dependencies will be included in the Leveransepakke twice; once in the application jar from the repackage goal, and
 once from the maven-assembly-plugin.
 
+For more details, see
+ * [Hvordan lage en leveransepakke som fungerer på OpenShift](https://aurora/wiki/pages/viewpage.action?pageId=112132497)
+
 ### Versioning
 
 The pom.xml is configured with the aurora-cd-plugin for versioning. aurora-cd, in turn, uses the aurora-git-version
@@ -239,6 +244,9 @@ Checkstyle, Sonar, Jacoco, PiTest
 ### Build metadata
 
 ### Jenkinsfile
+
+For more details, see
+ * [Hvordan ta i bruk Jenkins2 med jenkinsfile  ](https://aurora/wiki/display/OS/Hvordan+ta+i+bruk+Jenkins2+med+jenkinsfile)
 
 ### Nexus IQ
 
