@@ -93,6 +93,16 @@ Databases are migrated using the database migration tool [Flyway](https://flyway
 the ```src/main/resources/db/migration```-folder. Flyway is included as a dependency in the pom.xml-file and Spring
 Boot automatically picks it up and configures it using the application DataSource.
 
+Flyways out-of-order mode is enabled by default which allows migrations to be created in branches with concurrent
+development activity and hot fixes without running the risk of creating a series of migrations that
+cannot be applied because they have been created with an index/timestamp older than migrations already run against
+the database.
+
+The recommended naming scheme for migration files is ```VyyyyMMddHHmm__Migration_short_description.sql```, for
+example ```V201609232312__CounterTableInit.sql```. Using
+timestamps in preference of indexes is recommended to avoid having to coordinate migration indexes across branches
+and developers.
+
 For details, see:
 * [Flyway SpringBoot](https://flywaydb.org/documentation/plugins/springboot)
 * [Spring Doc: Use a higher-level database migration tool](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
@@ -116,7 +126,32 @@ preference of the default format which is just milli seconds since Epoc.
 ## Actuator Endpoints
 
 Spring Boot Actuator is included in the application, but most endpoints are disabled by default. See the 
-```resources/application.yml``` file for more details.
+```resources/application.yml``` file for more details. A couple of the endpoints are enabled, though, and required
+by the platform to work properly. The requirements for these endpoints are convered in detail in the Openshift
+Integrations section.
+
+### The /info endpoint
+
+The /info endpoint is particularly relevant because it is used by the Aurora Openshift Console to collect and display
+information about the application. Some of that information is maintained and set in the ```application.yml``` file
+(everything under ```info.*``` is exposed as properties), and some is set via maven plugins;
+  
+  * the spring-boot-maven plugin has a build-info goal that is configured to run by default. This will goal will create
+  a file ```META-INF/build-info.properties``` which includes  information like build time, groupId and artifactId. This
+  will be added to the info section by spring actuator. 
+  See [Spring Boot Maven Plugin](http://docs.spring.io/spring-boot/docs/current/maven-plugin/examples/build-info.html)
+  for details.
+  * the git-commit-id-plugin will create a file ```git.properties``` which includes information like committer, 
+  commit id, tags, commit time etc from the commit currently being built. Spring actuator will add this information to
+  the info section.
+
+### The /health endpoint
+
+The health endpoint is used to communicate to the platform that your application is ready to receive traffic. You
+should add your own custom application specific health checks to make sure this endpoint properly reflects the actual
+health state of your appliction. See 
+[Hvordan styre når din applikasjon får HTTP trafikk](https://aurora/wiki/pages/viewpage.action?pageId=112138285) for 
+more details.
 
 
 ## Metrics
