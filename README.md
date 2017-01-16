@@ -118,7 +118,23 @@ Spring Boot Actuator is included in the application, but most endpoints are disa
 
 
 ## Metrics
-HTTP Status, Logging, Standard Metrics, Prometheus
+
+Although Spring Boot comes with its own APIs for registering and exposing metrics, Skatteetaten has more or less
+standardized on using [Dropwizard Metrics](http://metrics.dropwizard.io/). Spring Boot integrates nicely with Dropwizard
+Metrics, and the Reference Application is set up to use it by default.
+
+For applications that are deployed to OpenShift, metrics exposed at ```/prometheus``` (default, configurable) in the
+format required by Prometheus will be automatically scraped, registered, and become available in the
+[central Graphana](https://metrics.skead.no/) instance. The Reference Application is configured to expose all metrics
+in the prometheus required format at ```/prometheus``` by using the 
+[spring-boot-prometheus](https://aurora/git/projects/AUF/repos/spring-boot-prometheus/browse) module. This module will
+also by default enable standard JVM metrics (heap, memory etc), HTTP status code metrics and logging metrics. See the
+documentation for more details.
+
+To allow the usage of [Dropwizard Metrics annotations](http://metrics.dropwizard.io/3.1.0/apidocs/com/codahale/metrics/annotation/package-summary.html),
+the Reference Application pulls in the [metrics-spring](http://metrics.ryantenney.com/) module.
+
+TODO: configuration.
 
 
 ## Security
