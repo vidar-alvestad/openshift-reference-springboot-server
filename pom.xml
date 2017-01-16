@@ -49,12 +49,6 @@
     </snapshotRepository>
   </distributionManagement>
 
-  <scm>
-    <url>https://aurora/git/projects/AOP/repos/openshift-referanse-springboot-server/browse</url>
-    <connection>scm:git:https://aurora/git/scm/aop/openshift-referanse-springboot-server.git</connection>
-    <developerConnection>scm:git:https://aurora/git/scm/aop/openshift-referanse-springboot-server.git</developerConnection>
-  </scm>
-
   <build>
     <pluginManagement>
       <plugins>
@@ -117,13 +111,6 @@
       <plugin>
         <groupId>pl.project13.maven</groupId>
         <artifactId>git-commit-id-plugin</artifactId>
-      </plugin>
-      <plugin>
-        <artifactId>maven-scm-plugin</artifactId>
-        <version>1.9.5</version>
-        <configuration>
-          <tag>v${project.version}</tag>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.gmavenplus</groupId>
