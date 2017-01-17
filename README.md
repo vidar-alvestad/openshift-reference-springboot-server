@@ -312,8 +312,7 @@ do this Marjory needs information from applications in addition to the Openshift
 
 For Spring Boot based applications the contract is fulfilled using Actuator and the required information is:
 
-Marjory needs to know about
- * application variables, via ```/env``` endpoint in Actuator
+ * configuration variables, via ```/env``` endpoint in Actuator
  * dependencies, as a object in ```/info```. HTTP dependencies should be declared with permanent load-balanced urls.
  * links to other internal resources, a links section in ```/info```. 
  
