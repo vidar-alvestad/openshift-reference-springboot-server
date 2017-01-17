@@ -287,11 +287,44 @@ TODO: add reference to Nexus IQ docs.
 
 TODO: missing
 
+### Readiness check
+OpenShift has a readiness check that controls if an application is ready to serve traffic. If this check fails the 
+particular instance will not be added to the load-balancer and will not receive any traffic. 
+
+For Spring Boot based applications we recommend that the /health endpoint and Health checks is used for this. 
+
+It is important to understand the implications of this. If you add a Health check to check if a circuit-breaker is popped
+then the instance will never receive traffic and the circuit-breaker can never close. We recommend that health checks do not 
+check the availability of http dependencies. They are declared in a separate configuration and are checked in the 
+management part of the Marjory application. 
+
+ 
 ### Build Metadata for Docker Images
+Build data for docker images is read from the docker part of the ```src/main/assembly/metadata/openshift.json```-file. 
 
-### Aurora Console Integration
+ * maintainer will be set as the MAINTAINER instruction in the generated docker image
+ * all the labels in the labels object will be added as LABEL instructions in the generated docker image
+ 
+### Marjory Integration
 
+Marjory is a GUI application that shows health status for all applications running on a Openshift cluster. In order to 
+do this Marjory needs information from applications in addition to the Openshift cluster.  
 
+For Spring Boot based applications the contract is fulfilled using Actuator and the required information is:
+
+Marjory needs to know about
+ * application variables, via ```/env``` endpoint in Actuator
+ * dependencies, as a object in ```/info```. HTTP dependencies should be declared with permanent load-balanced urls.
+ * links to other internal resources, a links section in ```/info```. 
+ 
+Some placeholders in the links section will be expanded by Marjory. These include
+ * xxxHostname: hostname to internal services
+ * cluster: the name of the given cluster
+ * clusterHostname: the hostname suffix of openshift clusters
+ * name: the name of the application
+ * namespace: the namespace the application runs in
+ 
+ 
 ## Development Tools
 
 TODO: missing
