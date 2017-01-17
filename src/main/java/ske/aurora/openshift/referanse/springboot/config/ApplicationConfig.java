@@ -65,8 +65,8 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
     }
 
     private PropertiesPropertySource createAuroraPropertySource(String name, String envPrefix) {
-        String secretPrefix = System.getenv(envPrefix);
 
+        String secretPrefix = System.getenv(envPrefix);
         if (secretPrefix == null) {
             return null;
         }
@@ -74,19 +74,16 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
         String propertiesName = secretPrefix + ".properties";
         Properties props = new Properties();
 
-        try {
-            try (BufferedReader reader =
-                     Files.newBufferedReader(Paths.get(propertiesName))) {
-                props.load(reader);
-            }
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(propertiesName))) {
+            props.load(reader);
         } catch (IOException e) {
             LOG.debug("Could not read file location " + propertiesName);
             return null;
         }
 
         PropertiesPropertySource secretProps = new PropertiesPropertySource(name, props);
-
         env.getPropertySources().addLast(secretProps);
+
         return secretProps;
     }
 }
