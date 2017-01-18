@@ -209,6 +209,11 @@ from the spring-boot documentation for details).
 A class, ```AbstractControllerTest```, is included as an example base class for tests that use spring-rest-docs.
 
 
+## Application Configuration and Spring Profiles
+
+TODO: Missng
+
+
 ## Build Configuration
 
 This section relates to how the ```pom.xml``` file is set up to produce artifacts and reports. Some of this have already
