@@ -17,10 +17,15 @@ spring:
     jackson:
         date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
 
+management.health.status.order: DOWN, OUT_OF_SERVICE, UNKNOWN, COMMENT, UP
+
 flyway:
   out-of-order: true
 
 endpoints:
+    health:
+        mapping:
+            COMMENT: OK
     metrics:
         enabled: false
     logfile:
