@@ -211,7 +211,25 @@ A class, ```AbstractControllerTest```, is included as an example base class for 
 
 ## Application Configuration and Spring Profiles
 
-TODO: Missng
+The Reference Application is set up to work with two Spring configuration profiles (see [missing link]()); one called
+```local``` and one called ```openshift```. The ```local``` profile is active by default (see the 
+```spring.profiles.active``` property in ```application.yml```), and the intention is that this profile should be used
+when running the application locally during development, and the application should ideally be startable from the IDE
+without modifications after cloning it from Git.
+
+In the ```metadata/openshift.json```-file the ```jvmOpts``` property is set to ```-Dspring.profiles.active=openshift```,
+which will disable the local profile and activate a profile called ```openshift``` (it could be called pretty much
+whatever, as long as it is something different from local). This allows you to have configuration that is active only
+when you develop locally, or only when you run the application from the Docker image (for instance on Openshift).
+
+Obviously, this dual profile setup does not help if you need different configuration for different deployed instances of
+your application (for instance different environment/namespaces). Openshift supports many methods for applying 
+configuration to Docker containers, and Aurora Openshift in particular has guidelines to how environment specific 
+configuration should be done.
+
+ * [Hvordan få miljøspesifikke variabler inn i et miljø](https://aurora/wiki/pages/viewpage.action?pageId=112136703)
+ * [Hvordan få hemmelige data i en app](https://aurora/wiki/pages/viewpage.action?pageId=112138166)
+ * [Min første app med AOC](https://aurora/wiki/pages/viewpage.action?pageId=115402890)
 
 
 ## Build Configuration
