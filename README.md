@@ -285,7 +285,7 @@ TODO: add reference to Nexus IQ docs.
 
 ## Openshift Integrations
 
-TODO: missing
+This section is related to how this application integrates with the Openshift plattform. 
 
 ### Readiness check
 OpenShift has a readiness check that controls if an application is ready to serve traffic. If this check fails the 
