@@ -326,4 +326,8 @@ Some placeholders in the links section will be expanded by Marjory. These includ
  
 ## Development Tools
 
-TODO: missing
+It is recommended to take a look at the productivity features of spring boot developer tools. See
+[Developer Tools](http://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html).
+
+Also, note that the developer-tools artifact will be removed by the Leveransepakkebygger when building Docker images
+with semantic versions (for instance 1.3.3), and hence only be available for -SNAPSHOT builds.
