@@ -1,24 +1,23 @@
 # Spring Boot Reference Application
 
-The intention of the Reference Application is to serve as a guide when developing "Fagapplikasjoner" within
-Skatteetaten; applications implementing the core business rules in the tax domain for which Skatteetaten is responsible.
+The intention of the Reference Application is to serve as a guide when developing Business Applications
+(Fagapplikasjoner) within The Norwegian Tax Administration (Skatteetaten); applications implementing the core business 
+rules in the tax domain for which Skatteetaten is responsible.
 
 In this repository your will find examples on how to solve common technical issues and implement requirements for 
-applications running within the networks of Skatteetaten and especially on the Aurora Openshift platform.
-This includes logging, handling database migrations, testing, security, application versioning, build pipeline, to name 
-a few.
+applications running within the networks of Skatteetaten and especially on the 
+[Aurora OpenShift platform](https://aurora/wiki/display/OS/OPENSHIFT). This includes logging, handling database 
+migrations, testing, security, application versioning, build pipeline, to name a few.
 
-The Reference Application is implemented in Spring Boot, which is currently the recommended technology for all new
-applications.
+The Reference Application is implemented in [Spring Boot](https://projects.spring.io/spring-boot/).
 
 
 # About the Core Technologies
 
 The recommended technology for all new business applications created within Skatteetaten is Spring Boot. Recommending
 a technology in this way is always associated with some controversy, especially in an organization with history of using
-several other technology stacks. It is, however, our opinion that at the time there are few other technology stacks
-that are better supported and are driving development in the Cloud Native space (a requirement when running on a PaaS
-like Openshift) better than Spring Boot.
+several other technology stacks. It is, however, our opinion that at the time there are few other stacks that are better
+supported and are driving development in the Cloud Native space better than Spring Boot.
 
 For more information on the decision process around selecting Spring Boot, see [reference missing].
 
