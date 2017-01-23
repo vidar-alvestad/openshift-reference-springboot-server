@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterService;
 
+/**
+ * A sample custom health check. You can add your own health checks that verifies the proper operational status of your
+ * application.
+ */
 @Component
 public class CounterHealth extends AbstractHealthIndicator {
 

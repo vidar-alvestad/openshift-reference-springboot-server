@@ -21,6 +21,10 @@ import com.ryantenney.metrics.spring.config.annotation.MetricsConfigurerAdapter;
 
 import ske.aurora.filter.logging.AuroraHeaderFilter;
 
+/**
+ * Class for doing basic application configuration and initialization. You can add to this class, but you should
+ * probably not change very much (know why, at the very least).
+ */
 @Configuration
 @EnableMetrics
 public class ApplicationConfig extends MetricsConfigurerAdapter {
@@ -30,6 +34,11 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
     @Autowired
     private ConfigurableEnvironment env;
 
+    /**
+     * Register the {@link AuroraHeaderFilter} to apply to /api/*
+     *
+     * @return
+     */
     @Bean
     public FilterRegistrationBean auroraHeaderFilter() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -38,16 +47,36 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
         return registration;
     }
 
+    /**
+     * Creates a PropertySource for configuration in the Aurora Secret properties file. This properties file is mounted
+     * in the container by OpenShift when the application is deployed. In most instances, AOC is used to manage the
+     * configuration that ultimately ends up in this file.
+     *
+     * @return
+     */
     @Bean
     public PropertiesPropertySource secretProperties() {
         return createAuroraPropertySource("auroraConfig[secret]", "AURORA_SECRET_PREFIX");
     }
 
+    /**
+     * Creates a PropertySource for configuration in the Aurora Env properties file. This properties file is mounted
+     * in the container by OpenShift when the application is deployed. In most instances, AOC is used to manage the
+     * configuration that ultimately ends up in this file.
+     *
+     * @return
+     */
     @Bean
     public PropertiesPropertySource configProperties() {
         return createAuroraPropertySource("auroraConfig[env]", "AURORA_ENV_PREFIX");
     }
 
+    /**
+     * Creates a PropertySource for some of the environment variables that exposed via the OpenShift deployment
+     * configuration. The values of these environment variables are controlled by AOC.
+     *
+     * @return
+     */
     @Bean
     public PropertiesPropertySource auroraProperties() {
 

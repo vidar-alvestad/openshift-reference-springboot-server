@@ -9,17 +9,16 @@ import com.codahale.metrics.Counter;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 
+/**
+ * A utility class that simplifies creation and maintenance of metrics related to the operational status specific
+ * operations.
+ */
 public final class Execute {
     public static final String EXECUTION_TIMER_SUFFIX = "executionTimer";
     public static final String SUCCESS_COUNTER_SUFFIX = "successCount";
     public static final String ERROR_COUNTER_SUFFIX = "errorCount";
 
     private Execute() {
-    }
-
-    public static <T> T withMetrics(Class myClass, String metricSuffix, MetricRegistry metricRegistry,
-        AtomicInteger healthCounter, Supplier<T> s) {
-        return withMetrics(name(myClass.getName(), metricSuffix), metricRegistry, healthCounter, s);
     }
 
     public static <T> T withHealth(AtomicInteger helsesjekkFeil, Supplier<T> s) {
@@ -33,6 +32,21 @@ public final class Execute {
         }
     }
 
+    public static <T> T withMetrics(Class myClass, String metricSuffix, MetricRegistry metricRegistry,
+        AtomicInteger healthCounter, Supplier<T> s) {
+        return withMetrics(name(myClass.getName(), metricSuffix), metricRegistry, healthCounter, s);
+    }
+
+    /**
+     * Updates metrics for execution time and either the success or error count of the specified operation.
+     *
+     * @param baseMetricName
+     * @param metricRegistry
+     * @param healthCounter
+     * @param s
+     * @param <T>
+     * @return
+     */
     public static <T> T withMetrics(String baseMetricName, MetricRegistry metricRegistry, AtomicInteger healthCounter,
         Supplier<T> s) {
         Timer executionTimer = getExecutionTimer(baseMetricName, metricRegistry);
