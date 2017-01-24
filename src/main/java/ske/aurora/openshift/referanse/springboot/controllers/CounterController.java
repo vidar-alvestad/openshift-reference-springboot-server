@@ -11,10 +11,14 @@ import com.codahale.metrics.annotation.Timed;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterService;
 
+/**
+ * This is an example Controller that demonstrates a very simple JSON-over-HTTP enpoint. An example of how to use
+ * metrics to register the execution times is also included.
+ */
 @RestController
 public class CounterController {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CounterController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CounterController.class);
 
     private final CounterService counterService;
 
@@ -28,7 +32,7 @@ public class CounterController {
     public Map<String, Object> counter() {
 
         Map<String, Object> counter = counterService.getAndIncrementCounter();
-        LOG.debug("Incrementing counter to {}", counter.get("VALUE"));
+        logger.debug("Incrementing counter to {}", counter.get("VALUE"));
         return counter;
     }
 }
