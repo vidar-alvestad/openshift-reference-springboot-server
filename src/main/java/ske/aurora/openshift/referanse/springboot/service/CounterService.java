@@ -25,4 +25,12 @@ public class CounterService {
         jdbcTemplate.update("update counter set value=value+1");
         return counter;
     }
+
+    public int getCounter() {
+        Integer integer = jdbcTemplate.queryForObject("select value from counter", Integer.class);
+        if (integer == null) {
+            return 0;
+        }
+        return integer;
+    }
 }
