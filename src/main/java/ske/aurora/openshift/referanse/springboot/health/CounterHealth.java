@@ -21,7 +21,7 @@ public class CounterHealth extends AbstractHealthIndicator {
 
     @Override
     protected void doHealthCheck(Health.Builder builder) throws Exception {
-        int currentValue = Integer.parseInt(counterService.getAndIncrementCounter().get("VALUE").toString());
+        int currentValue = counterService.getCounter();
 
         if (currentValue % 2 == 0) {
             builder.status("COMMENT").withDetail("message", "Partall antall i teller")

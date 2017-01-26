@@ -115,4 +115,5 @@ public class ApplicationConfig extends MetricsConfigurerAdapter {
 
         return secretProps;
     }
+
 }

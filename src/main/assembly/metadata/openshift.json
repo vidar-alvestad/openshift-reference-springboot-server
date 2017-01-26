@@ -9,7 +9,9 @@
   "java": {
     "mainClass": "ske.aurora.openshift.referanse.springboot.Main",
     "jvmOpts": "-Dspring.profiles.active=openshift",
-    "applicationArgs": "--logging.config=${LOGBACK_FILE}",
-    "readinessUrl": "/health"
+    "applicationArgs": "--logging.config=${LOGBACK_FILE}"
+  },
+  "openshift" : {
+      "readinessUrl": "/health"
   }
 }

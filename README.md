@@ -108,32 +108,26 @@ For details, see:
 * [Spring Doc: Use a higher-level database migration tool](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html#howto-execute-flyway-database-migrations-on-startup)
 
 
-## Application Health
-
-Application health is provided by standard Spring Boot features. An example is provided in the ```CounterHealth``` 
-class.
-
-For details, see:
-* [Spring Doc: Health information](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-health)
-
-
 ## HTTP Endpoint JSON serialization
 
 The format for Dates in JSON responses has been set to com.fasterxml.jackson.databind.util.ISO8601DateFormat in
 preference of the default format which is just milli seconds since Epoc.
 
 
-## Actuator Endpoints
+## Management interface
 
-Spring Boot Actuator is included in the application, but most endpoints are disabled by default. See the 
-```resources/application.yml``` file for more details. A couple of the endpoints are enabled, though, and required
-by the platform to work properly. The requirements for these endpoints are convered in detail in the Openshift
-Integrations section.
+The management interface is exposed on a seperate port (MANAGEMENT_HTTP_PORT) for security reasons. The main part of
+this is Spring Boot Actuator (with HATEOAS). Most of the endpoints are tured off by default. See the ```resources/application.yml``` file for more details. 
 
-### The /info endpoint
+A central component Marjory is deployed in the openshift cluster that aggregate the management interfaces for all 
+applications and works as a proxy to the hidden management interface. 
 
-The /info endpoint is particularly relevant because it is used by the Aurora Openshift Console to collect and display
-information about the application. Some of that information is maintained and set in the ```application.yml``` file
+The standard management interface consist of the following urls
+
+###  /info - Information 
+
+The /info endpoint is particularly relevant because it is used by Marjoy  to collect and display information about the application. 
+Some of that information is maintained and set in the ```application.yml``` file
 (everything under ```info.*``` is exposed as properties), and some is set via maven plugins;
   
   * the spring-boot-maven plugin has a build-info goal that is configured to run by default. This will goal will create
@@ -145,7 +139,13 @@ information about the application. Some of that information is maintained and se
   commit id, tags, commit time etc from the commit currently being built. Spring actuator will add this information to
   the info section.
 
-### The /health endpoint
+The info endpoint has a dependencies section that list the name of all the external dependices and their static base URL. 
+This information will be stored in a CMDB for cause analysis and to chart dependencies in Skatteetatens infrastructure.
+
+The links part of the info endpoint show application specific links to other part of the internal infrastructure in Skatteeaten. 
+The links contains some placeholders that are replaced by Marjory marked with ```{}``` fences.
+
+###  /health - Health status 
 
 The health endpoint is used to communicate to the platform that your application is ready to receive traffic. You
 should add your own custom application specific health checks to make sure this endpoint properly reflects the actual
@@ -153,8 +153,24 @@ health state of your appliction. See
 [Hvordan styre når din applikasjon får HTTP trafikk](https://aurora/wiki/pages/viewpage.action?pageId=112138285) for 
 more details.
 
+This endpoint is also used as the [Openshift Rediness probe](https://docs.openshift.com/container-platform/3.3/dev_guide/application_health.html).
+If the enpoints returns a failed status this particular instance will not get HTTP trafic.
 
-## Metrics
+We use an aditional status COMMENT (200 OK) in HealthChecks on order for the application to send a comment to Marjory but still 
+reveive trafic. 
+
+If you use circut breakers in your application note that you should not let the circuit breaker healthIndicator return an 
+error if it is popped. Make it return COMMENT and add relevant details to the indicator. 
+
+For more info see:
+* [Spring Doc: Health information](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-health)
+
+
+###  /env - Configuration 
+This endpoint prints out the given configuration for an application. Sensitive fields are masked using standard Spring Boot
+mechanics. 
+
+### /prometheus - Metrics   
 
 Although Spring Boot comes with its own APIs for registering and exposing metrics, Skatteetaten has more or less
 standardized on using [Dropwizard Metrics](http://metrics.dropwizard.io/). Spring Boot integrates nicely with Dropwizard
@@ -166,19 +182,23 @@ format required by Prometheus will be automatically scraped, registered, and bec
 in the prometheus required format at ```/prometheus``` by using the 
 [spring-boot-prometheus](https://aurora/git/projects/AUF/repos/spring-boot-prometheus/browse) module. This module will
 also by default enable standard JVM metrics (heap, memory etc), HTTP status code metrics and logging metrics. See the
-documentation for more details.
+documentation for more details. By default the prometheus endpoint is part of management so it is exposed on the seperate management port. 
 
 To allow the usage of [Dropwizard Metrics annotations](http://metrics.dropwizard.io/3.1.0/apidocs/com/codahale/metrics/annotation/package-summary.html),
 the Reference Application pulls in the [metrics-spring](http://metrics.ryantenney.com/) module.
-
-TODO: configuration.
 
 For more details, see
  * [Hvordan samle inn og se metrikker](https://aurora/wiki/display/OS/Hvordan+samle+inn+og+se+metrikker)
 
 ## Security
 
-TODO: missing
+Management interface is exposed on a seperate port that is not accessable outside of the cluster. This means that no 
+information about metrics, env vars, health status is available to the the outside world. 
+
+Tomcat is the application server used in the standard spring boot starter web, it by default disables the TRACE endpoint 
+closing another security issue.
+
+All application calls between applications are secured with an application level token that is provided by a central authority.
 
 
 ## Unit Testing with Spock
@@ -207,6 +227,7 @@ from the spring-boot documentation for details).
 
 A class, ```AbstractControllerTest```, is included as an example base class for tests that use spring-rest-docs.
 
+# How an application is built
 
 ## Application Configuration and Spring Profiles
 
@@ -282,46 +303,12 @@ your own staging profile id. See [reference missing]() for more details.
 
 TODO: add reference to Nexus IQ docs.
 
-## Openshift Integrations
-
-This section is related to how this application integrates with the Openshift plattform. 
-
-### Readiness check
-OpenShift has a readiness check that controls if an application is ready to serve traffic. If this check fails the 
-particular instance will not be added to the load-balancer and will not receive any traffic. 
-
-For Spring Boot based applications we recommend that the /health endpoint and Health checks is used for this. 
-
-It is important to understand the implications of this. If you add a Health check to check if a circuit-breaker is popped
-then the instance will never receive traffic and the circuit-breaker can never close. We recommend that health checks do not 
-check the availability of http dependencies. They are declared in a separate configuration and are checked in the 
-management part of the Marjory application. 
-
- 
 ### Build Metadata for Docker Images
 Build data for docker images is read from the docker part of the ```src/main/assembly/metadata/openshift.json```-file. 
-
+ 
  * maintainer will be set as the MAINTAINER instruction in the generated docker image
  * all the labels in the labels object will be added as LABEL instructions in the generated docker image
- 
-### Marjory Integration
-
-Marjory is a GUI application that shows health status for all applications running on a Openshift cluster. In order to 
-do this Marjory needs information from applications in addition to the Openshift cluster.  
-
-For Spring Boot based applications the contract is fulfilled using Actuator and the required information is:
-
- * configuration variables, via ```/env``` endpoint in Actuator
- * dependencies, as a object in ```/info```. HTTP dependencies should be declared with permanent load-balanced urls.
- * links to other internal resources, a links section in ```/info```. 
- 
-Some placeholders in the links section will be expanded by Marjory. These include
- * xxxHostname: hostname to internal services
- * cluster: the name of the given cluster
- * clusterHostname: the hostname suffix of openshift clusters
- * name: the name of the application
- * namespace: the namespace the application runs in
- 
+  
  
 ## Development Tools
 
