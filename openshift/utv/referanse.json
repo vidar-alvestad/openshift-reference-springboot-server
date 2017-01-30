@@ -1,0 +1,5 @@
+{
+  "deploy" : {
+    "DATABASE": "referanseapp:3f9d8558-0fd2-488e-8f79-fbbdf62b04ff"
+  }
+}
