@@ -1,6 +1,4 @@
 info:
-    application:
-        name: "Aurora Spring Boot Server Referanseapplikasjon"
     links:
         metrics: "{metricsHostname}/dashboard/db/openshift-project-spring-actuator-view?var-ds=openshift-{cluster}-ose&var-namespace={namespace}&var-app={name}"
         api-doc: "${ROUTE_NAME}/docs/index.html"
