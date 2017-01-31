@@ -3,7 +3,6 @@ info:
         name: "Aurora Spring Boot Server Referanseapplikasjon"
     links:
         metrics: "{metricsHostname}/dashboard/db/openshift-project-spring-actuator-view?var-ds=openshift-{cluster}-ose&var-namespace={namespace}&var-app={name}"
-        logs: "{logsHostname}/en-US/app/search/search?q=search environment%3D{namespace} application%3D{name} sourcetype%3Dlog4j&display.page.search.mode=smart&dispatch.sample_ratio=1&earliest=-10m&latest"
         api-doc: "${ROUTE_NAME}/docs/index.html"
     dependencies:
         skatteetaten: "http://www.skatteetaten.no"
