@@ -9,6 +9,7 @@
   },
   "deploy" : {
     "PROMETHEUS_ENABLED" : true,
-    "PROMETHEUS_PORT" : "8081"
+    "PROMETHEUS_PORT" : "8081",
+    "MANAGEMENT_PATH": ":8081/actuator"
   }
 }
