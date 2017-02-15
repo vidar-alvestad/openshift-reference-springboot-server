@@ -1,7 +1,9 @@
 info:
-    links:
+    serviceLinks:
         metrics: "{metricsHostname}/dashboard/db/openshift-project-spring-actuator-view?var-ds=openshift-{cluster}-ose&var-namespace={namespace}&var-app={name}"
         api-doc: "${ROUTE_NAME}/docs/index.html"
+    podLinks:
+        metrics: "{metricsHostname}/dashboard/db/openshift-project-spring-actuator-view-instance?var-ds=openshift-{cluster}-ose&var-namespace={namespace}&var-app={name}&var-instance={podName}"
     dependencies:
         skatteetaten: "http://www.skatteetaten.no"
 
@@ -14,6 +16,8 @@ spring:
 management:
     health.status.order: DOWN, OUT_OF_SERVICE, UNKNOWN, COMMENT, UP
     port: ${MANAGEMENT_HTTP_PORT}
+    security:
+        enabled: false
 
 flyway:
   out-of-order: true
