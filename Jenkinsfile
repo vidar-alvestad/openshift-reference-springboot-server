@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 def jenkinsfile
-fileLoader.withGit('https://git.sits.no/git/scm/ao/aurora-pipeline-scripts.git', 'v2.6.2') {
+fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git', 'v2.6.2') {
    jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
 
