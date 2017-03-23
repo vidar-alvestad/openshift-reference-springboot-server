@@ -1,11 +1,7 @@
 package ske.aurora.openshift.referanse.springboot;
 
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
@@ -40,9 +36,8 @@ public class Main {
         }
         Properties props = new Properties();
 
-        try (InputStreamReader inputStreamReader =
-                 new InputStreamReader(new FileInputStream(databasePath), StandardCharsets.UTF_8)) {
-            props.load(inputStreamReader);
+        try (FileInputStream input = new FileInputStream(databasePath)) {
+            props.load(input);
         }
 
         System.setProperty("spring.datasource.url", props.getProperty("jdbc.url"));
