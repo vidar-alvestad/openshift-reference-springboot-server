@@ -20,7 +20,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws Exception {
-        LOG.info("Setter opp database med navn REFERANSEAPP");
+        LOG.debug("Setter opp database med navn REFERANSEAPP");
         setDatasourcePropertiesFromDbPropertiesFile("REFERANSEAPP_DB_PROPERTIES");
 
         SpringApplication.run(Main.class, args);
