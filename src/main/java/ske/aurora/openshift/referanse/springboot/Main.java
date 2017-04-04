@@ -4,17 +4,23 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ske.aurora.openshift.referanse.springboot.config.ApplicationConfig;
+
 @SpringBootApplication
 public class Main {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationConfig.class);
 
     protected Main() {
     }
 
     public static void main(String[] args) throws Exception {
-
+        LOG.info("Setter opp database med navn REFERANSEAPP");
         setDatasourcePropertiesFromDbPropertiesFile("REFERANSEAPP_DB_PROPERTIES");
 
         SpringApplication.run(Main.class, args);
