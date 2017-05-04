@@ -2,7 +2,6 @@ package ske.aurora.openshift.referanse.springboot.health;
 
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.Status;
 import org.springframework.stereotype.Component;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterService;
