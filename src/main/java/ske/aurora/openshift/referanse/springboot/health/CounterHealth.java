@@ -2,6 +2,7 @@ package ske.aurora.openshift.referanse.springboot.health;
 
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.Status;
 import org.springframework.stereotype.Component;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterService;
@@ -24,7 +25,7 @@ public class CounterHealth extends AbstractHealthIndicator {
         int currentValue = counterService.getCounter();
 
         if (currentValue % 2 == 0) {
-            builder.status("COMMENT").withDetail("message", "Partall antall i teller")
+            builder.status("OBSERVE").withDetail("message", "Partall antall i teller")
                 .withDetail("Antall", currentValue);
         } else {
             builder.up()
