@@ -6,7 +6,6 @@ import java.util.function.Supplier
 import com.codahale.metrics.Metric
 import com.codahale.metrics.MetricRegistry
 
-import ske.aurora.metrics.Execute
 import spock.lang.Shared
 import spock.lang.Specification
 

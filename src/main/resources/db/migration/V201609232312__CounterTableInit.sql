@@ -1,1 +1,1 @@
-insert into counter (value) values (0);
+INSERT INTO counter (value) VALUES (0);

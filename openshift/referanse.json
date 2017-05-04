@@ -8,6 +8,7 @@
     "VERSION" : 0
   },
   "deploy" : {
+    "DATABASE": "REFERANSEAPP",
     "PROMETHEUS_ENABLED" : true,
     "PROMETHEUS_PORT" : "8081",
     "MANAGEMENT_PATH": ":8081/actuator"
