@@ -32,7 +32,7 @@
     <sonar.coverage.exclusions>**/*Main.java</sonar.coverage.exclusions>
     <sonar.tests>src/test/groovy</sonar.tests>
     <dropwizard-metrics.version>3.1.2</dropwizard-metrics.version>
-
+    <flyway.version>4.2.0</flyway.version>
 
     <!-- Prosjektspesifikk Nexus staging profil. Må endres av prosjektene -->
     <staging-profile-id-med-clm>8815b545f21bd</staging-profile-id-med-clm>
@@ -303,86 +303,22 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>ske.aurora.openshift.springboot</groupId>
+      <artifactId>aurora-openshift-spring-boot-starter</artifactId>
+      <version>0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>ske.aurora.openshift.springboot</groupId>
+      <artifactId>aurora-openshift-oracle-spring-boot-starter</artifactId>
+      <version>0.0-SNAPSHOT</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-hateoas</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jdbc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>ske.aurora</groupId>
-      <artifactId>aurora-header-mdc-filter</artifactId>
-      <version>1.1.9</version>
-    </dependency>
-    <dependency>
-      <groupId>ske.aurora.springboot.prometheus</groupId>
-      <artifactId>spring-boot-prometheus</artifactId>
-      <version>3.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.ryantenney.metrics</groupId>
-      <artifactId>metrics-spring</artifactId>
-      <version>3.1.3</version>
-    </dependency>
-    <dependency>
-      <groupId>com.oracle</groupId>
-      <artifactId>ojdbc7</artifactId>
-      <version>12.1.0.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-      <version>4.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.restdocs</groupId>
-      <artifactId>spring-restdocs-mockmvc</artifactId>
-      <version>1.2.0.RELEASE</version>
+      <groupId>ske.aurora.openshift.springboot</groupId>
+      <artifactId>aurora-openshift-spock-spring-boot-starter</artifactId>
+      <version>0.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.spockframework</groupId>
-      <artifactId>spock-core</artifactId>
-      <version>1.0-groovy-2.4</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- Valgfrie avhengigheter ved bruk av spock -->
-    <dependency> <!-- bruk en bestemt versjon av groovy (istedenfor den som settes av spock-core -->
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>2.4.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency> <!-- for å kunne mocke klasser (ikke bare interface) -->
-      <groupId>cglib</groupId>
-      <artifactId>cglib-nodep</artifactId>
-      <version>3.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency> <!-- for å kunne mocke klasser uten default konstruktør -->
-      <groupId>org.objenesis</groupId>
-      <artifactId>objenesis</artifactId>
-      <version>2.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
+
   </dependencies>
 
   <profiles>

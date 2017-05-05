@@ -7,7 +7,6 @@ info:
     dependencies:
         skatteetaten: "skatteetaten"
 
-
 aurora:
     #setting a db here will create a datasource from a database with that name.
     #in AOC config file
@@ -17,9 +16,6 @@ spring:
     profiles:
         active: local
 
-management:
-    port: ${MANAGEMENT_HTTP_PORT}
-
 logging:
     level:
       ske.aurora: DEBUG
@@ -27,6 +23,8 @@ logging:
         springframework: WARN
         apache.catalina: WARN
         hibernate: WARN
+flyway:
+  out-of-order: true
 
 ---
 spring:
