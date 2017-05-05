@@ -23,8 +23,6 @@ logging:
         springframework: WARN
         apache.catalina: WARN
         hibernate: WARN
-flyway:
-  out-of-order: true
 
 ---
 spring:
