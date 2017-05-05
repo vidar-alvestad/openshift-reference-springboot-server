@@ -32,11 +32,10 @@ logging:
 spring:
   profiles: local
   datasource:
-    # id: 3f9d8558-0fd2-488e-8f79-fbbdf62b04ff
+    # id: 02150c29-6ab9-4917-bd56-1ba63d4f46d5"
     url: jdbc:oracle:thin:@uil0map-drivein-db02:1521/dbhotel
-    username: EIRJUPISSHOZYQAEVQPGWHVLVRJPDI
-    password: vMJGXIptKxIbZZguunXBMoQvcZzYIG
-
+    username: MFBDNLMIQTWTWNWEQOMLPAAPJDKSYV
+    password: qWieNxGpdFcjVOHPiaCTcmJqYdgYkk
 
 management:
     port: 8081
@@ -44,3 +43,4 @@ management:
 logging:
     pattern:
       console: "%d [%-9.9thread] %-5level %logger %X - %msg %n%rEx{full}"
+

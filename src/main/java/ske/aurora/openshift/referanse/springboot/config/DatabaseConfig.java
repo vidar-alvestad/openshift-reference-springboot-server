@@ -6,15 +6,14 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
+import org.springframework.context.annotation.Profile;
 
 /**
  * Configure database if the aurora.db property is set.
@@ -22,14 +21,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties(DatabaseConfig.AuroraProperties.class)
-public class DatabaseConfig  {
-
-    private static final Logger LOG = LoggerFactory.getLogger(DatabaseConfig.class);
+@ConditionalOnProperty(prefix = "aurora", value = "db")
+public class DatabaseConfig {
 
     @Autowired
-    AuroraProperties auroraProperties;
+    private AuroraProperties auroraProperties;
 
     @Bean
+    @Profile("openshift")
     public DataSource dataSource() throws IOException {
 
         String envName = auroraProperties.db + "_DB_PROPERTIES";
