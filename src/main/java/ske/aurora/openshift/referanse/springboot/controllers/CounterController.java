@@ -20,6 +20,7 @@ import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
 public class CounterController {
 
     private static final Logger logger = LoggerFactory.getLogger(CounterController.class);
+    public static final int SECOND = 1000;
     private RestTemplate client;
     private CounterDatabaseService service;
 
@@ -39,7 +40,7 @@ public class CounterController {
     @GetMapping("/foo")
     public String counter2() {
         return withMetrics(this.getClass(), "test1", () -> {
-            long sleepTime = (long) (Math.random() * 1000);
+            long sleepTime = (long) (Math.random() * SECOND);
 
             try {
                 Thread.sleep(sleepTime);

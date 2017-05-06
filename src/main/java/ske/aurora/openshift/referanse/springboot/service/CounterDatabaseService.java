@@ -2,9 +2,6 @@ package ske.aurora.openshift.referanse.springboot.service;
 
 import java.util.Map;
 
-import javax.sql.DataSource;
-
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
