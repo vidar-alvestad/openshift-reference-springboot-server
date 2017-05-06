@@ -303,22 +303,25 @@
 
   <dependencies>
     <dependency>
-      <groupId>ske.aurora.openshift.springboot</groupId>
-      <artifactId>aurora-openshift-spring-boot-starter</artifactId>
-      <version>0.0-SNAPSHOT</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
-      <groupId>ske.aurora.openshift.springboot</groupId>
-      <artifactId>aurora-openshift-oracle-spring-boot-starter</artifactId>
-      <version>0.0-SNAPSHOT</version>
+      <groupId>ske.aurora.springboot</groupId>
+      <artifactId>aurora-spring-boot-starter</artifactId>
+      <version>0.1</version>
     </dependency>
     <dependency>
-      <groupId>ske.aurora.openshift.springboot</groupId>
-      <artifactId>aurora-openshift-spock-spring-boot-starter</artifactId>
-      <version>0.0-SNAPSHOT</version>
+      <groupId>ske.aurora.springboot</groupId>
+      <artifactId>aurora-oracle-spring-boot-starter</artifactId>
+      <version>0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>ske.aurora.springboot</groupId>
+      <artifactId>aurora-spock-spring-boot-starter</artifactId>
+      <version>0.1</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <profiles>

@@ -1,13 +1,13 @@
 package ske.aurora.openshift.referanse.springboot.controllers;
 
-import java.util.Map;
+import static ske.aurora.prometheus.Execute.withMetrics;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.codahale.metrics.annotation.Timed;
+import org.springframework.web.client.RestTemplate;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterService;
 
@@ -15,24 +15,43 @@ import ske.aurora.openshift.referanse.springboot.service.CounterService;
  * This is an example Controller that demonstrates a very simple JSON-over-HTTP enpoint. An example of how to use
  * metrics to register the execution times is also included.
  */
+
 @RestController
 public class CounterController {
 
     private static final Logger logger = LoggerFactory.getLogger(CounterController.class);
+    private RestTemplate client;
+    private CounterService service;
 
-    private final CounterService counterService;
+    public CounterController(RestTemplate client, CounterService service) {
 
-    public CounterController(CounterService counterService) {
-
-        this.counterService = counterService;
+        this.client = client;
+        this.service = service;
     }
 
-    @Timed(name = "counter")
     @GetMapping("/api/counter")
-    public Map<String, Object> counter() {
+    public String counter() {
+        ResponseEntity<String> forEntity = client.getForEntity("http://localhost:8080/foo", String.class);
+        logger.info("{}", forEntity.getStatusCode());
+        return forEntity.getBody();
+    }
 
-        Map<String, Object> counter = counterService.getAndIncrementCounter();
-        logger.debug("Incrementing counter to {}", counter.get("VALUE"));
-        return counter;
+    @GetMapping("/foo")
+    public String counter2() {
+        return withMetrics(this.getClass(), "test1", () -> {
+            long sleepTime = (long) (Math.random() * 1000);
+
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Sleep interupted", e);
+            }
+
+            if (sleepTime % 2 == 0) {
+                return service.getAndIncrementCounter().get("value").toString();
+            } else {
+                throw new RuntimeException("This is a test");
+            }
+        });
     }
 }
