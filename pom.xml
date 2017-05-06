@@ -303,10 +303,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
       <groupId>ske.aurora.springboot</groupId>
       <artifactId>aurora-spring-boot-starter</artifactId>
       <version>0.1</version>
