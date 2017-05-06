@@ -11,13 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * An example service that demonstrates basic database operations.
+ * For some reason if this is called CounterService it will not load?
  */
 @Service
-public class CounterService {
+public class CounterDatabaseService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public CounterService(JdbcTemplate jdbcTemplate) {
+    public CounterDatabaseService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
