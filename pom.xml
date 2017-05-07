@@ -5,7 +5,7 @@
 
   <groupId>ske.aurora.openshift.referanse</groupId>
   <artifactId>openshift-referanse-springboot-server</artifactId>
-  <version>0.0-SNAPSHOT</version>
+  <version>AOS-1478-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>openshift-referanse-springboot-server</name>
@@ -23,6 +23,7 @@
   </prerequisites>
 
   <properties>
+    <aurora.starters.version>0.0.1</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -305,17 +306,17 @@
     <dependency>
       <groupId>ske.aurora.springboot</groupId>
       <artifactId>aurora-spring-boot-starter</artifactId>
-      <version>0.1</version>
+      <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
       <groupId>ske.aurora.springboot</groupId>
       <artifactId>aurora-oracle-spring-boot-starter</artifactId>
-      <version>0.1</version>
+      <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
       <groupId>ske.aurora.springboot</groupId>
       <artifactId>aurora-spock-spring-boot-starter</artifactId>
-      <version>0.1</version>
+      <version>${aurora.starters.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

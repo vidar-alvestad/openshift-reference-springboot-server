@@ -20,7 +20,7 @@ logging:
     level:
       ske.aurora: DEBUG
       org:
-        springframework: WARN
+        springframework: INFO
         apache.catalina: WARN
         hibernate: WARN
 
