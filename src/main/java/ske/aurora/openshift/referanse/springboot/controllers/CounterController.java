@@ -30,6 +30,7 @@ public class CounterController {
             try {
                 Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
                 throw new RuntimeException("Sleep interupted", e);
             }
 
