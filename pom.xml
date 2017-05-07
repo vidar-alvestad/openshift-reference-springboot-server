@@ -32,7 +32,6 @@
     <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.coverage.exclusions>**/*Main.java</sonar.coverage.exclusions>
     <sonar.tests>src/test/groovy</sonar.tests>
-    <dropwizard-metrics.version>3.1.2</dropwizard-metrics.version>
     <flyway.version>4.2.0</flyway.version>
 
     <!-- Prosjektspesifikk Nexus staging profil. Må endres av prosjektene -->
