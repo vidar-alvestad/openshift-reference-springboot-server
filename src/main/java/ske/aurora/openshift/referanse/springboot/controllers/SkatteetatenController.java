@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+/*
+ * An example controller that does a request to another resource
+ * This call should automatically have the KorrelasjonsId and ClientId headers added
+ * There should be a metric called http_client_request_bucket recorded with the response
+ */
 @RestController
 public class SkatteetatenController {
 
