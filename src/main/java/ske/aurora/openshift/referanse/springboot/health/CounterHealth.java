@@ -2,6 +2,7 @@ package ske.aurora.openshift.referanse.springboot.health;
 
 import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
+import org.springframework.stereotype.Component;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
 
@@ -9,7 +10,7 @@ import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
  * A sample custom health check. You can add your own health checks that verifies the proper operational status of your
  * application.
  */
-//@Component
+@Component
 public class CounterHealth extends AbstractHealthIndicator {
 
     private final CounterDatabaseService counterDatabaseService;
