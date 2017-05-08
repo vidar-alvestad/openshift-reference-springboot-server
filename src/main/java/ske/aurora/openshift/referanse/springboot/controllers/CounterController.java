@@ -1,6 +1,6 @@
 package ske.aurora.openshift.referanse.springboot.controllers;
 
-import static ske.aurora.prometheus.Execute.withMetrics;
+import static ske.aurora.prometheus.collector.Execute.withMetrics;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
