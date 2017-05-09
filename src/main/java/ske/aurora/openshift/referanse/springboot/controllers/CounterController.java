@@ -5,6 +5,7 @@ import static ske.aurora.prometheus.collector.Execute.withMetrics;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ske.aurora.openshift.referanse.springboot.Main;
 import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
 
 /**
@@ -21,7 +22,7 @@ public class CounterController {
     public static final int SECOND = 1000;
     private CounterDatabaseService service;
 
-    public CounterController(CounterDatabaseService service) {
+    public CounterController(CounterDatabaseService service){
         this.service = service;
     }
 

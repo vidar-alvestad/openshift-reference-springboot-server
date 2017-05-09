@@ -11,6 +11,10 @@ aurora:
     #setting a db here will create a datasource from a database with that name.
     #in AOC config file
     db: REFERANSEAPP
+    client:
+        strict: true
+        metrics:
+            httpbin: ".*httpbin.org.*"
 
 spring:
     profiles:
