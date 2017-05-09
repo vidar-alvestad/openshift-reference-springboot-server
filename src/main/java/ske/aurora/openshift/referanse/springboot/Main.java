@@ -8,7 +8,6 @@ import ske.aurora.annotations.AuroraApplication;
 
 @SpringBootApplication(scanBasePackages = "ske.aurora")
 @AuroraApplication
-@Configuration
 public class Main {
 
     protected Main() {
