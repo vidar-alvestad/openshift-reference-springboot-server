@@ -12,10 +12,7 @@ aurora:
     #in AOC config file
     db: REFERANSEAPP
     client:
-        #if you set this to strict only the grouping below will be added metrics for. Default is false
-        strict: true
         metricsPathLabelGroupings:
-            #all request that match the re on the right are grouped in the path label on the left
             httpbin: ".*httpbin.org.*"
 
 spring:

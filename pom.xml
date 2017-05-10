@@ -23,7 +23,7 @@
   </prerequisites>
 
   <properties>
-    <aurora.starters.version>0.0.7</aurora.starters.version>
+    <aurora.starters.version>features_AOS_1478-SNAPSHOT</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>

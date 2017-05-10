@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import ske.aurora.annotations.AuroraApplication;
 
-@SpringBootApplication(scanBasePackages = "ske.aurora")
+@SpringBootApplication
 @AuroraApplication
 public class Main {
 
