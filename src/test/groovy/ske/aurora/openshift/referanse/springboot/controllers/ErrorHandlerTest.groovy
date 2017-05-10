@@ -10,6 +10,7 @@ class ErrorHandlerTest extends Specification {
   public static final String ROOT_CAUSE = "Root cause"
   def errorHandler = new ErrorHandler()
 
+
   def "Sets correct status code and error message on causeless Exceptions"() {
 
     when:

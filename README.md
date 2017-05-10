@@ -51,7 +51,28 @@ fork/export:
 
 # What is Covered in the Application?
 
+## Starters
+
+The application has one starter  [aurora-spring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora) in order to set up normal aurora requirements such as
+ - grouping properties into their own property sources
+ - setting default properties for actuator
+ - instrumenting RestTemplates with metrics
+ - instrument ServerFilter with metrics
+ - instrument logback with metrics
+ 
+There is a starter for testing with spock [aurora-spock-spring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora-oracle)
+
+A starter for working with oracle databases with flyway [aurora-oraclespring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora-spock)
+
+In order to auto configure a datasource provided on openshift add the following configuration to your properties file
+ 
+    aurora:
+      db: NAME_OF_DB
+       
+All starters are versioned together.
+
 ## Log Configuration
+
 
 All Skatteetaten applications should log using the same standard logging pattern. Also, all applications running
 on Openshift has to log to a specific folder in the container for the logs to picked up and automatically indexed in
@@ -154,14 +175,8 @@ health state of your appliction. See
 [Hvordan styre når din applikasjon får HTTP trafikk](https://aurora/wiki/pages/viewpage.action?pageId=112138285) for 
 more details.
 
-This endpoint is also used as the [Openshift Rediness probe](https://docs.openshift.com/container-platform/3.3/dev_guide/application_health.html).
-If the enpoints returns a failed status this particular instance will not get HTTP trafic.
+We use an status OBSERVE in HealthChecks on order for the application to send OBSERVE status to Aurora Console
 
-We use an aditional status COMMENT (200 OK) in HealthChecks on order for the application to send a comment to Marjory but still 
-reveive trafic. 
-
-If you use circut breakers in your application note that you should not let the circuit breaker healthIndicator return an 
-error if it is popped. Make it return COMMENT and add relevant details to the indicator. 
 
 For more info see:
 * [Spring Doc: Health information](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-health)
@@ -173,20 +188,52 @@ mechanics.
 
 ### /prometheus - Metrics   
 
-Although Spring Boot comes with its own APIs for registering and exposing metrics, Skatteetaten has more or less
-standardized on using [Dropwizard Metrics](http://metrics.dropwizard.io/). Spring Boot integrates nicely with Dropwizard
-Metrics, and the Reference Application is set up to use it by default.
+This reference application uses a library [aurora-prometheus](https://git.aurora.skead.no/projects/AUF/repos/aurora-prometheus)
+in order to directly instrument Prometheus metrics. 
+
+The following metrics are set up automatically
+ - http_server_requests histogram for inncomming requestes. 
+ - http_client_requests histogram for outgoing requests.
+ - operations histogram for manual operations with the ```withMetrics``` method.
+ 
+It is possible to configure the grouping and filtering of both server and client metrics in your application.yaml file. 
+
+    aurora:
+        client:
+           metricsPathLabelGroupings:
+              httpbin: ".*httpbin.org.*"
+
+This configuration says that all outgoing requests that match the regex on the right should be grouped under the 
+path label on the left.
+
+    aurora:
+        client:
+           mode : INCLUDE_MAPPINGS
+           metricsPathLabelGroupings:
+              httpbin: ".*httpbin.org.*"
+
+Group as above but also exclude everything not matching the regex in the labelGroupings.
+
+
+    aurora:
+        client:
+           mode: INCLUDE
+           includes:
+              httpbin: ".*httpbin.org.*"
+
+Only include the metrics matching the regex on the right
+
+    aurora:
+        client:
+           mode: EXCLUDE
+           includes:
+              httpbin: ".*httpbin.org.*"
+
+Exclude the metrics matching the regex on the right
 
 For applications that are deployed to OpenShift, metrics exposed at ```/prometheus``` (default, configurable) in the
 format required by Prometheus will be automatically scraped, registered, and become available in the
-[central Graphana](https://metrics.skead.no/) instance. The Reference Application is configured to expose all metrics
-in the prometheus required format at ```/prometheus``` by using the 
-[spring-boot-prometheus](https://aurora/git/projects/AUF/repos/spring-boot-prometheus/browse) module. This module will
-also by default enable standard JVM metrics (heap, memory etc), HTTP status code metrics and logging metrics. See the
-documentation for more details. By default the prometheus endpoint is part of management so it is exposed on the seperate management port. 
-
-To allow the usage of [Dropwizard Metrics annotations](http://metrics.dropwizard.io/3.1.0/apidocs/com/codahale/metrics/annotation/package-summary.html),
-the Reference Application pulls in the [metrics-spring](http://metrics.ryantenney.com/) module.
+[central Graphana](https://metrics.skead.no/) instance. 
 
 For more details, see
  * [Hvordan samle inn og se metrikker](https://aurora/wiki/display/OS/Hvordan+samle+inn+og+se+metrikker)

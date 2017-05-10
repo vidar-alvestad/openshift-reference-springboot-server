@@ -8,26 +8,26 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * An example service that demonstrates basic database operations.
+ * For some reason if this is called CounterService it will not load?
  */
 @Service
-public class CounterService {
+public class CounterDatabaseService {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public CounterService(JdbcTemplate jdbcTemplate) {
-
+    public CounterDatabaseService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Transactional
     public Map<String, Object> getAndIncrementCounter() {
-        Map<String, Object> counter = jdbcTemplate.queryForMap("select value from counter for update of value");
-        jdbcTemplate.update("update counter set value=value+1");
+        Map<String, Object> counter = jdbcTemplate.queryForMap("SELECT value FROM counter FOR UPDATE OF value");
+        jdbcTemplate.update("UPDATE counter SET value=value+1");
         return counter;
     }
 
     public int getCounter() {
-        Integer integer = jdbcTemplate.queryForObject("select value from counter", Integer.class);
+        Integer integer = jdbcTemplate.queryForObject("SELECT value FROM counter", Integer.class);
         if (integer == null) {
             return 0;
         }

@@ -5,7 +5,7 @@
 
   <groupId>ske.aurora.openshift.referanse</groupId>
   <artifactId>openshift-referanse-springboot-server</artifactId>
-  <version>0.0-SNAPSHOT</version>
+  <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>openshift-referanse-springboot-server</name>
@@ -14,8 +14,8 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.1.RELEASE</version>
-    <relativePath /> <!-- lookup parent from repository -->
+    <version>1.5.3.RELEASE</version>
+    <relativePath />
   </parent>
 
   <prerequisites>
@@ -23,6 +23,7 @@
   </prerequisites>
 
   <properties>
+    <aurora.starters.version>1.0.0</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -31,10 +32,11 @@
     <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.coverage.exclusions>**/*Main.java</sonar.coverage.exclusions>
     <sonar.tests>src/test/groovy</sonar.tests>
+    <flyway.version>4.2.0</flyway.version>
 
     <!-- Prosjektspesifikk Nexus staging profil. Må endres av prosjektene -->
     <staging-profile-id-med-clm>8815b545f21bd</staging-profile-id-med-clm>
-    <nexus-staging-maven-plugin.version>1.6.6</nexus-staging-maven-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
   </properties>
 
   <distributionManagement>
@@ -56,22 +58,22 @@
           <!-- Brukes til å kompilere groovy kode i enhetstestene -->
           <groupId>org.codehaus.gmavenplus</groupId>
           <artifactId>gmavenplus-plugin</artifactId>
-          <version>1.4</version>
+          <version>1.5</version>
         </plugin>
         <plugin>
           <groupId>ske.aurora.maven.plugins</groupId>
           <artifactId>aurora-cd</artifactId>
-          <version>2.0.2</version>
+          <version>2.0.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>2.4</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
-          <version>2.3</version>
+          <version>3.0.2</version>
         </plugin>
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
@@ -81,12 +83,12 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.7.7.201606060606</version>
+          <version>0.7.9</version>
         </plugin>
         <plugin>
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
-          <version>1.1.10</version>
+          <version>1.2.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -259,7 +261,7 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>7.5.1</version>
+            <version>7.7</version>
           </dependency>
           <dependency>
             <groupId>ske.aurora.checkstyle</groupId>
@@ -301,84 +303,19 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>ske.aurora.springboot</groupId>
+      <artifactId>aurora-spring-boot-starter</artifactId>
+      <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>ske.aurora.springboot</groupId>
+      <artifactId>aurora-oracle-spring-boot-starter</artifactId>
+      <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-hateoas</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jdbc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>ske.aurora</groupId>
-      <artifactId>aurora-header-mdc-filter</artifactId>
-      <version>1.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>ske.aurora.springboot.prometheus</groupId>
-      <artifactId>spring-boot-prometheus</artifactId>
-      <version>3.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.ryantenney.metrics</groupId>
-      <artifactId>metrics-spring</artifactId>
-      <version>3.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.oracle</groupId>
-      <artifactId>ojdbc7</artifactId>
-      <version>12.1.0.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-core</artifactId>
-      <version>4.0.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.restdocs</groupId>
-      <artifactId>spring-restdocs-mockmvc</artifactId>
-      <version>1.1.2.RELEASE</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.spockframework</groupId>
-      <artifactId>spock-core</artifactId>
-      <version>1.0-groovy-2.4</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- Valgfrie avhengigheter ved bruk av spock -->
-    <dependency> <!-- bruk en bestemt versjon av groovy (istedenfor den som settes av spock-core -->
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all</artifactId>
-      <version>2.4.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency> <!-- for å kunne mocke klasser (ikke bare interface) -->
-      <groupId>cglib</groupId>
-      <artifactId>cglib-nodep</artifactId>
-      <version>3.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency> <!-- for å kunne mocke klasser uten default konstruktør -->
-      <groupId>org.objenesis</groupId>
-      <artifactId>objenesis</artifactId>
-      <version>2.1</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>ske.aurora.springboot</groupId>
+      <artifactId>aurora-spock-spring-boot-starter</artifactId>
+      <version>${aurora.starters.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

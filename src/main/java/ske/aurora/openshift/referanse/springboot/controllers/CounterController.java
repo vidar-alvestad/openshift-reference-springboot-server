@@ -1,38 +1,30 @@
 package ske.aurora.openshift.referanse.springboot.controllers;
 
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.codahale.metrics.annotation.Timed;
-
-import ske.aurora.openshift.referanse.springboot.service.CounterService;
+import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
 
 /**
- * This is an example Controller that demonstrates a very simple JSON-over-HTTP enpoint. An example of how to use
- * metrics to register the execution times is also included.
+ * This is an example Controller that demonstrates a very simple controller that increments a counter
+ * in a oracle sql database and returns the previous value.
+ * <p>
+ * There should automatically be registered metrics for both the withMetrics block and the http endpoint
+ * execute and http_server_request histograms
  */
+
 @RestController
 public class CounterController {
 
-    private static final Logger logger = LoggerFactory.getLogger(CounterController.class);
+    private CounterDatabaseService service;
 
-    private final CounterService counterService;
-
-    public CounterController(CounterService counterService) {
-
-        this.counterService = counterService;
+    public CounterController(CounterDatabaseService service) {
+        this.service = service;
     }
 
-    @Timed(name = "counter")
     @GetMapping("/api/counter")
-    public Map<String, Object> counter() {
-
-        Map<String, Object> counter = counterService.getAndIncrementCounter();
-        logger.debug("Incrementing counter to {}", counter.get("VALUE"));
-        return counter;
+    public String counter() {
+        return service.getAndIncrementCounter().get("value").toString();
     }
+
 }
