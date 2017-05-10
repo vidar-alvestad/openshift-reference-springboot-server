@@ -51,7 +51,28 @@ fork/export:
 
 # What is Covered in the Application?
 
+## Starters
+
+The application has one starter  [aurora-spring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora) in order to set up normal aurora requirements such as
+ - grouping properties into their own property sources
+ - setting default properties for actuator
+ - instrumenting RestTemplates with metrics
+ - instrument ServerFilter with metrics
+ - instrument logback with metrics
+ 
+There is a starter for testing with spock [aurora-spock-spring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora-oracle)
+
+A starter for working with oracle databases with flyway [aurora-oraclespring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora-spock)
+
+In order to auto configure a datasource provided on openshift add the following configuration to your properties file
+ 
+    aurora:
+      db: NAME_OF_DB
+       
+All starters are versioned together.
+
 ## Log Configuration
+
 
 All Skatteetaten applications should log using the same standard logging pattern. Also, all applications running
 on Openshift has to log to a specific folder in the container for the logs to picked up and automatically indexed in
@@ -167,7 +188,7 @@ mechanics.
 
 ### /prometheus - Metrics   
 
-This reference application uses a library [aurora-prometheus](https://git.aurora.skead.no/porjects/AUF/repos/aurora-prometheus)
+This reference application uses a library [aurora-prometheus](https://git.aurora.skead.no/projects/AUF/repos/aurora-prometheus)
 in order to directly instrument Prometheus metrics. 
 
 The following metrics are set up automatically
