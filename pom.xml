@@ -33,6 +33,7 @@
     <sonar.coverage.exclusions>**/*Main.java</sonar.coverage.exclusions>
     <sonar.tests>src/test/groovy</sonar.tests>
     <flyway.version>4.2.0</flyway.version>
+    <logback.version>1.2.3</logback.version>
 
     <!-- Prosjektspesifikk Nexus staging profil. Må endres av prosjektene -->
     <staging-profile-id-med-clm>8815b545f21bd</staging-profile-id-med-clm>
