@@ -1,9 +1,13 @@
 package ske.aurora.openshift.referanse.springboot.controllers;
 
+import static ske.aurora.prometheus.collector.Operation.withMetrics;
+import static ske.aurora.prometheus.collector.Size.size;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
+import ske.aurora.prometheus.collector.Operation;
 
 /**
  * This is an example Controller that demonstrates a very simple controller that increments a counter
@@ -24,7 +28,13 @@ public class CounterController {
 
     @GetMapping("/api/counter")
     public String counter() {
-        return service.getAndIncrementCounter().get("value").toString();
+
+        String value = withMetrics("counter", "DATABASE_READ", () ->
+            service.getAndIncrementCounter().get("value").toString()
+        );
+
+        size("counter", "database", Integer.parseInt(value));
+        return value;
     }
 
 }

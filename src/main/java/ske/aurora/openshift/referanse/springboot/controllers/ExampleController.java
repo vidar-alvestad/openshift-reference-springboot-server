@@ -1,12 +1,17 @@
 package ske.aurora.openshift.referanse.springboot.controllers;
 
 import static ske.aurora.prometheus.collector.Operation.withMetrics;
+import static ske.aurora.prometheus.collector.Status.StatusValue.CRITICAL;
+import static ske.aurora.prometheus.collector.Status.StatusValue.OK;
+import static ske.aurora.prometheus.collector.Status.status;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
+
+import ske.aurora.prometheus.collector.Status;
 
 /*
  * An example controller that shows how to do a REST call and how to do an operation with a operations metrics
@@ -16,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 public class ExampleController {
 
     private static final int SECOND = 1000;
+    public static final String SOMETIMES = "sometimes";
 
     private RestTemplate restTemplate;
 
@@ -32,7 +38,7 @@ public class ExampleController {
 
     @GetMapping("/api/example/sometimes")
     public String example() {
-        return withMetrics("sometimes", () -> {
+        return withMetrics(SOMETIMES, () -> {
             long sleepTime = (long) (Math.random() * SECOND);
 
             try {
@@ -43,8 +49,10 @@ public class ExampleController {
             }
 
             if (sleepTime % 2 == 0) {
+                status(SOMETIMES, OK);
                 return "sometimes i succeed";
             } else {
+                status(SOMETIMES, CRITICAL);
                 throw new RuntimeException("Sometimes i fail");
             }
         });
