@@ -11,8 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import ske.aurora.prometheus.collector.Status;
-
 /*
  * An example controller that shows how to do a REST call and how to do an operation with a operations metrics
  * There should be a metric called http_client_requests http_server_requests and operations
@@ -20,9 +18,8 @@ import ske.aurora.prometheus.collector.Status;
 @RestController
 public class ExampleController {
 
+    private static final String SOMETIMES = "sometimes";
     private static final int SECOND = 1000;
-    public static final String SOMETIMES = "sometimes";
-
     private RestTemplate restTemplate;
 
     public ExampleController(RestTemplate restTemplate) {

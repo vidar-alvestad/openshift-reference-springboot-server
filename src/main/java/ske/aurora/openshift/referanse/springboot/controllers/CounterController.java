@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
-import ske.aurora.prometheus.collector.Operation;
 
 /**
  * This is an example Controller that demonstrates a very simple controller that increments a counter
