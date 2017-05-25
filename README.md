@@ -5,8 +5,7 @@ The intention of the Reference Application is to serve as a guide when developin
 rules in the tax domain for which Skatteetaten is responsible.
 
 In this repository your will find examples on how to solve common technical issues and implement requirements for 
-applications running within the networks of Skatteetaten and especially on the 
-[Aurora OpenShift platform](https://aurora/wiki/display/OS/OPENSHIFT). This includes logging, handling database 
+applications running within the networks of Skatteetaten and especially on the  Aurora OpenShift platform. This includes logging, handling database 
 migrations, testing, security, application versioning, build pipeline, to name a few.
 
 The Reference Application is implemented in [Spring Boot](https://projects.spring.io/spring-boot/).
@@ -18,14 +17,6 @@ The recommended technology for all new business applications created within Skat
 a technology in this way is always associated with some controversy, especially in an organization with history of using
 several other technology stacks. It is, however, our opinion that at the time there are few other stacks that are better
 supported and are driving development in the Cloud Native space better than Spring Boot.
-
-For more information on the decision process around selecting Spring Boot, see [reference missing].
-
-
-# The Aurora Requirements
-
-The non-functional requirements for application running on the Aurora Openshift platform is documented here:
-[Krav til applikasjoner som skal kjøre på OpenShift](https://aurora/wiki/pages/viewpage.action?pageId=108362986).
 
 
 # How to Use the Application
@@ -86,10 +77,6 @@ file when it exists, while still preserving the convenient Spring Boot features 
 in the ```src/main/assembly/metadata/openshift.json```-file. The ```application.yml```-file also contains an example on
 how to set the log levels.
 
-For details, see:
-* [OPENSHIFT: Hvordan få riktig konfigurert logging](https://aurora/wiki/pages/viewpage.action?pageId=121982307)
-* [Logging og feilhåndtering - Krav](https://aurora/wiki/pages/viewpage.action?pageId=34578383)
-
 
 ## HTTP Header Handling
 
@@ -102,11 +89,6 @@ This is implemented by using a filter that will extract the values of these head
 [SLF4J MDC](http://www.slf4j.org/api/org/slf4j/MDC.html). The artifact implementing the filter is 
 [aurora-header-mdc-filter](https://aurora/git/projects/AUF/repos/aurora-header-mdc-filter/browse) and is included
 as a dependency in the pom.xml-file. See the ```ApplicationConfig```-class for details on how the filter is configured.
-
-For details, see:
-* [Logging og feilhåndtering - Krav](https://aurora/wiki/pages/viewpage.action?pageId=34578383)
-* [UT-AUR-LOG-006](https://aurora/wiki/display/AURORA/UT-AUR-LOG-006)
-* [UT-AUR-REST-004](https://aurora/wiki/display/AURORA/UT-AUR-REST-004)
 
  
 ## Database Migrations with Flyway
@@ -169,14 +151,8 @@ The links contains some placeholders that are replaced by Marjory marked with ``
 
 ###  /health - Health status 
 
-The health endpoint is used to communicate to the platform that your application is ready to receive traffic. You
-should add your own custom application specific health checks to make sure this endpoint properly reflects the actual
-health state of your appliction. See 
-[Hvordan styre når din applikasjon får HTTP trafikk](https://aurora/wiki/pages/viewpage.action?pageId=112138285) for 
-more details.
-
-We use an status OBSERVE in HealthChecks on order for the application to send OBSERVE status to Aurora Console
-
+The health endpoint is used to communicate to the platform the status of your application. This information is scraped by the 
+aurora-console and used in the overall status of you application.
 
 For more info see:
 * [Spring Doc: Health information](http://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-health)
@@ -195,6 +171,10 @@ The following metrics are set up automatically
  - http_server_requests histogram for inncomming requestes. 
  - http_client_requests histogram for outgoing requests.
  - operations histogram for manual operations with the ```withMetrics``` method.
+ - statuses gauge for status of things, 0=OK, 1=Unstable, 2=Critical
+ - sizes gauge for size of queues or elements processed or similar things. 
+ 
+For tests see the [test folder](https://git.aurora.skead.no/projects/AUF/repos/aurora-prometheus/browse/src/test/groovy/ske/aurora/prometheus) in aurora-prometheus
  
 It is possible to configure the grouping and filtering of both server and client metrics in your application.yaml file. 
 
@@ -232,11 +212,7 @@ Only include the metrics matching the regex on the right
 Exclude the metrics matching the regex on the right
 
 For applications that are deployed to OpenShift, metrics exposed at ```/prometheus``` (default, configurable) in the
-format required by Prometheus will be automatically scraped, registered, and become available in the
-[central Graphana](https://metrics.skead.no/) instance. 
-
-For more details, see
- * [Hvordan samle inn og se metrikker](https://aurora/wiki/display/OS/Hvordan+samle+inn+og+se+metrikker)
+format required by Prometheus will be automatically scraped.
 
 ## Security
 
@@ -279,7 +255,7 @@ A class, ```AbstractControllerTest```, is included as an example base class for 
 
 ## Application Configuration and Spring Profiles
 
-The Reference Application is set up to work with two Spring configuration profiles (see [missing link]()); one called
+The Reference Application is set up to work with two Spring configuration profiles  one called
 ```local``` and one called ```openshift```. The ```local``` profile is active by default (see the 
 ```spring.profiles.active``` property in ```application.yml```), and the intention is that this profile should be used
 when running the application locally during development, and the application should ideally be startable from the IDE
@@ -294,10 +270,6 @@ Obviously, this dual profile setup does not help if you need different configura
 your application (for instance different environment/namespaces). Openshift supports many methods for applying 
 configuration to Docker containers, and Aurora Openshift in particular has guidelines to how environment specific 
 configuration should be done.
-
- * [Hvordan få miljøspesifikke variabler inn i et miljø](https://aurora/wiki/pages/viewpage.action?pageId=112136703)
- * [Hvordan få hemmelige data i en app](https://aurora/wiki/pages/viewpage.action?pageId=112138166)
- * [Min første app med AOC](https://aurora/wiki/pages/viewpage.action?pageId=115402890)
 
 
 ## Build Configuration
@@ -319,9 +291,6 @@ of a jar file with only the application classes and resources. If this behaviour
 dependencies will be included in the Leveransepakke twice; once in the application jar from the repackage goal, and
 once from the maven-assembly-plugin.
 
-For more details, see
- * [Hvordan lage en leveransepakke som fungerer på OpenShift](https://aurora/wiki/pages/viewpage.action?pageId=112132497)
-
 ### Versioning
 
 The pom.xml is configured with the aurora-cd-plugin for versioning. aurora-cd, in turn, uses the aurora-git-version
@@ -338,16 +307,12 @@ Plugins for code analysis via Checkstyle, Sonar, Jacoco and PiTest are included 
 with the default rule set for Skatteetaten. All code analysis is runn via the standard Jenkins pipeline scripts. See 
 section on Jenkinsfile for more details.
 
-### Jenkinsfile
-
-For more details, see
- * [Hvordan ta i bruk Jenkins2 med jenkinsfile  ](https://aurora/wiki/display/OS/Hvordan+ta+i+bruk+Jenkins2+med+jenkinsfile)
 
 ### Nexus IQ
 
 Every application that is deployed into production in the Skatteetaten networks are required to run a security
 check via the Nexus IQ tool. A profile for performing this check is included in the pom, but you will need to acquire
-your own staging profile id. See [reference missing]() for more details.
+your own staging profile id. 
 
 TODO: add reference to Nexus IQ docs.
 
