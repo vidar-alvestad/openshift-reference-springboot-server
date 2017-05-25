@@ -174,7 +174,7 @@ The following metrics are set up automatically
  - statuses gauge for status of things, 0=OK, 1=Unstable, 2=Critical
  - sizes gauge for size of queues or elements processed or similar things. 
  
-For tests see the [test folder](https://git.aurora.skead.no/projects/AUF/repos/aurora-prometheus/browse/src/test/groovy/ske/aurora/prometheus) in aurora-prometheus
+For instructions on how to use metrics see the [tests in aurora-prometheus](https://git.aurora.skead.no/projects/AUF/repos/aurora-prometheus/browse/src/test/groovy/ske/aurora/prometheus)
  
 It is possible to configure the grouping and filtering of both server and client metrics in your application.yaml file. 
 
