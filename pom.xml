@@ -23,7 +23,7 @@
   </prerequisites>
 
   <properties>
-    <aurora.starters.version>1.0.4</aurora.starters.version>
+    <aurora.starters.version>1.0.5</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -34,6 +34,7 @@
     <sonar.tests>src/test/groovy</sonar.tests>
     <flyway.version>4.2.0</flyway.version>
     <logback.version>1.2.3</logback.version>
+    <spock.version>1.1-groovy-2.4</spock.version>
 
     <!-- Prosjektspesifikk Nexus staging profil. Må endres av prosjektene -->
     <staging-profile-id-med-clm>8815b545f21bd</staging-profile-id-med-clm>
