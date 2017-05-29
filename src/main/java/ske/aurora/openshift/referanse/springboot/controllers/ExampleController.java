@@ -1,6 +1,9 @@
 package ske.aurora.openshift.referanse.springboot.controllers;
 
 import static ske.aurora.prometheus.collector.Operation.withMetrics;
+import static ske.aurora.prometheus.collector.Status.StatusValue.CRITICAL;
+import static ske.aurora.prometheus.collector.Status.StatusValue.OK;
+import static ske.aurora.prometheus.collector.Status.status;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +18,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 @RestController
 public class ExampleController {
 
+    private static final String SOMETIMES = "sometimes";
     private static final int SECOND = 1000;
-
     private RestTemplate restTemplate;
 
     public ExampleController(RestTemplate restTemplate) {
@@ -32,7 +35,7 @@ public class ExampleController {
 
     @GetMapping("/api/example/sometimes")
     public String example() {
-        return withMetrics("sometimes", () -> {
+        return withMetrics(SOMETIMES, () -> {
             long sleepTime = (long) (Math.random() * SECOND);
 
             try {
@@ -43,8 +46,10 @@ public class ExampleController {
             }
 
             if (sleepTime % 2 == 0) {
+                status(SOMETIMES, OK);
                 return "sometimes i succeed";
             } else {
+                status(SOMETIMES, CRITICAL);
                 throw new RuntimeException("Sometimes i fail");
             }
         });
