@@ -1,4 +1,4 @@
-package ske.aurora.openshift.referanse.springboot.controllers
+package no.skatteetaten.aurora.openshift.referanse.springboot.controllers
 
 import org.junit.Rule
 import org.springframework.restdocs.JUnitRestDocumentation

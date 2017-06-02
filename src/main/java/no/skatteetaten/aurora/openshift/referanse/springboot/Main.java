@@ -1,9 +1,9 @@
-package ske.aurora.openshift.referanse.springboot;
+package no.skatteetaten.aurora.openshift.referanse.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ske.aurora.annotations.AuroraApplication;
+import no.skatteetaten.aurora.annotations.AuroraApplication;
 
 @SpringBootApplication
 @AuroraApplication

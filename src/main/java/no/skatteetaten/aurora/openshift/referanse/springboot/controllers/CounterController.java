@@ -1,12 +1,12 @@
-package ske.aurora.openshift.referanse.springboot.controllers;
+package no.skatteetaten.aurora.openshift.referanse.springboot.controllers;
 
-import static ske.aurora.prometheus.collector.Operation.withMetrics;
-import static ske.aurora.prometheus.collector.Size.size;
+import static no.skatteetaten.aurora.prometheus.collector.Operation.withMetrics;
+import static no.skatteetaten.aurora.prometheus.collector.Size.size;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ske.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
+import no.skatteetaten.aurora.openshift.referanse.springboot.service.CounterDatabaseService;
 
 /**
  * This is an example Controller that demonstrates a very simple controller that increments a counter

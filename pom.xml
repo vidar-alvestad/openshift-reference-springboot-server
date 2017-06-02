@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>ske.aurora.openshift.referanse</groupId>
-  <artifactId>openshift-referanse-springboot-server</artifactId>
+  <groupId>ske.aurora.openshift</groupId>
+  <artifactId>openshift-reference-springboot-server</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>openshift-referanse-springboot-server</name>
+  <name>openshift-reference-springboot-server</name>
   <description>Demo project for Spring Boot</description>
 
   <parent>
@@ -23,7 +23,7 @@
   </prerequisites>
 
   <properties>
-    <aurora.starters.version>1.0.5</aurora.starters.version>
+    <aurora.starters.version>1.1.0</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -63,9 +63,9 @@
           <version>1.5</version>
         </plugin>
         <plugin>
-          <groupId>ske.aurora.maven.plugins</groupId>
+          <groupId>no.skatteetaten.aurora.maven.plugins</groupId>
           <artifactId>aurora-cd</artifactId>
-          <version>2.0.3</version>
+          <version>2.0.5</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -266,9 +266,9 @@
             <version>7.7</version>
           </dependency>
           <dependency>
-            <groupId>ske.aurora.checkstyle</groupId>
+            <groupId>no.skatteetaten.aurora.checkstyle</groupId>
             <artifactId>checkstyle-config</artifactId>
-            <version>0.8.0</version>
+            <version>0.8</version>
           </dependency>
         </dependencies>
       </plugin>
@@ -305,17 +305,17 @@
 
   <dependencies>
     <dependency>
-      <groupId>ske.aurora.springboot</groupId>
+      <groupId>no.skatteetaten.aurora.springboot</groupId>
       <artifactId>aurora-spring-boot-starter</artifactId>
       <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
-      <groupId>ske.aurora.springboot</groupId>
+      <groupId>no.skatteetaten.aurora.springboot</groupId>
       <artifactId>aurora-oracle-spring-boot-starter</artifactId>
       <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
-      <groupId>ske.aurora.springboot</groupId>
+      <groupId>no.skatteetaten.aurora.springboot</groupId>
       <artifactId>aurora-spock-spring-boot-starter</artifactId>
       <version>${aurora.starters.version}</version>
       <scope>test</scope>

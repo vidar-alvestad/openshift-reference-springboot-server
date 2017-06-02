@@ -44,16 +44,16 @@ fork/export:
 
 ## Starters
 
-The application has one starter  [aurora-spring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora) in order to set up normal aurora requirements such as
+The application has one starter  [aurora-spring-boot-starter](https://github.com/Skatteetaten/aurora-spring-boot-starters/tree/master/aurora) in order to set up normal aurora requirements such as
  - grouping properties into their own property sources
  - setting default properties for actuator
  - instrumenting RestTemplates with metrics
  - instrument ServerFilter with metrics
  - instrument logback with metrics
  
-There is a starter for testing with spock [aurora-spock-spring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora-oracle)
+There is a starter for testing with spock [aurora-spock-spring-boot-starter](https://github.com/Skatteetaten/aurora-spring-boot-starters/tree/master/aurora-spock)
 
-A starter for working with oracle databases with flyway [aurora-oraclespring-boot-starter](https://git.aurora.skead.no/projects/AUF/repos/aurora-spring-boot-starters/browse/aurora-spock)
+A starter for working with oracle databases with flyway [aurora-oraclespring-boot-starter](https://github.com/Skatteetaten/aurora-spring-boot-starters/tree/master/aurora-oracle)
 
 In order to auto configure a datasource provided on openshift add the following configuration to your properties file
  
@@ -87,7 +87,7 @@ They may also optionally send a ```Meldingsid``` header as an identifier for the
 The value of the ```Klientid```, ```Korrelasjonsid``` and ```Meldingsid``` headers should be logged on every request.
 This is implemented by using a filter that will extract the values of these headers and putting them on 
 [SLF4J MDC](http://www.slf4j.org/api/org/slf4j/MDC.html). The artifact implementing the filter is 
-[aurora-header-mdc-filter](https://aurora/git/projects/AUF/repos/aurora-header-mdc-filter/browse) and is included
+[aurora-header-mdc-filter](https://github.com/skatteetaten/aurora-header-mdc-filter) and is included
 as a dependency in the pom.xml-file. See the ```ApplicationConfig```-class for details on how the filter is configured.
 
  
@@ -164,7 +164,7 @@ mechanics.
 
 ### /prometheus - Metrics   
 
-This reference application uses a library [aurora-prometheus](https://git.aurora.skead.no/projects/AUF/repos/aurora-prometheus)
+This reference application uses a library [aurora-prometheus](https://github.com/skatteetaten/aurora-prometheus)
 in order to directly instrument Prometheus metrics. 
 
 The following metrics are set up automatically
@@ -174,7 +174,7 @@ The following metrics are set up automatically
  - statuses gauge for status of things, 0=OK, 1=Unstable, 2=Critical
  - sizes gauge for size of queues or elements processed or similar things. 
  
-For instructions on how to use metrics see the [tests in aurora-prometheus](https://git.aurora.skead.no/projects/AUF/repos/aurora-prometheus/browse/src/test/groovy/ske/aurora/prometheus)
+For instructions on how to use metrics see the [tests in aurora-prometheus](https://github.com/Skatteetaten/aurora-prometheus/tree/master/src/test/groovy/no/skatteetaten/aurora/prometheus)
  
 It is possible to configure the grouping and filtering of both server and client metrics in your application.yaml file. 
 
@@ -294,12 +294,12 @@ once from the maven-assembly-plugin.
 ### Versioning
 
 The pom.xml is configured with the aurora-cd-plugin for versioning. aurora-cd, in turn, uses the aurora-git-version
-component. See [aurora-git-version](https://aurora/git/projects/AUF/repos/aurora-git-version/browse) for details.
+component. See [aurora-git-version](https://github.com/skatteetaten/aurora-git-version) for details.
 
 Maven does not allow plugins to change the version of the current build, so the plugin has to be triggered once
 before the actual "main" build is started. This is handled by Jenkins via the Jenkinsfile. See the ```Jenkinsfile``` in
-the root folder and [aurora-pipeline-scripts](https://aurora/git/projects/AO/repos/aurora-pipeline-scripts/browse) for 
-details.
+the root folder. The pipeline scripts will be opensource soon.
+
 
 ### Code Analysis
 

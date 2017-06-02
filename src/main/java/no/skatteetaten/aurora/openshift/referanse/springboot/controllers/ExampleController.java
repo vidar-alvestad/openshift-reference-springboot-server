@@ -1,9 +1,9 @@
-package ske.aurora.openshift.referanse.springboot.controllers;
+package no.skatteetaten.aurora.openshift.referanse.springboot.controllers;
 
-import static ske.aurora.prometheus.collector.Operation.withMetrics;
-import static ske.aurora.prometheus.collector.Status.StatusValue.CRITICAL;
-import static ske.aurora.prometheus.collector.Status.StatusValue.OK;
-import static ske.aurora.prometheus.collector.Status.status;
+import static no.skatteetaten.aurora.prometheus.collector.Operation.withMetrics;
+import static no.skatteetaten.aurora.prometheus.collector.Status.StatusValue.CRITICAL;
+import static no.skatteetaten.aurora.prometheus.collector.Status.StatusValue.OK;
+import static no.skatteetaten.aurora.prometheus.collector.Status.status;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
