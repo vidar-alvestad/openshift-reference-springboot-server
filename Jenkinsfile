@@ -6,5 +6,5 @@ fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.g
    jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
 
-def overrides = [piTests: false]
+def overrides = [piTests: false, credentialsId: "github_bjartek"]
 jenkinsfile.run(version, overrides)
