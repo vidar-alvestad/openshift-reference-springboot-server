@@ -23,7 +23,7 @@
   </prerequisites>
 
   <properties>
-    <aurora.starters.version>1.1.0</aurora.starters.version>
+    <aurora.starters.version>2.0.0</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -65,7 +65,7 @@
         <plugin>
           <groupId>no.skatteetaten.aurora.maven.plugins</groupId>
           <artifactId>aurora-cd</artifactId>
-          <version>2.0.2</version>
+          <version>3.0.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -263,12 +263,12 @@
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>7.7</version>
+            <version>7.8.1</version>
           </dependency>
           <dependency>
             <groupId>no.skatteetaten.aurora.checkstyle</groupId>
             <artifactId>checkstyle-config</artifactId>
-            <version>0.8</version>
+            <version>1.0.0</version>
           </dependency>
         </dependencies>
       </plugin>
