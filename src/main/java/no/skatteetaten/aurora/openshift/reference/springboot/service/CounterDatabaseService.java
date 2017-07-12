@@ -1,4 +1,4 @@
-package no.skatteetaten.aurora.openshift.referanse.springboot.service;
+package no.skatteetaten.aurora.openshift.reference.springboot.service;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package no.skatteetaten.aurora.openshift.referanse.springboot.controllers;
+package no.skatteetaten.aurora.openshift.reference.springboot.controllers;
 
 import java.util.HashMap;
 import java.util.Map;

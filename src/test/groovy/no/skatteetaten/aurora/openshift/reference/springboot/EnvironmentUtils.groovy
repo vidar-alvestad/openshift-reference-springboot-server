@@ -1,4 +1,4 @@
-package no.skatteetaten.aurora.openshift.referanse.springboot
+package no.skatteetaten.aurora.openshift.reference.springboot
 
 import java.lang.reflect.Field
 

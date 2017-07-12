@@ -1,4 +1,4 @@
-package no.skatteetaten.aurora.openshift.referanse.springboot.controllers;
+package no.skatteetaten.aurora.openshift.reference.springboot.controllers;
 
 import static no.skatteetaten.aurora.prometheus.collector.Operation.withMetrics;
 import static no.skatteetaten.aurora.prometheus.collector.Status.StatusValue.CRITICAL;

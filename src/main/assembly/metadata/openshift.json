@@ -7,7 +7,7 @@
     }
   },
   "java": {
-    "mainClass": "ske.aurora.openshift.referanse.springboot.Main",
+    "mainClass": "no.skatteetaten.aurora.openshift.reference.springboot.Main",
     "jvmOpts": "-Dspring.profiles.active=openshift",
     "applicationArgs": "--logging.config=${LOGBACK_FILE}"
   }
