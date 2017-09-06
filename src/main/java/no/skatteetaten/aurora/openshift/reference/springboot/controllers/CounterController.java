@@ -1,11 +1,9 @@
 package no.skatteetaten.aurora.openshift.reference.springboot.controllers;
 
-import static no.skatteetaten.aurora.prometheus.collector.Operation.withMetrics;
-import static no.skatteetaten.aurora.prometheus.collector.Size.size;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.micrometer.core.annotation.Timed;
 import no.skatteetaten.aurora.openshift.reference.springboot.service.CounterDatabaseService;
 
 /**
@@ -25,15 +23,10 @@ public class CounterController {
         this.service = service;
     }
 
+    @Timed
     @GetMapping("/api/counter")
     public String counter() {
-
-        String value = withMetrics("counter", "DATABASE_READ", () ->
-            service.getAndIncrementCounter().get("value").toString()
-        );
-
-        size("counter", "database", Integer.parseInt(value));
-        return value;
+        return service.getAndIncrementCounter().get("value").toString();
     }
 
 }

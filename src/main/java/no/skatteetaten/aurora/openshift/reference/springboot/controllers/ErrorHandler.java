@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import io.micrometer.spring.web.ControllerMetrics;
+
 /**
  * A sample error handler. You can add your own exceptions below to control the error codes that should be used in
  * various error scenarios.
@@ -19,22 +21,26 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ErrorHandler extends ResponseEntityExceptionHandler {
 
+    private ControllerMetrics metrics;
+
+    public ErrorHandler(ControllerMetrics metrics) {
+
+        this.metrics = metrics;
+    }
+
     @ExceptionHandler({ RuntimeException.class })
     protected ResponseEntity<Object> handleGenericError(RuntimeException e, WebRequest request) {
-
-        logger.error("Unexpected error", e);
         return handleException(e, request, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler({ IllegalArgumentException.class })
     protected ResponseEntity<Object> handleBadRequest(IllegalArgumentException e, WebRequest request) {
-
         return handleException(e, request, HttpStatus.BAD_REQUEST);
     }
 
     private ResponseEntity<Object> handleException(final RuntimeException e, WebRequest request,
         HttpStatus httpStatus) {
-
+        metrics.tagWithException(e);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 

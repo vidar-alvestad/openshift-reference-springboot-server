@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>ske.aurora.openshift</groupId>
+  <groupId>no.skatteetaten.aurora.openshift</groupId>
   <artifactId>openshift-reference-springboot-server</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -23,7 +23,7 @@
   </prerequisites>
 
   <properties>
-    <aurora.starters.version>2.0.1</aurora.starters.version>
+    <aurora.starters.version>3.0.0</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -236,10 +236,10 @@
         <artifactId>pitest-maven</artifactId>
         <configuration>
           <targetClasses>
-            <param>ske.aurora.openshift.referanse.*</param>
+            <param>no.skatteetaten.aurora.openshift.reference.*</param>
           </targetClasses>
           <targetTests>
-            <param>ske.aurora.openshift.referanse.*</param>
+            <param>no.skatteetaten.aurora.openshift.reference.*</param>
           </targetTests>
         </configuration>
       </plugin>
@@ -310,15 +310,54 @@
       <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
-      <groupId>no.skatteetaten.aurora.springboot</groupId>
-      <artifactId>aurora-oracle-spring-boot-starter</artifactId>
-      <version>${aurora.starters.version}</version>
+      <groupId>org.springframework.restdocs</groupId>
+      <artifactId>spring-restdocs-mockmvc</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>no.skatteetaten.aurora.springboot</groupId>
-      <artifactId>aurora-spock-spring-boot-starter</artifactId>
-      <version>${aurora.starters.version}</version>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-core</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.spockframework</groupId>
+      <artifactId>spock-spring</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.groovy</groupId>
+      <artifactId>groovy-all</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>cglib</groupId>
+      <artifactId>cglib-nodep</artifactId>
+      <version>3.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.objenesis</groupId>
+      <artifactId>objenesis</artifactId>
+      <version>2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc7</artifactId>
+      <version>12.1.0.2.p19158500</version>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
     </dependency>
   </dependencies>
 
