@@ -1,7 +1,5 @@
 package no.skatteetaten.aurora.openshift.reference.springboot.service;
 
-import java.util.Map;
-
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,17 +18,17 @@ public class CounterDatabaseService {
     }
 
     @Transactional
-    public Map<String, Object> getAndIncrementCounter() {
-        Map<String, Object> counter = jdbcTemplate.queryForMap("SELECT value FROM counter FOR UPDATE OF value");
+    public Long getAndIncrementCounter() {
+        Long counter = jdbcTemplate.queryForObject("SELECT value FROM counter FOR UPDATE OF value", Long.class);
         jdbcTemplate.update("UPDATE counter SET value=value+1");
         return counter;
     }
 
-    public int getCounter() {
-        Integer integer = jdbcTemplate.queryForObject("SELECT value FROM counter", Integer.class);
-        if (integer == null) {
-            return 0;
+    public Long getCounter() {
+        Long counter = jdbcTemplate.queryForObject("SELECT value FROM counter", Long.class);
+        if (counter == null) {
+            return 0L;
         }
-        return integer;
+        return counter;
     }
 }

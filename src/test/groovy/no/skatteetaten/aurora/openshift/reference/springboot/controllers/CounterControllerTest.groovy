@@ -20,7 +20,7 @@ class CounterControllerTest extends AbstractControllerTest {
   def "Example test for documenting the counter endpoint"() {
 
     given:
-      counterDatabaseService.getAndIncrementCounter() >> [value: 1]
+      counterDatabaseService.getAndIncrementCounter() >> BigDecimal.valueOf(1)
 
     when:
       ResultActions result = mockMvc.perform(RestDocumentationRequestBuilders.get('/api/counter'))

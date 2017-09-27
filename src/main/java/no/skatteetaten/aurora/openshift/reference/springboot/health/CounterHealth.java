@@ -21,7 +21,7 @@ public class CounterHealth extends AbstractHealthIndicator {
 
     @Override
     protected void doHealthCheck(Health.Builder builder) throws Exception {
-        int currentValue = counterDatabaseService.getCounter();
+        Long currentValue = counterDatabaseService.getCounter();
 
         if (currentValue % 2 == 0) {
             builder.status("OBSERVE").withDetail("message", "Partall antall i teller")
