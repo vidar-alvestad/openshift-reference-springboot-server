@@ -40,7 +40,7 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> handleException(final RuntimeException e, WebRequest request,
         HttpStatus httpStatus) {
-//        metrics.tagWithException(e);
+        metrics.tagWithException(e);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 

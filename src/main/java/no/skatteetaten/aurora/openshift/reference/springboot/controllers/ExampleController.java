@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import io.micrometer.core.annotation.Timed;
 import no.skatteetaten.aurora.AuroraMetrics;
 
 /*
@@ -33,7 +32,6 @@ public class ExampleController {
         this.metrics = metrics;
     }
 
-    @Timed
     @GetMapping("/api/example/ip")
     public Map<String, Object> ip() {
         JsonNode forEntity = restTemplate.getForObject("http://httpbin.org/ip", JsonNode.class);
@@ -42,7 +40,6 @@ public class ExampleController {
         return response;
     }
 
-    @Timed
     @GetMapping("/api/example/sometimes")
     public Map<String, Object> example() {
         return metrics.withMetrics(SOMETIMES, () -> {

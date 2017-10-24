@@ -3,21 +3,20 @@ info:
         api-doc: "${route.name}/docs/index.html"
     dependencies:
         skatteetaten: "skatteetaten"
-    auroraVersion: ${aurora.version:local-dev}
-    imageBuildTime: ${image.build.time:}
-
-aurora:
-    #setting a db here will create a datasource from a database with that name.
-    #in AOC config file
-    db: REFERANSEAPP
 
 spring:
     profiles:
         active: local
+    metrics:
+        prometheus:
+            timerPercentilesMax: "PT5S"
+            timerPercentilesMin: "PT0.1S"
+
 
 logging:
     level:
       ske.aurora: DEBUG
+      no.skatteetaten: INFO
       org:
         springframework: WARN
         apache.catalina: WARN
