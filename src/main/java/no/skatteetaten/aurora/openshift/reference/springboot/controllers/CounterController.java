@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.micrometer.core.annotation.Timed;
 import no.skatteetaten.aurora.openshift.reference.springboot.service.CounterDatabaseService;
 
 /**
@@ -26,7 +25,6 @@ public class CounterController {
         this.service = service;
     }
 
-    @Timed
     @GetMapping("/api/counter")
     public Map<String, Object> counter() {
         Map<String, Object> response = new HashMap<>();
