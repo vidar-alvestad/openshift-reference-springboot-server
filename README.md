@@ -32,10 +32,8 @@ central files, like the ```pom.xml``` and ```application.yml```.
 Regardless of the approach you use to keep up with changes, you will have to make the following changes to the
 fork/export:
 
- * remove the openshift folder, it is there to be used for demos. If you want you can use the aoc configuration as inspiration when you create your own aoc configuration in a seperate repository
  * change the ```groupId``` and ```artifactId``` in the ```pom.xml``` to match that of your application
  * rename the main package in ```src/main``` to match that of your application
- * change the ```info.application.name``` property in ```application.yml``` to match that of your application
  * change the ```info.links``` in ```application.yml``` to match that of your application
  * remove the example database code (migrations under ```src/main/resource/db/migrations```), the Counter-classes in the controllers, health and service packages and the database config in ```application.yml```
 
@@ -51,11 +49,6 @@ The application has one starter  [aurora-spring-boot-starter](https://github.com
  - instrument ServerFilter with metrics
  - instrument logback with metrics
  
-In order to auto configure a datasource provided on openshift add the following configuration to your properties file
- 
-    aurora:
-      db: NAME_OF_DB
-
 
 ## Log Configuration
 
