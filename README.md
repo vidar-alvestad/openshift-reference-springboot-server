@@ -55,7 +55,7 @@ The application has one starter  [aurora-spring-boot-starter](https://github.com
 All Skatteetaten applications should log using the same standard logging pattern. Also, all applications running
 on Openshift has to log to a specific folder in the container for the logs to picked up and automatically indexed in
 Splunk. Logfiles put in the container need to be rolled before reaching a predetermined size to avoid the platform
-terminating the application (in self defence; log files filling up disk on the Openshift nodes may wreck havoc in a 
+terminating the application (in self defence; log files filling up disk on the Openshift nodes may wreak havoc in a 
 cluster).
 
 To avoid every application having to maintain their own ```logback.xml```-file implementing all the requirements, one
@@ -102,7 +102,7 @@ For details, see:
 ## HTTP Endpoint JSON serialization
 
 The format for Dates in JSON responses has been set to com.fasterxml.jackson.databind.util.ISO8601DateFormat in
-preference of the default format which is just milli seconds since Epoc.
+preference of the default format which is just milliseconds since Epoch.
 
 
 ## Management interface
@@ -263,7 +263,7 @@ Every application that is deployed into production in the Skatteetaten networks 
 check via the Nexus IQ tool. A profile for performing this check is included in the pom, but you will need to acquire
 your own staging profile id. 
 
-TODO: add reference to Nexus IQ docs.
+Nexus IQ docs: https://help.sonatype.com/display/NXIQ)
 
 ### Build Metadata for Docker Images
 Build data for docker images is read from the docker part of the ```src/main/assembly/metadata/openshift.json```-file. 
