@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def version = 'v4'
+def version = 'keo-gobo-custom'
 fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git', version) {
    jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
