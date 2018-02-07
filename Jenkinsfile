@@ -1,27 +1,32 @@
 #!/usr/bin/env groovy
 
-//@Library('git.aurora.skead.no/scm/ao/aurora-pipeline-libraries@master') //virker ikke
-@Library('aurora-pipeline-libraries@feature/AOS-1731') //virker - "aurora-pipeline-libraries" er navn på definert shared lib i Jenkins
-import no.skatteetaten.aurora.jenkins.utils.Maven
+library identifier: 'aurora-pipeline-libraries@feature/AOS-1731', retriever: modernSCM(
+            [$class: 'GitSCMSource',
+             remote: 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-libraries.git',
+             credentialsId: 'aurora-bitbucket']) _
 
-echo 'testmessage'
-
-
-pipeline {
-  agent any
-  stages {
-     //checkoutAndPreparation()
-     //compile()
-
-     stage ('prep') {
-        steps {
-          echo 'inside stage prep'
-        }
-
-     }
-     stage ('compile') {
-        Maven.compile(null)
-     }
-  }
-
+def version = 'feature/AOS-1731'
+fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git', version) {
+   jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
+
+def systemtest = [
+  auroraConfigEnvironment : 'st-refapp',
+  path : 'src/systemtest',
+  applicationUnderTest : "referanse",
+  npmScripts : ['test'],
+  gatling : [
+    "appDir" : "gatling"
+  ]
+]
+
+def overrides = [
+  affiliation: "paas",
+  testStages:[systemtest],
+  piTests: false,
+  credentialsId: "github"
+  ]
+
+jenkinsfile.run(version, overrides)
+
+
