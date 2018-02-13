@@ -369,6 +369,12 @@
       <version>1.4.196</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.lesfurets</groupId>
+      <artifactId>jenkins-pipeline-unit</artifactId>
+      <version>1.2-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <profiles>
