@@ -1,9 +1,11 @@
 #!/usr/bin/env groovy
 
-library identifier: 'aurora-pipeline-libraries@feature/AOS-1731', retriever: modernSCM(
-            [$class: 'GitSCMSource',
-             remote: 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-libraries.git',
-             credentialsId: 'aurora-bitbucket']) _
+//library identifier: 'aurora-pipeline-libraries@feature/AOS-1731', retriever: modernSCM(
+//            [$class: 'GitSCMSource',
+//             remote: 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-libraries.git',
+//             credentialsId: 'aurora-bitbucket']) _
+
+@Library('aurora-pipeline-libraries@feature/AOS-1731')
 
 def version = 'feature/AOS-1731'
 
@@ -12,10 +14,15 @@ LinkedHashMap<String, Serializable> defaultProps = getDefaultProps()
   props.putAll(defaultProps)
 
 
-node {
-  checkoutAndPreparationStage(props)
-}
 
+node {
+  stage ('print stage'){
+    echo env.PATH
+    echo currentBuild.toString()
+  }
+
+  checkoutAndPreparationStage(this, env, props)
+}
 
 
 private static LinkedHashMap<String, Serializable> getDefaultProps() {
