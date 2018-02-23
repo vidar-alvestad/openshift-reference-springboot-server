@@ -1,111 +1,14 @@
 #!/usr/bin/env groovy
-
-//library identifier: 'aurora-pipeline-libraries@feature/AOS-1731', retriever: modernSCM(
-//            [$class: 'GitSCMSource',
-//             remote: 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-libraries.git',
-//             credentialsId: 'aurora-bitbucket']) _
-
 @Library('aurora-pipeline-libraries@feature/AOS-1731')
 
-def version = 'feature/AOS-1731'
-
-LinkedHashMap<String, Serializable> defaultProps = getDefaultProps()
-  Map<String, Object> props = [:]
-  props.putAll(defaultProps)
-
-
-
-node {
-  stage ('print stage'){
-    echo env.PATH
-    echo currentBuild.toString()
-  }
-
-  checkoutAndPreparationStage(this, env, props)
-}
-
-
-private static LinkedHashMap<String, Serializable> getDefaultProps() {
-  Map<String, Object> defaultProps = [
-
-      // The name of the Maven tool to use during this build
-      mavenVersion             : 'Maven 3',
-
-      // The path of the pom-file that contains the Leveransepakke
-      pomPath                  : 'pom.xml',
-
-      // Command used to compile with maven
-      mavenBuildCommand        : 'compile',
-
-      // Optional properties used by Maven compile phase
-      compileProperties        : "",
-
-      // Optional properties used by Maven test phase
-      testProperties           : "",
-
-      // Optional properties used by Maven deploy phase
-      deployProperties         : "",
-
-      // Path to custom maven settings file
-      mavenSettingsFile        : "",
-
-      // Where to deploy? Possible options are 'aurora-nexus' or 'maven-central'
-      deployTo                 : 'aurora-nexus',
-
-      // The Id of the credentials object in Jenkins that contains the username and password for the git service
-      // account that will be used when tagging releases.
-      credentialsId            : 'aurora-bitbucket',
-
-      // Should code analysis reports be run?
-      disableAllReports        : false,
-
-      // Enable checkstyle reports
-      checkstyle               : true,
-
-      // Enable jacoco reports
-      jacoco                   : true,
-
-      // Enable Cucumber reports
-      cucumber                 : false,
-
-      // Enable SonarQube integration?
-      sonarQube                : true,
-
-      // SonarQube server
-      sonarQubeUrl             : 'https://sonar.aurora.skead.no/',
-
-      // Should PI Tests be run?
-      piTests                  : false,
-
-      // Deprecated - use openShiftBuild
-      // Are you a library?
-      library                  : false,
-
-      // Deprecated - use openShiftBuild
-      skipOpenShiftBuild       : false,
-
-      // Start OpenShift image build
-      openShiftBuild           : true,
-
-      openShiftBaseImage       : 'flange',
-
-      openShiftBaseImageVersion: '8',
-
-      /*if you have testStages to perform specify them as an array of testStage definitions
-      If you have multiple test stages repeat the block below
-      Example testStages is
-      def systemtest = [
-        //the name of the AO environment to use as a template for the env under test
-        auroraConfigEnvironment : 'st-refapp',
-        //the path to where the systemtest scripts are located
+def props = getDefaultProps()
+def systemtest = [
+        auroraConfigEnvironment : 'frl1-refapp-utv',
         path : 'src/systemtest',
-        //the name of the application under test
         applicationUnderTest : "referanse",
-        //what NPM scripts to perform
-        npmScripts : ['test']
+        npmScripts : ['test'],
         gatling: [
-          //if you have gatling tests in another directory specify it here I.e if you have a gatling folder specify gatling
-          appDir : "gatling"
+          appDir : "gatling",
           options: ['-Dgatling.concurrentUsers=2']
         ],
         cucumber: [
@@ -113,37 +16,57 @@ private static LinkedHashMap<String, Serializable> getDefaultProps() {
         ],
         webdriver: [
           appDir : 'my-directory'
-        ]
-
+        ],
         mvnCommands: ['gatling:execute -Dgatling.simulationClass=computerdatabase.BasicSimulation']
       ]
-      */
-      testStages               : false,
+props.testStages = [systemtest]
+props.affiliation = 'paas'
 
-      // Should documentation be generated?
-      docs                     : true,
+node {
+  checkoutAndPreparationStage(this, env, props)
 
-      // Should Jenkins notify HipChat?
-      // Valid options are "started, success, failure"
-      notifyHipchat            : "",
+  compileStage(this, env, props, { this.echo 'A TEST WRITEOUT'})
 
-      // Which HipChat room to notify
-      hipchatRoom              : "",
+  jacocoOrTestStage(this, env, props)
+  //jacocoStage(this, env, props)
+  //testStage(this, env, props)
 
-      // Should Jenkins send mail to developers
-      // Valid options are "started, success, failure"
-      notifyDevelopers         : "",
+  if (props.sonarQube) {
+    sonarqubeStage(this, env, props)
+  }
 
-      //What version of node to use
-      nodeVersion              : 'node-6',
+  if (props.piTests) {
+    piTestStage(this, env, props)
+  }
 
-      //Where is the NPM registry to install from
-      npmRegistry              : '--registry=https://aurora/npm/repository/npm-all/',
+  if ('aurora-nexus' == props.deployTo) {
+    deployAuroraNexusStage(this, env, props)
+  }
 
-      // Should special build artifacts be saved?
-      artifacts                : false
-  ]
-  defaultProps
+  if ('maven-central' == props.deployTo) {
+    deployMavenCentralStage(this, env, props)
+  }
+
+
+  if (props.testStages) {
+
+      def testId = UUID.randomUUID().toString().substring(0, 20)
+      echo "TestId $testId"
+
+      buildTempReleaseStage(this, env, testId, props)
+
+      //openshift.performTestStages(props.testStages, props.affiliation, testId, git.getCommitId(), npm, maven, utilities)
+      performTestStages(this, env, props, testId)
+
+      retagTempReleaseStage(this, env, testId, props)
+
+  } else if (props.openShiftBuild) {
+    //stage('OpenShift Build') {
+      //openshift.buildLeveransepakkePom(props.pomPath)
+    //}
+  } else {
+    echo "[INFO] Skipping OpenShift build"
+  }
+
+
 }
-
-
