@@ -19,7 +19,7 @@ def systemtest = [
         ],
         mvnCommands: ['gatling:execute -Dgatling.simulationClass=computerdatabase.BasicSimulation']
       ]
-props.testStages = [systemtest]
+props.testStages = []
 props.affiliation = 'paas'
 
 node {
