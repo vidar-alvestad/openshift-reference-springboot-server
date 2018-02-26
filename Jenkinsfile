@@ -19,32 +19,32 @@ def systemtest = [
         ],
         mvnCommands: ['gatling:execute -Dgatling.simulationClass=computerdatabase.BasicSimulation']
       ]
-props.testStages = []
+props.testStages = [systemtest]
 props.affiliation = 'paas'
 
 node {
-  checkoutAndPreparationStage(this, env, props)
+  checkoutAndPreparationStage(props)
 
-  compileStage(this, env, props, { this.echo 'A TEST WRITEOUT'})
+  compileStage(props, { this.echo 'A TEST WRITEOUT'})
 
-  jacocoOrTestStage(this, env, props)
-  //jacocoStage(this, env, props)
-  //testStage(this, env, props)
+  jacocoOrTestStage(props)
+  //jacocoStage(props)
+  //testStage(props)
 
   if (props.sonarQube) {
-    sonarqubeStage(this, env, props)
+    sonarqubeStage(props)
   }
 
   if (props.piTests) {
-    piTestStage(this, env, props)
+    piTestStage(props)
   }
 
   if ('aurora-nexus' == props.deployTo) {
-    deployAuroraNexusStage(this, env, props)
+    deployAuroraNexusStage(props)
   }
 
   if ('maven-central' == props.deployTo) {
-    deployMavenCentralStage(this, env, props)
+    deployMavenCentralStage(props)
   }
 
 
@@ -53,17 +53,15 @@ node {
       def testId = UUID.randomUUID().toString().substring(0, 20)
       echo "TestId $testId"
 
-      buildTempReleaseStage(this, env, testId, props)
+      buildTempReleaseStage(testId, props)
 
       //openshift.performTestStages(props.testStages, props.affiliation, testId, git.getCommitId(), npm, maven, utilities)
-      performTestStages(this, env, props, testId)
+      performTestStages(props, testId)
 
-      retagTempReleaseStage(this, env, testId, props)
+      retagTempReleaseStage(testId, props)
 
   } else if (props.openShiftBuild) {
-    //stage('OpenShift Build') {
-      //openshift.buildLeveransepakkePom(props.pomPath)
-    //}
+      openshiftBuildStage(props)
   } else {
     echo "[INFO] Skipping OpenShift build"
   }
