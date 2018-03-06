@@ -1,7 +1,7 @@
 package no.skatteetaten.aurora.openshift.reference.springboot.health;
 
-import org.springframework.boot.actuate.health.AbstractHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
+import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
 
 import no.skatteetaten.aurora.openshift.reference.springboot.service.CounterDatabaseService;
@@ -11,7 +11,7 @@ import no.skatteetaten.aurora.openshift.reference.springboot.service.CounterData
  * application.
  */
 @Component
-public class CounterHealth extends AbstractHealthIndicator {
+public class CounterHealth implements HealthIndicator {
 
     private final CounterDatabaseService counterDatabaseService;
 
@@ -20,15 +20,14 @@ public class CounterHealth extends AbstractHealthIndicator {
     }
 
     @Override
-    protected void doHealthCheck(Health.Builder builder) throws Exception {
+    public Health health() {
         Long currentValue = counterDatabaseService.getCounter();
 
         if (currentValue % 2 == 0) {
-            builder.status("OBSERVE").withDetail("message", "Partall antall i teller")
-                .withDetail("Antall", currentValue);
+            return Health.status("OBSERVE").withDetail("message", "Partall antall i teller")
+                .withDetail("Antall", currentValue).build();
         } else {
-            builder.up()
-                .withDetail("Antall", currentValue);
+            return Health.up().withDetail("Antall", currentValue).build();
         }
     }
 }

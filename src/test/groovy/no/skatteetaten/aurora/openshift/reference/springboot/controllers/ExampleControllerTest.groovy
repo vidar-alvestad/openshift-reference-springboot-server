@@ -9,6 +9,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Bean
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
@@ -18,7 +19,6 @@ import org.springframework.web.client.RestTemplate
 
 import io.micrometer.core.instrument.MeterRegistry
 import io.micrometer.core.instrument.Metrics
-import io.micrometer.spring.autoconfigure.MetricsAutoConfiguration
 import no.skatteetaten.aurora.AuroraMetrics
 
 @SpringBootTest(classes = [Config, RestTemplate, MetricsAutoConfiguration, AuroraMetrics], webEnvironment = NONE)

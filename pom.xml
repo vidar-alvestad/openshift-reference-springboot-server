@@ -5,7 +5,7 @@
 
   <groupId>no.skatteetaten.aurora.openshift</groupId>
   <artifactId>openshift-reference-springboot-server</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>2.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>openshift-reference-springboot-server</name>
@@ -14,12 +14,12 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>1.5.10.RELEASE</version>
+    <version>2.0.0.RELEASE</version>
     <relativePath />
   </parent>
 
   <properties>
-    <aurora.starters.version>3.5.3</aurora.starters.version>
+    <aurora.starters.version>1.0.0</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -28,10 +28,7 @@
     <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.coverage.exclusions>**/*Main.java</sonar.coverage.exclusions>
     <sonar.tests>src/test/groovy</sonar.tests>
-    <flyway.version>4.2.0</flyway.version>
-    <logback.version>1.2.3</logback.version>
     <spock.version>1.1-groovy-2.4</spock.version>
-
     <!-- Prosjektspesifikk Nexus staging profil. Må endres av prosjektene -->
     <!--<staging-profile-id-med-clm>specify-your-own</staging-profile-id-med-clm>-->
     <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
@@ -318,7 +315,7 @@
   <dependencies>
     <dependency>
       <groupId>no.skatteetaten.aurora.springboot</groupId>
-      <artifactId>aurora-spring-boot-starter</artifactId>
+      <artifactId>aurora-spring-boot2-starter</artifactId>
       <version>${aurora.starters.version}</version>
     </dependency>
     <dependency>
@@ -329,11 +326,13 @@
     <dependency>
       <groupId>org.spockframework</groupId>
       <artifactId>spock-core</artifactId>
+      <version>${spock.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.spockframework</groupId>
       <artifactId>spock-spring</artifactId>
+      <version>${spock.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -347,11 +346,9 @@
       <version>3.1</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.objenesis</groupId>
-      <artifactId>objenesis</artifactId>
-      <version>2.1</version>
-      <scope>test</scope>
+      <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
