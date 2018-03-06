@@ -17,7 +17,7 @@ def systemtest = [
         //webdriver: [
           //appDir : 'my-directory'
         //],
-        mvnCommands: ['gatling:execute -Dgatling.simulationClass=computerdatabase.BasicSimulation']
+        //mvnCommands: ['gatling:execute -Dgatling.simulationClass=computerdatabase.BasicSimulation']
       ]
 props.testStages = [systemtest]
 props.affiliation = 'paas'
