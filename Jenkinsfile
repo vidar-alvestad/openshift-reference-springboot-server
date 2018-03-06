@@ -14,9 +14,9 @@ def systemtest = [
         //cucumber: [
           //appDir: 'my-directory'
         //],
-        webdriver: [
-          appDir : 'my-directory'
-        ],
+        //webdriver: [
+          //appDir : 'my-directory'
+        //],
         mvnCommands: ['gatling:execute -Dgatling.simulationClass=computerdatabase.BasicSimulation']
       ]
 props.testStages = [systemtest]
