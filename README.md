@@ -1,5 +1,7 @@
 # Spring Boot Reference Application
 
+This is an old version of this reference application based upon spring boot 1.5.x, look in the master branch for the new version.
+
 The intention of the Reference Application is to serve as a guide when developing Business Applications
 (Fagapplikasjoner) within The Norwegian Tax Administration (Skatteetaten); applications implementing the core business 
 rules in the tax domain for which Skatteetaten is responsible.
