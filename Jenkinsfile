@@ -7,13 +7,13 @@ def systemtest = [
         path : 'src/systemtest',
         applicationUnderTest : "referanse",
         npmScripts : ['test'],
-        gatling: [
+        //gatling: [
           //appDir : "gatling",
           //options: ['-Dgatling.concurrentUsers=2']
-        ],
-        cucumber: [
-          appDir: 'my-directory'
-        ],
+        //],
+        //cucumber: [
+          //appDir: 'my-directory'
+        //],
         webdriver: [
           appDir : 'my-directory'
         ],
