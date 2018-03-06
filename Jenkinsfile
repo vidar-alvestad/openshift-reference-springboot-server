@@ -8,8 +8,8 @@ def systemtest = [
         applicationUnderTest : "referanse",
         npmScripts : ['test'],
         gatling: [
-          appDir : "gatling",
-          options: ['-Dgatling.concurrentUsers=2']
+          //appDir : "gatling",
+          //options: ['-Dgatling.concurrentUsers=2']
         ],
         cucumber: [
           appDir: 'my-directory'
