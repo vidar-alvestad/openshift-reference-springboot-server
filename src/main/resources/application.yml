@@ -10,7 +10,7 @@ spring:
 
 logging:
     level:
-      ske.aurora: DEBUG
+      ske.aurora: INFO
       no.skatteetaten: INFO
       org:
         springframework: WARN
