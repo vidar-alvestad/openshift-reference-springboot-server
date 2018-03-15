@@ -8,16 +8,8 @@ def systemtest = [
         applicationUnderTest : "referanse",
         npmScripts : ['test'],
         gatling: [
-          //appDir : "gatling",
-          //options: ['-Dgatling.concurrentUsers=2']
-        ],
-        cucumber: [
-          appDir: 'my-directory'
-        ],
-        webdriver: [
-          appDir : 'my-directory'
-        ],
-        mvnCommands: ['gatling:execute -Dgatling.simulationClass=computerdatabase.BasicSimulation']
+          appDir : "gatling"
+        ]
       ]
 props.testStages = [systemtest]
 props.affiliation = 'paas'
