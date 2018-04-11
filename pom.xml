@@ -19,7 +19,7 @@
   </parent>
 
   <properties>
-    <aurora.starters.version>3.6.0</aurora.starters.version>
+    <aurora.starters.version>3.6.1</aurora.starters.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
@@ -128,6 +128,9 @@
       <plugin>
         <groupId>pl.project13.maven</groupId>
         <artifactId>git-commit-id-plugin</artifactId>
+        <configuration>
+          <verbose>false</verbose>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.codehaus.gmavenplus</groupId>
