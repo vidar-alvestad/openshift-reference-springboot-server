@@ -34,7 +34,7 @@ central files, like the ```pom.xml``` and ```application.yml```.
 Regardless of the approach you use to keep up with changes, you will have to make the following changes to the
 fork/export:
 
- * change the ```groupId``` and ```artifactId``` in the ```pom.xml``` to match that of your application
+ * change the ```groupId```, ```artifactId```, ```name``` and ```description``` in the ```pom.xml``` to match that of your application
  * rename the main package in ```src/main``` to match that of your application
  * change the ```info.links``` in ```application.yml``` to match that of your application
  * remove the example database code (migrations under ```src/main/resource/db/migrations```), the Counter-classes in the controllers, health and service packages and the database config in ```application.yml```
