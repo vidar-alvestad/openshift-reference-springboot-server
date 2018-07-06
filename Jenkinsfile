@@ -15,13 +15,13 @@ def systemtest = [
   ]
 ]
 
-def overrides = [
+def config = [
   affiliation: "paas",
   testStages:[systemtest],
   piTests: false,
   credentialsId: "github"
   ]
 
-jenkinsfile.run(version, overrides)
+jenkinsfile.run(version, config)
 
 
