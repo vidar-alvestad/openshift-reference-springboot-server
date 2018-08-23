@@ -27,7 +27,7 @@ def config = [
   affiliation: "paas",
   testStages:[systemtest],
   piTests: false,
-  credentialsId: "github"
+  credentialsId: "github",
   suggestVersionAndTagReleases: [
           [branch: 'master', versionHint: '2.0'],
           [branch: 'release/v1', versionHint: '1.0']]
