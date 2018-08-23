@@ -9,9 +9,17 @@ def systemtest = [
   auroraConfigEnvironment : 'st-refapp',
   path : 'src/systemtest',
   applicationUnderTest : "referanse",
-  npmScripts : ['test'],
-  gatling : [
-    "appDir" : "gatling"
+  testStages: [
+    [
+      stageName : 'postman'
+      stageType : 'postman',
+      npmCommand : 'test',
+    ],
+    [
+      stageName : 'gatling'
+      stageType: 'gatling'
+      appDir   : 'gatling'
+    ]
   ]
 ]
 
@@ -20,6 +28,9 @@ def config = [
   testStages:[systemtest],
   piTests: false,
   credentialsId: "github"
+  suggestVersionAndTagReleases: [
+          [branch: 'master', versionHint: '2.0'],
+          [branch: 'release/v1', versionHint: '1.0']]
   ]
 
 jenkinsfile.run(version, config)
