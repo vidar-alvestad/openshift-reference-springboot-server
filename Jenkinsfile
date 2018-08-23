@@ -11,13 +11,13 @@ def systemtest = [
   applicationUnderTest : "referanse",
   testStages: [
     [
-      stageName : 'postman'
+      stageName : 'postman',
       stageType : 'postman',
       npmCommand : 'test',
     ],
     [
-      stageName : 'gatling'
-      stageType: 'gatling'
+      stageName : 'gatling',
+      stageType: 'gatling',
       appDir   : 'gatling'
     ]
   ]
