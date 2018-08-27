@@ -18,6 +18,6 @@ def config = [
           [branch: 'release/v1', versionHint: '1.0']]
   ]
 
-jenkinsfile.run(version, config)
+jenkinsfile.run(scriptVersion, config)
 
 
