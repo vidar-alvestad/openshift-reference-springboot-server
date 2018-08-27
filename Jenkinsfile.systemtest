@@ -39,7 +39,7 @@ def config = [
     openShiftBaseImageVersion: OPENSHIFT_BASE_IMAGE_VERSION,
     openshiftBuilderImage    : OPENSHIFT_BUILDER_IMAGE,
     openshiftBuilderVersion  : OPENSHIFT_BUILDER_VERSION,
-    tempBuildTimeToLiveDays  : TEMP_BUILD_TIME_TO_LIVE_DAYS
+    tempBuildTimeToLiveDays  : TEMP_BUILD_TIME_TO_LIVE_DAYS,
     notifyBitbucket          : "" //We are on github
 ]
 
