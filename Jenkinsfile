@@ -1,13 +1,14 @@
 #!/usr/bin/env groovy
 
-def version  = 'feature/AOS-2708'
-fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git', version) {
+def scriptVersion  = 'feature/AOS-2708'
+def pipelineScript = 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git'
+fileLoader.withGit(pipelineScript,scriptVersion) {
    jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
 
 def config = [
   pipelineScript              : pipelineScript,
-  scriptVersion               : version,
+  scriptVersion               : scriptVersion,
   affiliation                 : "paas",
   downstreamSystemtestJob     : [ jobName: 'systemtest-refapp',  branch: env.BRANCH_NAME],
   piTests: false,
