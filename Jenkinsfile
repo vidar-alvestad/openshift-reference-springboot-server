@@ -5,27 +5,11 @@ fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.g
    jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
 
-def systemtest = [
-  auroraConfigEnvironment : 'st-refapp',
-  path : 'src/systemtest',
-  applicationUnderTest : "referanse",
-  testStages: [
-    [
-      stageName : 'postman',
-      stageType : 'postman',
-      npmCommand : 'test',
-    ],
-    [
-      stageName : 'gatling',
-      stageType: 'gatling',
-      appDir   : 'gatling'
-    ]
-  ]
-]
-
 def config = [
-  affiliation: "paas",
-  testStages:[systemtest],
+  pipelineScript              : pipelineScript,
+  scriptVersion               : version,
+  affiliation                 : "paas",
+  downstreamSystemtestJob     : [ jobName: 'systemtest-refapp',  branch: env.BRANCH_NAME],
   piTests: false,
   credentialsId: "github",
   suggestVersionAndTagReleases: [
