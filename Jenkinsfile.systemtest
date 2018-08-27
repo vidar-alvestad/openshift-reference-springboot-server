@@ -54,7 +54,8 @@ timestamps {
 node {
   if (currentBuild.result == null) {
     currentBuild.result = 'SUCCESS'
-    utilities.notifyBitbucket(ORIGINATING_COMMIT_ID)
+    //We are on github for reference app
+  //  utilities.notifyBitbucket(ORIGINATING_COMMIT_ID)
   }
 }
 
