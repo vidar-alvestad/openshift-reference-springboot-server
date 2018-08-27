@@ -40,6 +40,7 @@ def config = [
     openshiftBuilderImage    : OPENSHIFT_BUILDER_IMAGE,
     openshiftBuilderVersion  : OPENSHIFT_BUILDER_VERSION,
     tempBuildTimeToLiveDays  : TEMP_BUILD_TIME_TO_LIVE_DAYS
+    notifyBitbucket          : "" //We are on github
 ]
 
 timestamps {
