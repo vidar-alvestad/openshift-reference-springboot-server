@@ -3,7 +3,7 @@
 def scriptVersion  = 'feature/AOS-2708'
 def pipelineScript = 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git'
 fileLoader.withGit(pipelineScript, scriptVersion) {
-   jenkinsfile = fileLoader.load('templates/leveransepakke')
+   jenkinsfile = fileLoader.load('templates/systemtest)
 }
 
 def systemtest = [
