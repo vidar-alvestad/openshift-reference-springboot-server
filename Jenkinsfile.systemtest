@@ -42,7 +42,7 @@ def config = [
     tempBuildTimeToLiveDays  : TEMP_BUILD_TIME_TO_LIVE_DAYS,
     testBranch               : TEST_BRANCH,
     releaseClassifier        : RELEASE_CLASSIFIER,
-    notifyBitbucket          : "" //We are on github
+    notifyBitbucket          : false //We are on github
 ]
 
 timestamps {
