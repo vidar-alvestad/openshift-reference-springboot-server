@@ -39,7 +39,6 @@ def config = [
     openShiftBaseImageVersion: OPENSHIFT_BASE_IMAGE_VERSION,
     openshiftBuilderImage    : OPENSHIFT_BUILDER_IMAGE,
     openshiftBuilderVersion  : OPENSHIFT_BUILDER_VERSION,
-    tempBuildTimeToLiveDays  : TEMP_BUILD_TIME_TO_LIVE_DAYS,
     testBranch               : TEST_BRANCH,
     releaseClassifier        : RELEASE_CLASSIFIER,
     notifyBitbucket          : "none" //We are on github
@@ -56,8 +55,6 @@ timestamps {
 node {
   if (currentBuild.result == null) {
     currentBuild.result = 'SUCCESS'
-    //We are on github for reference app
-  //  utilities.notifyBitbucket(ORIGINATING_COMMIT_ID)
   }
 }
 
