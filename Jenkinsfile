@@ -12,6 +12,7 @@ def config = [
   affiliation                 : "paas",
   downstreamSystemtestJob     : [ jobName: 'systemtest-refapp',  branch: env.BRANCH_NAME],
   piTests: false,
+    debug: true,
   credentialsId: "github",
   suggestVersionAndTagReleases: [
           [branch: 'master', versionHint: '2.0'],
