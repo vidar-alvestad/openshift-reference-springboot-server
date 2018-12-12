@@ -27,7 +27,7 @@ public class CounterController {
 
     @GetMapping("/api/counter")
     public Map<String, Object> counter() {
-        Map<String, Object> response = new HashMap<>();
+        var response = new HashMap();
         Long counter = service.getAndIncrementCounter();
         response.put("value", counter);
         return response;
