@@ -11,7 +11,7 @@ def config = [
     scriptVersion               : scriptVersion,
     affiliation                 : "paas",
 //    downstreamSystemtestJob     : [ jobName: 'systemtest-refapp',  branch: env.BRANCH_NAME],
-    debugAndExit: true,
+    debug: true,
     credentialsId: "github",
     suggestVersionAndTagReleases: [
         [branch: 'master', versionHint: '2.0'],
