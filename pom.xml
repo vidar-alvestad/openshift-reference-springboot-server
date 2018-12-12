@@ -368,6 +368,7 @@
     </dependency>
   </dependencies>
 
+  <!--
   <profiles>
     <profile>
       <id>release-staging</id>
@@ -392,4 +393,5 @@
       </build>
     </profile>
   </profiles>
+  -->
 </project>
