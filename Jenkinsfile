@@ -16,7 +16,8 @@ def config = [
     credentialsId: "github",
     suggestVersionAndTagReleases: [
         [branch: 'master', versionHint: '2.0'],
-        [branch: 'release/v1', versionHint: '1.0', tagsToPush:'major,minor,patch']
+        [branch: 'release/v1', versionHint: '1.0', tagsToPush:'major,minor,patch'],
+        [branch: 'feature/java11', versionHint: '0', tagsToPush:'major,minor,patch']
     ]
 ]
 
