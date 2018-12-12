@@ -1,27 +1,25 @@
 #!/usr/bin/env groovy
 
-def version = 'v4'
-fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git', version) {
-   jenkinsfile = fileLoader.load('templates/leveransepakke')
+def scriptVersion  = 'feature/AOS-3004'
+def pipelineScript = 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git'
+fileLoader.withGit(pipelineScript,scriptVersion) {
+  jenkinsfile = fileLoader.load('templates/leveransepakke')
 }
 
-def systemtest = [
-  auroraConfigEnvironment : 'st-refapp',
-  path : 'src/systemtest',
-  applicationUnderTest : "referanse",
-  npmScripts : ['test'],
-  gatling : [
-    "appDir" : "gatling"
-  ]
+def config = [
+    pipelineScript              : pipelineScript,
+    scriptVersion               : scriptVersion,
+    affiliation                 : "paas",
+//    downstreamSystemtestJob     : [ jobName: 'systemtest-refapp',  branch: env.BRANCH_NAME],
+    debug: true,
+    credentialsId: "github",
+    suggestVersionAndTagReleases: [
+        [branch: 'master', versionHint: '2.0'],
+        [branch: 'release/v1', versionHint: '1.0', tagsToPush:'major,minor,patch'],
+        [branch: 'feature/AOS-2708-downstream', versionHint: '0.0', tagsToPush:'major,minor,patch']
+    ]
 ]
 
-def config = [
-  affiliation: "paas",
-  testStages:[systemtest],
-  piTests: false,
-  credentialsId: "github"
-  ]
-
-jenkinsfile.run(version, config)
+jenkinsfile.run(scriptVersion, config)
 
 
