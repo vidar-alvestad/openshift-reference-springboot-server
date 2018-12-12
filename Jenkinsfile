@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def scriptVersion  = 'feature/AOS-3004'
+def scriptVersion  = 'AOS-3004'
 def pipelineScript = 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git'
 fileLoader.withGit(pipelineScript,scriptVersion) {
   jenkinsfile = fileLoader.load('templates/leveransepakke')
