@@ -1,28 +1,17 @@
 #!/usr/bin/env groovy
-
-def version = 'v4'
-fileLoader.withGit('https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git', version) {
-   jenkinsfile = fileLoader.load('templates/leveransepakke')
-}
-
-def systemtest = [
-  auroraConfigEnvironment : 'st-refapp',
-  path : 'src/systemtest',
-  applicationUnderTest : "referanse",
-  npmScripts : ['test'],
-  gatling : [
-    "appDir" : "gatling"
-  ]
-]
-
 def config = [
-  affiliation: "paas",
-  testStages:[systemtest],
-  piTests: false,
-  credentialsId: "github",
-  nodeVersion: "node-8"
-  ]
-
-jenkinsfile.run(version, config)
-
-
+    scriptVersion          : 'v6',
+    pipelineScript         : 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git',
+    affiliation            : "paas",
+    downstreamSystemtestJob: [branch: env.BRANCH_NAME],
+    credentialsId          : "github",
+    javaType               : "oracle",
+    versionStrategy        : [
+        [branch: 'master', versionHint: '2'],
+        [branch: 'release/v1', versionHint: '1']
+    ]
+]
+fileLoader.withGit(config.pipelineScript, config.scriptVersion) {
+  jenkinsfile = fileLoader.load('templates/leveransepakke')
+}
+jenkinsfile.run(config.scriptVersion, config)

@@ -25,7 +25,7 @@
     <java.version>1.8</java.version>
     <maven.min-version>3.3.3</maven.min-version>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+    <sonar.jacoco.reportPaths>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPaths>
     <sonar.coverage.exclusions>**/*Main.java</sonar.coverage.exclusions>
     <sonar.tests>src/test/groovy</sonar.tests>
     <spock.version>1.1-groovy-2.4</spock.version>
@@ -143,13 +143,13 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-          <dependencies>
-              <dependency>
-                  <groupId>org.springframework.boot.experimental</groupId>
-                  <artifactId>spring-boot-thin-layout</artifactId>
-                  <version>1.0.17.RELEASE</version>
-              </dependency>
-          </dependencies>
+        <dependencies>
+          <dependency>
+            <groupId>org.springframework.boot.experimental</groupId>
+            <artifactId>spring-boot-thin-layout</artifactId>
+            <version>1.0.17.RELEASE</version>
+          </dependency>
+        </dependencies>
         <executions>
           <execution>
             <goals>
@@ -224,7 +224,7 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <configuration>
-          <destFile>${sonar.jacoco.reportPath}</destFile>
+          <destFile>${sonar.jacoco.reportPaths}</destFile>
           <append>true</append>
         </configuration>
         <executions>
