@@ -2,12 +2,12 @@
 def config = [
     scriptVersion          : 'v6',
     pipelineScript         : 'https://git.aurora.skead.no/scm/ao/aurora-pipeline-scripts.git',
-    affiliation            : "paas",
     downstreamSystemtestJob: [branch: env.BRANCH_NAME],
     credentialsId          : "github",
     javaVersion            : 11,
     versionStrategy        : [
         [branch: 'master', versionHint: '3'],
+        [branch: 'release/v2', versionHint: '2'],
         [branch: 'release/v1', versionHint: '1']
     ]
 ]
