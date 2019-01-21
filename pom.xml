@@ -60,11 +60,6 @@
           <version>1.6.2</version>
         </plugin>
         <plugin>
-          <groupId>no.skatteetaten.aurora.maven.plugins</groupId>
-          <artifactId>aurora-cd</artifactId>
-          <version>3.2.1</version>
-        </plugin>
-        <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>3.5.0.1254</version>
