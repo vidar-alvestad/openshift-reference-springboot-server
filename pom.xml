@@ -300,13 +300,6 @@
   </build>
 
   <dependencies>
-    <!--
-    <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-impl</artifactId>
-      <version>2.3.1</version>
-    </dependency>
-    -->
     <dependency>
       <groupId>no.skatteetaten.aurora.springboot</groupId>
       <artifactId>aurora-spring-boot2-starter</artifactId>
